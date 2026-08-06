@@ -1,0 +1,40 @@
+---
+/**
+ * 복사해서 쓰는 명령.
+ *
+ * 링크로 저장소에 보내는 대신 명령을 그대로 준다.
+ * 이 도구를 켜는 사람은 이미 터미널 앞에 앉아 있다.
+ */
+
+interface Props {
+  code: string
+  class?: string
+}
+
+const { code, class: cls } = Astro.props
+---
+
+<div class:list={['px bg-[var(--color-ink)]', cls]} style="--px-c: var(--color-edge)">
+  <div class="flex items-start gap-3 p-4">
+    <pre
+      class="min-w-0 flex-1 overflow-x-auto font-mono text-[13px] leading-relaxed whitespace-pre"><code>{code}</code></pre>
+    <button
+      type="button"
+      class="shrink-0 px-2 py-1 font-mono text-[11px] text-[var(--color-faint)] transition-colors hover:text-[var(--color-moss)]"
+      data-copy={code}
+    >
+      복사
+    </button>
+  </div>
+</div>
+
+<script>
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-copy]')) {
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(btn.dataset.copy ?? '')
+      const before = btn.textContent
+      btn.textContent = '복사했어요'
+      setTimeout(() => (btn.textContent = before), 1600)
+    })
+  }
+</script>

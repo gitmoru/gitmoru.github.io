@@ -1,0 +1,64 @@
+---
+/**
+ * 깊이계.
+ *
+ * 스크롤 진행률인데 막대 대신 깊이로 보여준다.
+ * 굴을 파고 내려가는 사이트에서 진행 바를 따로 그리면 그것만 다른 세상 물건이 된다.
+ *
+ * 좁은 화면에서는 숨긴다. 읽을 자리를 뺏으면서까지 보여줄 것은 아니다.
+ */
+---
+
+<aside
+  id="depth"
+  class="pointer-events-none fixed top-1/2 right-4 z-20 hidden -translate-y-1/2 text-right lg:block"
+  aria-hidden="true"
+>
+  <p
+    class="font-mono text-[13px] tracking-tight text-[var(--color-sand)]"
+    data-depth-value
+  >
+    0m
+  </p>
+  <p class="font-mono text-[10.5px] text-[var(--color-soil-line)]" data-depth-layer>지표</p>
+</aside>
+
+<script>
+  /*
+    지금 화면 한가운데 있는 지층을 찾는다.
+    IntersectionObserver 로 하면 섹션이 화면보다 길 때 경계에서 값이 튄다.
+  */
+  const box = document.getElementById('depth')
+  const valueEl = box?.querySelector('[data-depth-value]')
+  const layerEl = box?.querySelector('[data-depth-layer]')
+  const strata = [...document.querySelectorAll<HTMLElement>('[data-depth]')]
+
+  if (box && valueEl && layerEl && strata.length) {
+    let queued = false
+
+    const update = () => {
+      queued = false
+      const middle = window.scrollY + window.innerHeight / 2
+
+      let current = strata[0]!
+      for (const s of strata) {
+        if (s.offsetTop <= middle) current = s
+      }
+
+      const depth = current.dataset.depth ?? ''
+      const layer = current.dataset.layer ?? ''
+      if (valueEl.textContent !== depth) valueEl.textContent = depth
+      if (layerEl.textContent !== layer) layerEl.textContent = layer
+    }
+
+    const onScroll = () => {
+      if (queued) return
+      queued = true
+      requestAnimationFrame(update)
+    }
+
+    addEventListener('scroll', onScroll, { passive: true })
+    addEventListener('resize', onScroll, { passive: true })
+    update()
+  }
+</script>

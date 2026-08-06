@@ -1,0 +1,355 @@
+---
+import Layout from '../components/Layout.astro'
+import Stratum from '../components/Stratum.astro'
+import DepthMeter from '../components/DepthMeter.astro'
+import Mole from '../components/Mole.astro'
+import Command from '../components/Command.astro'
+
+const REPO = 'https://github.com/gitmoru/gitmoru'
+
+/*
+  문구는 WRITING.md 규칙을 따른다.
+
+  요약하면 이렇다.
+    - "안전합니다" 를 어디에도 쓰지 않는다
+    - 확인 못 한 것은 긍정문으로 감싸지 않는다
+    - 위로하지 않는다. 침착하게 사실만 적는다
+    - 숫자를 먼저 쓰고 형용사를 안 쓴다
+*/
+
+const TOOLS = [
+  ['scan', '시작. caseId 를 받아요'],
+  ['open_case', '앱에서 훑어둔 사건을 그대로 열어요'],
+  ['triage', '무엇부터 볼지'],
+  ['list_changes', '바뀐 파일 전부'],
+  ['diff_file', '공격 직전 파일과 지금 파일 비교'],
+  ['read_file', '파일 전체 읽기'],
+  ['list_forced_pushes', '어느 브랜치가 커밋 몇 개를 잃었는지'],
+  ['check_access', '배포 키, 웹훅, 대기 초대'],
+  ['preview_restore', '무엇을 어디로 되돌리게 되는지'],
+  ['share_summary', '팀 채널용 요약'],
+  ['list_cases', '보관된 사건 목록'],
+]
+
+const WATCHES = [
+  ['크기 급증', '설정 파일 뒤에 공백을 길게 넣고 그 뒤에 코드를 숨기는 수법이 있어요. 이름은 그대로라 눈에 안 띄는데 크기는 정직하게 늘어납니다.'],
+  ['저장소 간 같은 파일', '도구로 여러 저장소를 덮어쓰면 완전히 같은 내용이 여기저기 들어가요. 내용의 해시가 같으면 같은 파일입니다.'],
+  ['커밋 위조', 'author 이름과 날짜는 바꿀 수 있어요. 그런데 committer 날짜는 실제로 커밋이 만들어진 시각이라 어긋난 자국이 남습니다.'],
+  ['도구 흔적', '자동화 도구는 작업용 임시 파일을 만들고, 그게 커밋에 안 섞이게 .gitignore 에 적어둡니다. 그 줄이 그대로 지문이에요.'],
+]
+---
+
+<Layout
+  title="gitmoru - 저장소가 털렸을 때 무엇이 바뀌었는지 파봅니다"
+  description="특정 시간대에 저장소에서 바뀐 파일을 브랜치별로 찾아서 보여주는 도구입니다. 아무것도 내려받지 않고, 이 컴퓨터 밖으로 아무것도 보내지 않아요."
+>
+  <DepthMeter />
+
+  <!-- ── 0m 지표 ─────────────────────────────────────── -->
+  <!-- 깊이계가 읽는 값이라 히어로에도 붙여둔다. 없으면 맨 위에서 -2m 부터 시작한다. -->
+  <header
+    class="relative overflow-hidden"
+    style="background: var(--color-ink)"
+    data-depth="0m"
+    data-layer="지표"
+  >
+    <div class="mx-auto max-w-5xl px-6 pt-20 pb-28 md:pt-28 md:pb-36">
+      <img src="/wordmark.svg" alt="gitmoru" width="240" height="77" data-pixel />
+
+      <h1 class="mt-10 text-[34px] leading-[1.25] font-bold md:text-[52px]">
+        저장소가 털렸을 때<br />
+        <span style="color: var(--color-apricot)">무엇이 바뀌었는지</span> 파봅니다
+      </h1>
+
+      <p class="mt-6 max-w-xl text-[17px] text-[var(--color-muted)]">
+        새벽에 누가 브랜치를 통째로 갈아엎었을 때 켜는 도구예요.<br />
+        아무것도 내려받지 않고, 이 컴퓨터 밖으로 아무것도 보내지 않아요.
+      </p>
+
+      <!--
+        히어로에 슬로건 대신 제품이 실제로 뱉는 문장을 놓는다.
+        경쟁 도구는 이 자리에 "0건, 안전합니다" 를 쓴다. 우리가 안 쓰는 게 차별점이라
+        말로 설명하는 것보다 그냥 보여주는 게 빠르다.
+      -->
+      <div
+        class="px mt-12 max-w-xl bg-[var(--color-slate)] p-5"
+        style="--px-c: var(--color-edge)"
+      >
+        <p class="font-mono text-[11px] text-[var(--color-faint)]">훑고 나면 이렇게 말해줘요</p>
+        <p class="mt-3 text-[15px] leading-relaxed">
+          눈에 띈 건 0개예요.<br />
+          <span style="color: var(--color-apricot)">그래도 바뀐 파일 14개는 한 번 봐주세요.</span>
+        </p>
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center gap-4">
+        <a
+          href="#쓰는법"
+          class="px-btn bg-[var(--color-moss)] px-6 py-3 text-[15px] font-semibold text-[#16241c]"
+          style="--px-c: var(--color-moss)"
+        >
+          받아서 켜기
+        </a>
+        <a
+          href={REPO}
+          class="px-btn px-6 py-3 text-[15px] text-[var(--color-text)]"
+          style="--px-c: var(--color-edge)"
+        >
+          GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- 잔디 한 줄. 여기서부터 아래는 땅속이다. -->
+    <div class="h-3 w-full" style="background: var(--color-grass)"></div>
+    <Mole
+      motion="peek"
+      scale={7}
+      ms={420}
+      label="땅에서 올라오는 모루"
+      class="absolute right-8 bottom-3 hidden md:block"
+    />
+  </header>
+
+  <!-- ── -2m 표토 ────────────────────────────────────── -->
+  <Stratum depth="-2m" layer="표토" tone={0} first>
+    <h2 class="text-[28px] leading-snug font-bold md:text-[38px]">
+      "안전합니다" 라고 말하지 않아요
+    </h2>
+
+    <div class="mt-8 grid gap-10 md:grid-cols-2">
+      <div class="space-y-5 text-[16px] text-[#e5dcd0]">
+        <p>탐지 규칙은 겪어본 공격에서 나와요. 새로운 수법은 정의상 규칙에 없습니다.</p>
+        <p>
+          규칙이 판정을 내리는 구조에서는, <strong class="text-[var(--color-sand)]"
+            >규칙이 못 잡은 공격이 "이상 없음" 으로 표시돼요.</strong
+          >
+        </p>
+        <p>
+          실제로 그랬어요. 파일 이름으로 찾다가 다른 이름에 붙은 같은 코드를 놓쳤고,
+          화면에는 0건이 떴습니다. 그 화면을 보고 한동안 안심했어요.
+        </p>
+      </div>
+
+      <div class="px bg-[var(--color-ink)] p-5" style="--px-c: var(--color-soil-line)">
+        <p class="font-mono text-[11px] text-[var(--color-faint)]">그래서 0건도 갈라서 말해요</p>
+        <ul class="mt-4 space-y-3 text-[14px]">
+          <li>그 시간대에 아무도 안 건드렸어요</li>
+          <li>푸시는 있었는데 내용이 그대로예요</li>
+          <li style="color: var(--color-sand)">조회에 실패해서 확인하지 못했어요</li>
+          <li style="color: var(--color-apricot)">규칙이 못 알아봤어요</li>
+        </ul>
+        <p class="mt-5 text-[13px] leading-relaxed text-[var(--color-muted)]">
+          네 개는 뜻이 전혀 달라요. 하나로 뭉쳐서 0이라고 쓰면 그때부터 도구가 거짓말을 합니다.
+        </p>
+      </div>
+    </div>
+  </Stratum>
+
+  <!-- ── -4m ─────────────────────────────────────────── -->
+  <Stratum depth="-4m" layer="심토" tone={1}>
+    <h2 class="text-[28px] leading-snug font-bold md:text-[38px]">
+      덮어써도 원래 커밋은 남아 있어요
+    </h2>
+
+    <div class="mt-8 grid gap-10 md:grid-cols-2">
+      <div class="space-y-5 text-[16px] text-[#e5dcd0]">
+        <p>
+          브랜치는 <strong>포스트잇</strong>이에요. 커밋 더미 어딘가에 붙어서 "여기가 최신" 이라고
+          가리킬 뿐입니다.
+        </p>
+        <p>
+          공격자가 강제로 덮어쓴 건 커밋을 지운 게 아니라 <strong>포스트잇을 다른 데로 옮긴
+            것</strong>이에요. 원래 커밋은 그대로 있고, 주소를 잃어버렸을 뿐입니다.
+        </p>
+        <p>
+          그런데 GitHub 은 푸시가 들어올 때마다 <strong class="text-[var(--color-moss)]"
+            >옮기기 직전에 어디를 가리켰는지</strong
+          >를 적어둬요. 그 주소로 돌아가서 지금과 맞대보는 겁니다.
+        </p>
+      </div>
+
+      <div>
+        <div class="px bg-[var(--color-ink)] p-5" style="--px-c: var(--color-soil-line)">
+          <pre class="overflow-x-auto font-mono text-[12.5px] leading-relaxed"><code>누가:    attacker
+언제:    08-04 03:12
+어디:    main
+
+before:  7f3a91c   <span style="color: var(--color-moss)">잃어버린 주소</span>
+head:    9d2b04e</code></pre>
+        </div>
+        <p class="mt-5 text-[14px] leading-relaxed text-[var(--color-muted)]">
+          되돌리기도 여기서 나와요. 포스트잇을 원래 자리에 도로 붙이면 됩니다.
+        </p>
+        <p class="mt-3 text-[14px] leading-relaxed" style="color: var(--color-sand)">
+          한계도 여기서 나와요. 활동 기록은 90일까지만 남습니다. 그 밖으로 밀려나면 주소를 못
+          찾아요.
+        </p>
+      </div>
+    </div>
+  </Stratum>
+
+  <!-- ── -6m ─────────────────────────────────────────── -->
+  <Stratum depth="-6m" layer="자갈층" tone={2}>
+    <h2 class="text-[28px] leading-snug font-bold md:text-[38px]">먼저 볼 것을 골라줘요</h2>
+    <p class="mt-5 max-w-2xl text-[16px] text-[#e5dcd0]">
+      바뀐 파일은 규칙과 무관하게 전부 목록에 남아요. 아래 넷은 그중에서 순서를 정해주는 것뿐이고,
+      여기 안 걸렸다고 괜찮다는 뜻이 아닙니다.
+    </p>
+
+    <ul class="mt-10 grid gap-4 md:grid-cols-2">
+      {
+        WATCHES.map(([name, why]) => (
+          <li class="px bg-[var(--color-ink)] p-5" style="--px-c: var(--color-soil-line)">
+            <p class="text-[15px] font-semibold" style="color: var(--color-apricot)">
+              {name}
+            </p>
+            <p class="mt-2 text-[14px] leading-relaxed text-[var(--color-muted)]">{why}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-12 grid gap-4 text-[14px] md:grid-cols-3">
+      <div class="px bg-black/20 p-4" style="--px-c: var(--color-soil-line)">
+        <p class="font-semibold">좌우 비교</p>
+        <p class="mt-1.5 text-[var(--color-muted)]">GitHub 처럼 공격 전후를 나란히 봐요</p>
+      </div>
+      <div class="px bg-black/20 p-4" style="--px-c: var(--color-soil-line)">
+        <p class="font-semibold">문단속</p>
+        <p class="mt-1.5 text-[var(--color-muted)]">
+          배포 키, 웹훅, 대기 중인 초대. 푸시 기록에 안 남는 길들이에요
+        </p>
+      </div>
+      <div class="px bg-black/20 p-4" style="--px-c: var(--color-soil-line)">
+        <p class="font-semibold">되돌리기</p>
+        <p class="mt-1.5 text-[var(--color-muted)]">
+          미리보기가 먼저예요. 잠금을 풀어야 실행됩니다
+        </p>
+      </div>
+    </div>
+  </Stratum>
+
+  <!-- ── -8m ─────────────────────────────────────────── -->
+  <Stratum depth="-8m" layer="점토층" tone={3}>
+    <div class="flex items-start justify-between gap-6">
+      <div>
+        <h2 class="text-[28px] leading-snug font-bold md:text-[38px]">읽는 건 AI 한테 넘겨요</h2>
+        <p class="mt-5 max-w-2xl text-[16px] text-[#e5dcd0]">
+          이 도구는 무엇이 바뀌었는지까지 합니다. 그게 무슨 코드인지는 안 해요.
+          대신 MCP 서버가 같이 들어 있어서, Claude Code 같은 곳에 붙이면 결과를 직접 읽습니다.
+        </p>
+      </div>
+      <Mole motion="dig" scale={6} ms={300} label="굴을 파는 모루" class="hidden shrink-0 md:block" />
+    </div>
+
+    <Command class="mt-8 max-w-2xl" code="claude mcp add gitmoru -- npx tsx <경로>/src/mcp/index.ts" />
+
+    <ul class="mt-10 grid gap-x-8 gap-y-3 md:grid-cols-2">
+      {
+        TOOLS.map(([name, what]) => (
+          <li class="flex gap-3 text-[14px]">
+            <code class="shrink-0 font-mono text-[13px]" style="color: var(--color-moss)">
+              {name}
+            </code>
+            <span class="text-[var(--color-muted)]">{what}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-8 max-w-2xl text-[14px] leading-relaxed" style="color: var(--color-sand)">
+      11개 전부 읽기 전용이에요. 에이전트는 공격자가 쓴 글을 읽습니다. 거기에 지시문이 섞여 있을 수
+      있어서, 되돌리기는 도구로 열지 않았어요. 그 방아쇠는 사람이 앱에서 당깁니다.
+    </p>
+  </Stratum>
+
+  <!-- ── -10m 쓰는 법 ────────────────────────────────── -->
+  <Stratum depth="-10m" layer="암반" tone="rock" id="쓰는법">
+    <h2 class="text-[28px] leading-snug font-bold md:text-[38px]">받아서 켜기</h2>
+    <p class="mt-5 text-[16px] text-[#e5dcd0]">
+      Node 22 이상, pnpm, GitHub CLI 가 있어야 해요.
+    </p>
+
+    <Command
+      class="mt-8 max-w-2xl"
+      code={`git clone ${REPO}.git
+cd gitmoru
+gh auth login
+pnpm install
+pnpm app`}
+    />
+
+    <p class="mt-6 text-[15px] text-[var(--color-muted)]">
+      창이 뜨면 조직 이름을 넣고 <strong class="text-[var(--color-text)]">파보기</strong>를
+      누르세요. 시간대는 기본값 그대로 두면 됩니다.
+    </p>
+
+    <div class="px mt-12 max-w-2xl bg-black/25 p-5" style="--px-c: var(--color-edge)">
+      <p class="text-[15px] font-semibold">설치 파일은 안 만들었어요</p>
+      <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">
+        이 도구는 저장소 접근 권한을 씁니다. 서명 없는 실행 파일이 그걸 요구하는 모습은, 이 도구가
+        찾아내는 공격과 구분이 안 돼요.
+      </p>
+      <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">
+        받는 사람은 방금 털린 사람이에요. 그런 날에 건네야 할 건 읽을 수 있는 코드라고 봤습니다.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-3 text-[14px] md:grid-cols-2">
+      <p class="text-[var(--color-muted)]">
+        <span class="text-[var(--color-text)]">웹사이트가 아니에요.</span> 내 컴퓨터에 뜨는 창입니다.
+        접속할 주소도, 로그인도 없어요
+      </p>
+      <p class="text-[var(--color-muted)]">
+        <span class="text-[var(--color-text)]">토큰을 저장하지 않아요.</span> gh 에서 그때그때 빌려
+        씁니다
+      </p>
+      <p class="text-[var(--color-muted)]">
+        <span class="text-[var(--color-text)]">코드를 실행하지 않아요.</span> 내려받지도, 설치하지도
+        않고 읽기만 합니다
+      </p>
+      <p class="text-[var(--color-muted)]">
+        <span class="text-[var(--color-text)]">한국어, English, 日本語.</span> 번역이 아니라 그 언어로
+        다시 썼어요
+      </p>
+    </div>
+  </Stratum>
+
+  <!-- ── 만든 이유 ───────────────────────────────────── -->
+  <footer class="stratum" style="background: var(--color-ink)">
+    <div class="mx-auto max-w-5xl px-6 py-24">
+      <div class="flex items-start gap-6">
+        <Mole motion="idle" scale={5} label="모루" class="hidden shrink-0 sm:block" />
+        <div class="max-w-2xl">
+          <h2 class="text-[22px] font-bold md:text-[26px]">만든 이유</h2>
+          <p class="mt-5 text-[15px] leading-relaxed text-[var(--color-muted)]">
+            실제 사고를 터미널로 수습하면서 만들었어요. 브랜치가 222개가 되니 명령을 손으로 치는 게
+            불가능했습니다.
+          </p>
+          <p class="mt-4 text-[15px] leading-relaxed text-[var(--color-muted)]">
+            무엇보다 <strong class="text-[var(--color-sand)]"
+              >잘못 짠 명령 하나가 조용히 0건을 뱉는 게 무서웠어요.</strong
+            > 그래서 이 도구는 실패를 숨기지 않습니다. 확인 못 한 게 있으면 개수를 세서 눈에 띄는
+            자리에 적어요.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--color-edge-soft)] pt-8 text-[13px] text-[var(--color-faint)]"
+      >
+        <p>MIT. 개인용 도구입니다</p>
+        <nav class="flex gap-5">
+          <a href={REPO} class="hover:text-[var(--color-text)]">GitHub</a>
+          <a href={`${REPO}/blob/main/SAFETY.md`} class="hover:text-[var(--color-text)]"
+            >격리 원칙</a
+          >
+          <a href={`${REPO}/blob/main/docs/decisions/README.md`} class="hover:text-[var(--color-text)]"
+            >결정 기록</a
+          >
+        </nav>
+      </div>
+    </div>
+  </footer>
+</Layout>

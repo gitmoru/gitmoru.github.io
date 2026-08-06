@@ -1,0 +1,7 @@
+# 이 파일이 없으면 홈에 있는 워크스페이스 설정이 잡혀서 설치가 엉뚱하게 붙는다.
+packages:
+  - '.'
+
+# Astro 가 esbuild 를 쓴다. 설치 스크립트를 막으면 바이너리가 안 깔린다.
+allowBuilds:
+  esbuild: true
