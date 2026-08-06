@@ -1,0 +1,146 @@
+---
+import Layout from '../components/Layout.astro'
+import Band from '../components/Band.astro'
+import Command from '../components/Command.astro'
+import Mole from '../components/Mole.astro'
+import Output from '../components/Output.astro'
+import { href, type Lang } from '../i18n/config'
+import { t } from '../i18n/ui'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const ui = t(lang)
+const h = ui.home
+
+/*
+  히어로 옆에 놓는 건 실제 공유문의 일부다.
+
+  화면 사진을 넣고 싶은 자리인데, 지금 있는 진짜 산출물이 이 글이라서 이걸 쓴다.
+  실물 대신 그럴듯한 목업을 그려 넣는 순간 이 사이트도 우리가 싫어하는 부류가 된다.
+*/
+const SHARE = `[someorg 2026-08-04]
+검사 범위: someorg
+검사 시간대: 2026-08-04 00:00 ~ 2026-08-04 07:00 (GMT+9)
+
+저장소 3곳, 브랜치 12개를 확인했습니다.
+변경됨 4, 원복됨 0, 변경 없음 7, 확인 실패 1
+기록을 덮어쓴 푸시가 브랜치 1개에 있었고, 커밋 6개가 사라졌습니다.
+
+※ 브랜치 1개를 확인하지 못했습니다.
+   이 결과를 "이상 없음"으로 판단하면 안 됩니다.`
+---
+
+<Layout lang={lang} page="" title={`gitmoru - ${h.title}`} description={h.desc}>
+  <!-- ── 지표 ─────────────────────────────────────────── -->
+  <div class="relative overflow-hidden bg-[var(--color-ink)]">
+    <div class="mx-auto grid max-w-6xl gap-14 px-5 pt-16 pb-24 lg:grid-cols-[1.05fr_1fr] lg:pt-24">
+      <div>
+        <h1 class="text-[36px] leading-[1.2] font-bold md:text-[54px]">
+          {h.h1a}<br />
+          <span style="color: var(--color-apricot)">{h.h1b}</span> {h.h1c}
+        </h1>
+
+        <p class="mt-7 max-w-lg text-[17px] leading-relaxed whitespace-pre-line text-[var(--color-muted)]">
+          {h.lede}
+        </p>
+
+        <div class="mt-10 flex flex-wrap items-center gap-3">
+          <a
+            href={href(lang, 'start')}
+            class="px-btn bg-[var(--color-moss)] px-6 py-3 text-[15px] font-semibold text-[#16241c]"
+            style="--px-c: var(--color-moss)"
+          >
+            {h.ctaStart}
+          </a>
+          <a
+            href={href(lang, 'why')}
+            class="px-btn px-6 py-3 text-[15px]"
+            style="--px-c: var(--color-edge)"
+          >
+            {h.ctaWhy}
+          </a>
+        </div>
+      </div>
+
+      <div class="min-w-0">
+        <div class="px bg-[var(--color-slate)] p-5" style="--px-c: var(--color-edge)">
+          <p class="font-mono text-[11px] text-[var(--color-faint)]">{h.outputLabel}</p>
+          <p class="mt-4 text-[16px] leading-relaxed">
+            {h.output1}<br />
+            <span style="color: var(--color-apricot)">{h.output2}</span>
+          </p>
+        </div>
+        <p class="mt-4 text-[13px] leading-relaxed text-[var(--color-faint)]">{h.outputWhy}</p>
+      </div>
+    </div>
+
+    <!-- 여기서부터 땅속. 모루가 그 경계에서 올라온다. -->
+    <div class="h-3 w-full" style="background: var(--color-grass)"></div>
+    <Mole
+      motion="peek"
+      scale={7}
+      ms={420}
+      label="모루"
+      class="absolute right-10 bottom-3 hidden md:block"
+    />
+  </div>
+
+  <!-- ── 세 가지 ──────────────────────────────────────── -->
+  <Band tone={0} grit>
+    <h2 class="text-[24px] font-bold md:text-[32px]">{h.threeTitle}</h2>
+    <ol class="mt-10 grid gap-5 md:grid-cols-3">
+      {
+        h.three.map(([name, what], i) => (
+          <li class="px bg-[var(--color-ink)] p-6" style="--px-c: var(--color-soil-line)">
+            <p class="font-mono text-[12px] text-[var(--color-sand)]">{String(i + 1).padStart(2, '0')}</p>
+            <p class="mt-3 text-[17px] font-semibold">{name}</p>
+            <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">{what}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Band>
+
+  <!-- ── 실제 출력 ────────────────────────────────────── -->
+  <Band tone={1} grit edge>
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+      <div>
+        <h2 class="text-[24px] leading-snug font-bold md:text-[32px]">{ui.why.h1}</h2>
+        <p class="mt-6 max-w-md text-[15.5px] leading-relaxed text-[#e5dcd0]">{ui.why.zeroNote}</p>
+        <a
+          href={href(lang, 'why')}
+          class="mt-7 inline-block text-[14px] text-[var(--color-moss)] hover:underline"
+        >
+          {ui.why.title} →
+        </a>
+      </div>
+      <Output label="share_summary" code={SHARE} />
+    </div>
+  </Band>
+
+  <!-- ── 켜기 ─────────────────────────────────────────── -->
+  <Band tone="rock" edge>
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+      <div>
+        <h2 class="text-[24px] font-bold md:text-[32px]">{h.quickTitle}</h2>
+        <p class="mt-4 text-[14px] text-[var(--color-muted)]">{h.quickNote}</p>
+        <a
+          href={href(lang, 'start')}
+          class="mt-6 inline-block text-[14px] text-[var(--color-moss)] hover:underline"
+        >
+          {h.quickMore} →
+        </a>
+      </div>
+      <Command
+        code={`git clone https://github.com/gitmoru/gitmoru.git
+cd gitmoru
+gh auth login
+pnpm install
+pnpm app`}
+      />
+    </div>
+  </Band>
+</Layout>

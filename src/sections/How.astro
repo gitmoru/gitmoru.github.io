@@ -1,0 +1,82 @@
+---
+import Layout from '../components/Layout.astro'
+import Band from '../components/Band.astro'
+import PageHead from '../components/PageHead.astro'
+import Output from '../components/Output.astro'
+import { href, type Lang } from '../i18n/config'
+import { t } from '../i18n/ui'
+
+interface Props { lang: Lang }
+const { lang } = Astro.props
+const ui = t(lang)
+const h = ui.how
+---
+
+<Layout lang={lang} page="how" title={`${h.title} - gitmoru`} description={h.desc} tone="var(--color-soil-1)">
+  <Band tone={1} grit>
+    <PageHead title={h.h1} motion="dig" />
+  </Band>
+
+  <Band tone={2} grit edge>
+    <div class="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
+      <div>
+        <h2 class="text-[24px] font-bold md:text-[30px]">{h.stickyTitle}</h2>
+        <div class="mt-8 space-y-5 text-[16px] leading-relaxed text-[#e5dcd0]">
+          <p>{h.sticky1}</p>
+          <p>{h.sticky2}</p>
+          <p><strong style="color: var(--color-moss)">{h.sticky3}</strong></p>
+        </div>
+      </div>
+
+      <div>
+        <Output
+          label={h.eventLabel}
+          code={`before:  7f3a91c   <- ${h.lostAddress}
+head:    9d2b04e`}
+        />
+        <p class="mt-6 text-[15px] leading-relaxed text-[var(--color-muted)]">{h.sticky4}</p>
+      </div>
+    </div>
+  </Band>
+
+  <Band tone={3} grit edge>
+    <h2 class="text-[24px] font-bold md:text-[30px]">{h.flowTitle}</h2>
+    <ol class="mt-10 space-y-px overflow-hidden" style="background: var(--color-soil-line)">
+      {h.flow.map(([name, what], i) => (
+        <li class="flex gap-5 bg-[var(--color-ink)] p-5">
+          <span class="shrink-0 font-mono text-[13px] leading-7" style="color: var(--color-soil-line)">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <div class="min-w-0">
+            <p class="text-[16px] font-semibold">{name}</p>
+            <p class="mt-1.5 text-[14px] leading-relaxed text-[var(--color-muted)]">{what}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </Band>
+
+  <Band tone="rock" edge>
+    <div class="px max-w-3xl bg-black/25 p-6" style="--px-c: var(--color-sand)">
+      <h2 class="text-[19px] font-semibold" style="color: var(--color-sand)">{h.limitTitle}</h2>
+      <p class="mt-4 text-[15.5px] leading-relaxed text-[#e5dcd0]">{h.limit1}</p>
+      <p class="mt-3 text-[15.5px] leading-relaxed text-[var(--color-muted)]">{h.limit2}</p>
+    </div>
+
+    <h2 class="mt-20 text-[24px] font-bold md:text-[30px]">{h.watchTitle}</h2>
+    <p class="mt-4 max-w-2xl text-[15px] text-[var(--color-muted)]">{h.watchLede}</p>
+
+    <ul class="mt-10 grid gap-5 md:grid-cols-2">
+      {h.watches.map(([name, why]) => (
+        <li class="px bg-[var(--color-ink)] p-6" style="--px-c: var(--color-edge)">
+          <p class="text-[16px] font-semibold" style="color: var(--color-apricot)">{name}</p>
+          <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">{why}</p>
+        </li>
+      ))}
+    </ul>
+
+    <a href={href(lang, 'start')} class="mt-12 inline-block text-[15px] text-[var(--color-moss)] hover:underline">
+      {h.next} →
+    </a>
+  </Band>
+</Layout>

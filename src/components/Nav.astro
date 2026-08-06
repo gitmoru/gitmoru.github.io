@@ -1,0 +1,120 @@
+---
+import { href, LANG_NAME, LANGS, type Lang, type PagePath } from '../i18n/config'
+import { t } from '../i18n/ui'
+import { frameToSvg } from '../lib/mole'
+import { SEQ_PEEK } from '../lib/sprites'
+
+interface Props {
+  lang: Lang
+  page: PagePath
+}
+
+const { lang, page } = Astro.props
+const ui = t(lang)
+
+const ITEMS: Array<[PagePath, string]> = [
+  ['why', ui.nav.why],
+  ['how', ui.nav.how],
+  ['start', ui.nav.start],
+  ['mcp', ui.nav.mcp],
+  ['story', ui.nav.story],
+]
+
+/*
+  지금 보고 있는 자리에 모루가 고개를 내밀고 있다.
+
+  밑줄을 그어도 되지만, 이 사이트에는 땅을 파는 캐릭터가 이미 있다.
+  현재 위치 표시를 캐릭터가 맡으면 장식이 아니라 쓸모가 생긴다.
+*/
+const peeking = frameToSvg(SEQ_PEEK[2] ?? [], { scale: 2 })
+---
+
+<header
+  class="sticky top-0 z-30 border-b border-[var(--color-edge-soft)] bg-[var(--color-ink)]/92 backdrop-blur"
+>
+  <div class="mx-auto flex h-14 max-w-6xl items-center gap-6 px-5">
+    <a href={href(lang)} class="shrink-0" aria-label="gitmoru">
+      <img src="/wordmark.svg" alt="gitmoru" width="104" height="33" data-pixel />
+    </a>
+
+    <nav class="hidden min-w-0 flex-1 items-center gap-1 md:flex" aria-label={ui.nav.menu}>
+      {
+        ITEMS.map(([to, label]) => (
+          <a
+            href={href(lang, to)}
+            aria-current={page === to ? 'page' : undefined}
+            class:list={[
+              'relative px-3 py-2 text-[13.5px] whitespace-nowrap transition-colors',
+              page === to
+                ? 'text-[var(--color-text)]'
+                : 'text-[var(--color-muted)] hover:text-[var(--color-text)]',
+            ]}
+          >
+            {label}
+            {page === to && (
+              <span
+                class="absolute -bottom-[7px] left-1/2 -translate-x-1/2"
+                set:html={peeking}
+              />
+            )}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="ml-auto flex shrink-0 items-center gap-2">
+      <!--
+        언어를 링크로 둔다. 셀렉트로 자바스크립트가 주소를 바꾸면
+        검색 엔진이 다른 언어판을 못 따라간다.
+      -->
+      <nav class="flex items-center gap-1" aria-label={ui.nav.lang}>
+        {
+          LANGS.map((l) => (
+            <a
+              href={href(l, page)}
+              hreflang={l}
+              lang={l}
+              aria-current={l === lang ? 'true' : undefined}
+              class:list={[
+                'px-2 py-1 text-[12px] transition-colors',
+                l === lang
+                  ? 'text-[var(--color-sand)]'
+                  : 'text-[var(--color-faint)] hover:text-[var(--color-text)]',
+              ]}
+            >
+              {LANG_NAME[l]}
+            </a>
+          ))
+        }
+      </nav>
+
+      <a
+        href="https://github.com/gitmoru/gitmoru"
+        class="hidden px-2 py-1 text-[13px] text-[var(--color-muted)] hover:text-[var(--color-text)] sm:block"
+      >
+        {ui.nav.github}
+      </a>
+    </div>
+  </div>
+
+  <!-- 좁은 화면에서는 가로로 밀어서 본다. 햄버거를 열게 하는 것보다 한 번 덜 누른다. -->
+  <nav
+    class="flex gap-1 overflow-x-auto border-t border-[var(--color-edge-soft)] px-5 py-2 md:hidden"
+    aria-label={ui.nav.menu}
+  >
+    {
+      ITEMS.map(([to, label]) => (
+        <a
+          href={href(lang, to)}
+          aria-current={page === to ? 'page' : undefined}
+          class:list={[
+            'px-2.5 py-1 text-[12.5px] whitespace-nowrap',
+            page === to ? 'text-[var(--color-sand)]' : 'text-[var(--color-muted)]',
+          ]}
+        >
+          {label}
+        </a>
+      ))
+    }
+  </nav>
+</header>

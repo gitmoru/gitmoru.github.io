@@ -1,0 +1,13 @@
+---
+import Home from '../../sections/Home.astro'
+import { LANGS, DEFAULT_LANG, type Lang } from '../../i18n/config'
+
+// 기본 언어를 뺀 나머지만 여기서 만든다. /ko/... 는 만들지 않는다.
+export function getStaticPaths() {
+  return LANGS.filter((l) => l !== DEFAULT_LANG).map((lang) => ({ params: { lang } }))
+}
+
+const lang = Astro.params.lang as Lang
+---
+
+<Home lang={lang} />

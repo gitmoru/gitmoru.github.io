@@ -1,0 +1,74 @@
+---
+import Layout from '../components/Layout.astro'
+import Band from '../components/Band.astro'
+import PageHead from '../components/PageHead.astro'
+import { href, type Lang } from '../i18n/config'
+import { t } from '../i18n/ui'
+
+interface Props { lang: Lang }
+const { lang } = Astro.props
+const ui = t(lang)
+const w = ui.why
+---
+
+<Layout lang={lang} page="why" title={`${w.title} - gitmoru`} description={w.desc} tone="var(--color-soil-0)">
+  <Band tone={0} grit>
+    <PageHead title={w.h1} motion="look" />
+
+    <figure class="mt-12 max-w-2xl">
+      <p class="text-[14px] text-[var(--color-muted)]">{w.lede}</p>
+      <blockquote
+        class="px mt-4 bg-[var(--color-ink)] p-6 text-[19px] leading-relaxed md:text-[22px]"
+        style="--px-c: var(--color-soil-line)"
+      >
+        {w.quote}
+      </blockquote>
+    </figure>
+  </Band>
+
+  <Band tone={1} grit edge>
+    <h2 class="text-[24px] font-bold md:text-[30px]">{w.reasonTitle}</h2>
+    <div class="mt-8 max-w-2xl space-y-5 text-[16px] leading-relaxed text-[#e5dcd0]">
+      <p>{w.reason1}</p>
+      <p><strong style="color: var(--color-sand)">{w.reason2}</strong></p>
+      <p>{w.reason3}</p>
+    </div>
+  </Band>
+
+  <Band tone={2} grit edge>
+    <h2 class="text-[24px] font-bold md:text-[30px]">{w.zeroTitle}</h2>
+    <p class="mt-4 text-[15.5px] text-[#e5dcd0]">{w.zeroLede}</p>
+
+    <ol class="mt-10 grid gap-px overflow-hidden md:grid-cols-2" style="background: var(--color-soil-line)">
+      {w.zero.map(([name, what], i) => (
+        <li class="bg-[var(--color-ink)] p-6">
+          <div class="flex items-baseline gap-3">
+            <span class="font-mono text-[26px] leading-none" style="color: var(--color-soil-line)">0</span>
+            <span class="text-[16px] font-semibold" style={i >= 2 ? 'color: var(--color-sand)' : ''}>{name}</span>
+          </div>
+          <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">{what}</p>
+        </li>
+      ))}
+    </ol>
+
+    <p class="mt-8 max-w-2xl text-[15.5px] leading-relaxed" style="color: var(--color-apricot)">
+      {w.zeroNote}
+    </p>
+  </Band>
+
+  <Band tone={3} grit edge>
+    <h2 class="text-[24px] font-bold md:text-[30px]">{w.ruleTitle}</h2>
+    <ul class="mt-10 grid gap-5 md:grid-cols-2">
+      {w.rules.map(([name, what]) => (
+        <li class="px bg-[var(--color-ink)] p-5" style="--px-c: var(--color-soil-line)">
+          <p class="text-[15.5px] font-semibold">{name}</p>
+          <p class="mt-2 text-[14px] leading-relaxed text-[var(--color-muted)]">{what}</p>
+        </li>
+      ))}
+    </ul>
+
+    <a href={href(lang, 'how')} class="mt-12 inline-block text-[15px] text-[var(--color-moss)] hover:underline">
+      {w.next} →
+    </a>
+  </Band>
+</Layout>

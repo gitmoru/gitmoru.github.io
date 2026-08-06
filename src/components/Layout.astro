@@ -1,26 +1,53 @@
 ---
 import '../styles/tokens.css'
+import Nav from './Nav.astro'
+import Footer from './Footer.astro'
+import { DEFAULT_LANG, HREFLANG, LANGS, href, type Lang, type PagePath } from '../i18n/config'
+import { t } from '../i18n/ui'
 
 interface Props {
+  lang: Lang
+  page: PagePath
   title: string
   description: string
+  /** 지층 색. 페이지마다 다른 깊이에 있는 것처럼 보이게 한다 */
+  tone?: string
 }
 
-const { title, description } = Astro.props
+const { lang, page, title, description, tone = 'var(--color-ink)' } = Astro.props
+const site = Astro.site ?? new URL('https://gitmoru.dev')
+const canonical = new URL(href(lang, page), site).href
+
+/*
+  언어마다 다른 주소를 주고 서로를 가리키게 한다.
+
+  한 주소에서 자바스크립트로 말만 바꾸면 검색 결과에는 한 언어만 남는다.
+  x-default 는 "어느 것도 안 맞으면 여기" 라는 뜻이라 기본 언어를 준다.
+*/
+const alternates = LANGS.map((l) => ({
+  hreflang: HREFLANG[l],
+  href: new URL(href(l, page), site).href,
+}))
 ---
 
 <!doctype html>
-<html lang="ko">
+<html lang={HREFLANG[lang]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(href(DEFAULT_LANG, page), site).href} />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/wordmark.svg" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={HREFLANG[lang].replace('-', '_')} />
+    <meta property="og:image" content={new URL('/wordmark.svg', site).href} />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" type="image/svg+xml" href="/mole.svg" />
@@ -34,7 +61,16 @@ const { title, description } = Astro.props
     />
   </head>
 
-  <body>
-    <slot />
+  <body style={`background: ${tone}`}>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:bg-[var(--color-moss)] focus:px-4 focus:py-2 focus:text-[#16241c]"
+    >
+      {t(lang).nav.menu}
+    </a>
+
+    <Nav lang={lang} page={page} />
+    <main id="main"><slot /></main>
+    <Footer lang={lang} />
   </body>
 </html>

@@ -1,0 +1,83 @@
+---
+import Layout from '../components/Layout.astro'
+import Band from '../components/Band.astro'
+import PageHead from '../components/PageHead.astro'
+import Command from '../components/Command.astro'
+import Output from '../components/Output.astro'
+import { href, type Lang } from '../i18n/config'
+import { t } from '../i18n/ui'
+
+interface Props { lang: Lang }
+const { lang } = Astro.props
+const ui = t(lang)
+const m = ui.mcp
+
+const CLIENTS = ['Claude Code', 'Claude Desktop', 'Codex CLI', 'Gemini CLI', 'Cursor', 'Windsurf', 'VS Code']
+
+/* 실제 응답이다. 보기 좋으라고 손보지 않았다. */
+const SAMPLE = `someorg 2026-08-04  (case-mcpx)
+본 시간대: 2026-08-04 00:00 ~ 2026-08-04 07:00 GMT+9
+
+- [덮어씀]   a/b@main   커밋 6개 사라짐
+- [갈아치움] a/c@dev    이전 기록과 이어지지 않음
+- [확인 실패] a/e@main  커밋이 정리돼 없습니다
+
+합계: 사라진 커밋 6개
+기록이 갈아치워진 브랜치 1곳 - 되돌리기로도 못 살립니다
+확인하지 못한 푸시 1건 - 없었다는 뜻이 아닙니다`
+---
+
+<Layout lang={lang} page="mcp" title={`${m.title} - gitmoru`} description={m.desc} tone="var(--color-soil-3)">
+  <Band tone={3} grit>
+    <PageHead title={m.h1} lede={m.lede} motion="found" />
+  </Band>
+
+  <Band tone="rock" grit edge>
+    <h2 class="text-[22px] font-bold md:text-[28px]">{m.addTitle}</h2>
+    <Command class="mt-6 max-w-3xl" code="claude mcp add gitmoru -- npx tsx <경로>/src/mcp/index.ts" />
+    <p class="mt-4 text-[14px] text-[var(--color-muted)]">{m.addNote}</p>
+
+    <h3 class="mt-14 text-[13px] font-semibold text-[var(--color-faint)]">{m.clientsTitle}</h3>
+    <ul class="mt-4 flex flex-wrap gap-2">
+      {CLIENTS.map((c) => (
+        <li class="px bg-[var(--color-ink)] px-3 py-1.5 font-mono text-[12.5px] text-[var(--color-muted)]" style="--px-c: var(--color-edge-soft)">
+          {c}
+        </li>
+      ))}
+    </ul>
+  </Band>
+
+  <Band tone="ink" edge>
+    <div class="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
+      <div>
+        <h2 class="text-[22px] font-bold md:text-[28px]">{m.toolsTitle}</h2>
+        <ul class="mt-8 space-y-3">
+          {m.tools.map(([name, what]) => (
+            <li class="flex gap-3 text-[14px]">
+              <code class="w-[9.5rem] shrink-0 font-mono text-[13px]" style="color: var(--color-moss)">{name}</code>
+              <span class="text-[var(--color-muted)]">{what}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-[22px] font-bold md:text-[28px]">{m.sampleTitle}</h2>
+        <Output class="mt-8" label="list_forced_pushes" code={SAMPLE} />
+      </div>
+    </div>
+  </Band>
+
+  <Band tone="ink">
+    <div class="px max-w-3xl bg-black/25 p-6" style="--px-c: var(--color-sand)">
+      <h2 class="text-[19px] font-semibold" style="color: var(--color-sand)">{m.readTitle}</h2>
+      <p class="mt-4 text-[15.5px] leading-relaxed text-[#e5dcd0]">{m.read1}</p>
+      <p class="mt-3 text-[15px] leading-relaxed text-[var(--color-muted)]">{m.read2}</p>
+      <p class="mt-3 text-[15px] leading-relaxed text-[var(--color-muted)]">{m.read3}</p>
+    </div>
+
+    <a href={href(lang, 'story')} class="mt-12 inline-block text-[15px] text-[var(--color-moss)] hover:underline">
+      {m.next} →
+    </a>
+  </Band>
+</Layout>

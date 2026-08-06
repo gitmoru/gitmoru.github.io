@@ -15,12 +15,21 @@ export function frameToSvg(rows: string[], opts: { scale?: number } = {}): strin
   const cells: string[] = []
 
   rows.forEach((row, y) => {
-    for (let x = 0; x < row.length; x++) {
+    let x = 0
+    while (x < row.length) {
       const key = row[x]
-      if (!key || key === '.') continue
-      const fill = PALETTE[key]
-      if (!fill) continue
-      cells.push(`<rect x="${x}" y="${y}" width="1" height="1" fill="${fill}"/>`)
+      if (!key || key === '.' || !PALETTE[key]) {
+        x++
+        continue
+      }
+
+      // 가로로 이어진 같은 색은 한 칸씩 찍지 않고 하나로 합친다.
+      // 그림은 똑같은데 페이지가 절반 아래로 줄어든다.
+      let run = 1
+      while (row[x + run] === key) run++
+
+      cells.push(`<rect x="${x}" y="${y}" width="${run}" height="1" fill="${PALETTE[key]}"/>`)
+      x += run
     }
   })
 

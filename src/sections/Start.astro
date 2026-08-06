@@ -1,0 +1,90 @@
+---
+import Layout from '../components/Layout.astro'
+import Band from '../components/Band.astro'
+import PageHead from '../components/PageHead.astro'
+import Command from '../components/Command.astro'
+import { href, type Lang } from '../i18n/config'
+import { t } from '../i18n/ui'
+
+interface Props { lang: Lang }
+const { lang } = Astro.props
+const ui = t(lang)
+const s = ui.start
+
+const NEEDS = [
+  ['Node 22+', 'https://nodejs.org'],
+  ['pnpm', 'https://pnpm.io'],
+  ['GitHub CLI', 'https://cli.github.com'],
+]
+---
+
+<Layout lang={lang} page="start" title={`${s.title} - gitmoru`} description={s.desc} tone="var(--color-soil-2)">
+  <Band tone={2} grit>
+    <PageHead title={s.h1} motion="wave" />
+  </Band>
+
+  <Band tone={3} grit edge>
+    <h2 class="text-[22px] font-bold md:text-[28px]">{s.needTitle}</h2>
+    <ul class="mt-6 flex flex-wrap gap-3">
+      {NEEDS.map(([name, url]) => (
+        <li>
+          <a
+            href={url}
+            class="px inline-block bg-[var(--color-ink)] px-4 py-2 text-[14px] hover:text-[var(--color-moss)]"
+            style="--px-c: var(--color-soil-line)"
+          >
+            {name}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-8 mb-3 text-[13.5px] text-[var(--color-muted)]">{s.needCheck}</p>
+    <Command class="max-w-2xl" code="node -v && pnpm -v && gh --version" />
+
+    <h2 class="mt-20 text-[22px] font-bold md:text-[28px]">{s.runTitle}</h2>
+    <Command
+      class="mt-6 max-w-2xl"
+      code={`git clone https://github.com/gitmoru/gitmoru.git
+cd gitmoru
+gh auth login
+pnpm install
+pnpm app`}
+    />
+
+    <h2 class="mt-20 text-[22px] font-bold md:text-[28px]">{s.afterTitle}</h2>
+    <p class="mt-5 max-w-2xl text-[16px] leading-relaxed text-[#e5dcd0]">{s.after1}</p>
+    <p class="mt-3 max-w-2xl text-[15px] leading-relaxed text-[var(--color-muted)]">{s.after2}</p>
+  </Band>
+
+  <Band tone="rock" edge>
+    <h2 class="text-[22px] font-bold md:text-[28px]">{s.stuckTitle}</h2>
+    <ul class="mt-8 space-y-px overflow-hidden" style="background: var(--color-edge-soft)">
+      {s.stuck.map(([name, what]) => (
+        <li class="bg-[var(--color-ink)] p-5">
+          <p class="font-mono text-[14px]" style="color: var(--color-sand)">{name}</p>
+          <p class="mt-2 text-[14.5px] leading-relaxed text-[var(--color-muted)]">{what}</p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="px mt-16 max-w-3xl bg-black/25 p-6" style="--px-c: var(--color-edge)">
+      <h2 class="text-[18px] font-semibold">{s.noInstallerTitle}</h2>
+      <p class="mt-4 text-[15px] leading-relaxed text-[var(--color-muted)]">{s.noInstaller1}</p>
+      <p class="mt-3 text-[15px] leading-relaxed text-[var(--color-muted)]">{s.noInstaller2}</p>
+    </div>
+
+    <h2 class="mt-20 text-[22px] font-bold md:text-[28px]">{s.factTitle}</h2>
+    <dl class="mt-8 grid gap-6 md:grid-cols-2">
+      {s.facts.map(([name, what]) => (
+        <div>
+          <dt class="text-[15.5px] font-semibold">{name}</dt>
+          <dd class="mt-1.5 text-[14px] leading-relaxed text-[var(--color-muted)]">{what}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <a href={href(lang, 'mcp')} class="mt-12 inline-block text-[15px] text-[var(--color-moss)] hover:underline">
+      {s.next} →
+    </a>
+  </Band>
+</Layout>

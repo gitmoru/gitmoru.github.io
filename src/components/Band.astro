@@ -1,0 +1,39 @@
+---
+/**
+ * 색이 있는 가로 띠 하나.
+ *
+ * 페이지가 여러 장으로 나뉘면서 "스크롤 = 굴착" 은 홈에만 남겼다.
+ * 대신 각 페이지가 저마다 다른 깊이의 흙 위에 놓인다.
+ * 왜 판정 안 하나는 표토, 만든 이유는 제일 깊은 곳이다.
+ */
+
+interface Props {
+  tone?: 0 | 1 | 2 | 3 | 'rock' | 'ink'
+  grit?: boolean
+  edge?: boolean
+  class?: string
+  id?: string
+}
+
+const { tone = 'ink', grit = false, edge = false, class: cls, id } = Astro.props
+
+const SOIL = {
+  0: 'var(--color-soil-0)',
+  1: 'var(--color-soil-1)',
+  2: 'var(--color-soil-2)',
+  3: 'var(--color-soil-3)',
+  rock: 'var(--color-tunnel)',
+  ink: 'var(--color-ink)',
+} as const
+---
+
+<section
+  id={id}
+  class:list={['relative overflow-hidden', edge && 'stratum', cls]}
+  style={`background: ${SOIL[tone]}`}
+>
+  {grit && <div class="grit pointer-events-none absolute inset-0" />}
+  <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
+    <slot />
+  </div>
+</section>

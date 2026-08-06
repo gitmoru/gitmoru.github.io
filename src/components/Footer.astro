@@ -1,0 +1,43 @@
+---
+import { href, type Lang } from '../i18n/config'
+import { t } from '../i18n/ui'
+import Mole from './Mole.astro'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const ui = t(lang)
+const REPO = 'https://github.com/gitmoru/gitmoru'
+---
+
+<footer class="border-t border-[var(--color-edge-soft)] bg-[var(--color-ink)]">
+  <div class="mx-auto max-w-6xl px-5 py-12">
+    <div class="flex flex-wrap items-end justify-between gap-8">
+      <div class="flex items-end gap-4">
+        <Mole motion="idle" scale={4} label="모루" class="hidden sm:block" />
+        <div>
+          <img src="/wordmark.svg" alt="gitmoru" width="120" height="38" data-pixel />
+          <p class="mt-3 text-[12.5px] text-[var(--color-faint)]">{ui.foot.license}</p>
+        </div>
+      </div>
+
+      <nav class="flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-[var(--color-muted)]">
+        <a href={href(lang, 'why')} class="hover:text-[var(--color-text)]">{ui.nav.why}</a>
+        <a href={href(lang, 'start')} class="hover:text-[var(--color-text)]">{ui.nav.start}</a>
+        <a href={href(lang, 'mcp')} class="hover:text-[var(--color-text)]">{ui.nav.mcp}</a>
+        <a href={REPO} class="hover:text-[var(--color-text)]">{ui.nav.github}</a>
+        <a href={`${REPO}/blob/main/SAFETY.md`} class="hover:text-[var(--color-text)]">
+          {ui.foot.safety}
+        </a>
+        <a href={`${REPO}/blob/main/docs/decisions/README.md`} class="hover:text-[var(--color-text)]">
+          {ui.foot.decisions}
+        </a>
+      </nav>
+    </div>
+
+    <!-- 사실이라서 쓸 수 있는 문장. 안 그랬으면 안 썼다. -->
+    <p class="mt-10 text-[12px] text-[var(--color-faint)]">{ui.foot.noTracking}</p>
+  </div>
+</footer>

@@ -1,0 +1,41 @@
+---
+import Mole from './Mole.astro'
+
+/**
+ * 안쪽 페이지 머리.
+ *
+ * 홈만 크게 열고 나머지는 같은 리듬으로 시작한다.
+ * 페이지마다 다른 모루 동작을 붙여서, 내용이 아니라 분위기로 어디 있는지 알게 한다.
+ */
+
+interface Props {
+  eyebrow?: string
+  title: string
+  lede?: string
+  motion?: 'idle' | 'dig' | 'peek' | 'wave' | 'look' | 'found'
+}
+
+const { eyebrow, title, lede, motion = 'idle' } = Astro.props
+---
+
+<div class="flex items-start justify-between gap-8">
+  <div class="min-w-0">
+    {
+      eyebrow && (
+        <p class="mb-4 font-mono text-[12px] tracking-wide text-[var(--color-sand)]">{eyebrow}</p>
+      )
+    }
+    <h1 class="text-[30px] leading-[1.25] font-bold whitespace-pre-line md:text-[44px]">
+      {title}
+    </h1>
+    {
+      lede && (
+        <p class="mt-6 max-w-2xl text-[16.5px] leading-relaxed whitespace-pre-line text-[#e5dcd0]">
+          {lede}
+        </p>
+      )
+    }
+  </div>
+
+  <Mole motion={motion} scale={6} class="hidden shrink-0 lg:block" />
+</div>

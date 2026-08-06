@@ -1,0 +1,53 @@
+---
+import Layout from '../components/Layout.astro'
+import Band from '../components/Band.astro'
+import PageHead from '../components/PageHead.astro'
+import { href, type Lang } from '../i18n/config'
+import { t } from '../i18n/ui'
+
+interface Props { lang: Lang }
+const { lang } = Astro.props
+const ui = t(lang)
+const s = ui.story
+---
+
+<Layout lang={lang} page="story" title={`${s.title} - gitmoru`} description={s.desc} tone="var(--color-tunnel)">
+  <Band tone="rock" grit>
+    <PageHead title={s.h1} motion="idle" />
+
+    <div class="mt-12 max-w-2xl space-y-5 text-[16.5px] leading-relaxed text-[#e5dcd0]">
+      <p>{s.p1}</p>
+      <p>{s.p2}</p>
+      <p><strong style="color: var(--color-sand)">{s.p3}</strong></p>
+      <p>{s.p4}</p>
+    </div>
+  </Band>
+
+  <Band tone="ink" edge>
+    <h2 class="text-[22px] font-bold md:text-[28px]">{s.scriptTitle}</h2>
+    <ol class="mt-10 space-y-8">
+      {s.scripts.map(([name, what], i) => (
+        <li class="grid gap-4 md:grid-cols-[3rem_1fr]">
+          <span class="font-mono text-[13px] leading-7" style="color: var(--color-edge)">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <div>
+            <p class="text-[16.5px] font-semibold">{name}</p>
+            <p class="mt-2 max-w-2xl text-[14.5px] leading-relaxed text-[var(--color-muted)]">{what}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </Band>
+
+  <Band tone="ink">
+    <div class="max-w-2xl">
+      <h2 class="text-[20px] font-bold">{s.nowTitle}</h2>
+      <p class="mt-4 text-[16px] leading-relaxed text-[var(--color-muted)]">{s.now}</p>
+      <p class="mt-10 text-[15px] text-[var(--color-faint)]">{s.thanks}</p>
+      <a href={href(lang, 'start')} class="mt-8 inline-block text-[15px] text-[var(--color-moss)] hover:underline">
+        {ui.nav.start} →
+      </a>
+    </div>
+  </Band>
+</Layout>

@@ -1,0 +1,42 @@
+---
+import Layout from '../components/Layout.astro'
+import Band from '../components/Band.astro'
+import Mole from '../components/Mole.astro'
+import { href, DEFAULT_LANG } from '../i18n/config'
+import { t } from '../i18n/ui'
+
+/*
+  없는 페이지.
+
+  "페이지를 찾을 수 없습니다" 대신 이 도구가 0건을 다루는 방식 그대로 쓴다.
+  없다고 단정하지 않고, 찾지 못했다고 말한다. 농담이면서 제품 설명이기도 하다.
+*/
+const ui = t(DEFAULT_LANG)
+---
+
+<Layout
+  lang={DEFAULT_LANG}
+  page=""
+  title={`${ui.notFound.title} - gitmoru`}
+  description={ui.notFound.p}
+  tone="var(--color-tunnel)"
+>
+  <Band tone="rock" grit class="min-h-[60vh]">
+    <div class="flex flex-col items-start gap-8 py-16">
+      <Mole motion="dig" scale={9} ms={280} label="계속 파고 있는 모루" />
+
+      <h1 class="text-[30px] leading-tight font-bold md:text-[42px]">{ui.notFound.h1}</h1>
+      <p class="max-w-lg text-[16.5px] leading-relaxed text-[var(--color-muted)]">
+        {ui.notFound.p}
+      </p>
+
+      <a
+        href={href(DEFAULT_LANG)}
+        class="px-btn bg-[var(--color-moss)] px-6 py-3 text-[15px] font-semibold text-[#16241c]"
+        style="--px-c: var(--color-moss)"
+      >
+        {ui.notFound.back}
+      </a>
+    </div>
+  </Band>
+</Layout>
