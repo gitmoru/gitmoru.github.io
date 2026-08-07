@@ -350,8 +350,8 @@ export const en: Dict = {
   home: {
     title: 'Find out what changed when your repos got hit',
     desc: 'Finds the files that changed in a repository during a time window, branch by branch. Nothing is downloaded, nothing leaves your machine.',
-    h1: [{ t: 'Someone force-pushed over your branches. ' }, { t: 'Find out what they left behind', hl: true }, { t: '.' }],
-    lede: 'The thing you open at 3am, after someone force-pushed over every branch you had. Nothing gets downloaded. Nothing leaves your machine.',
+    h1: [{ t: 'Your repos got hit. ' }, { t: 'Find out what actually changed', hl: true }, { t: '.' }],
+    lede: 'It reads the events API to find every file that changed in a time window, branch by branch. Nothing is cloned, and nothing leaves your machine.',
     outputLabel: 'Here is what it tells you',
     output1: 'Nothing stood out.',
     output2: 'Still, 14 changed files are worth a look.',
@@ -366,8 +366,8 @@ export const en: Dict = {
       ['Can it be undone', 'Whether the commit from just before the attack is still reachable. You press the button, not us.'],
     ],
 
-    forkNow: 'It just happened',
-    forkLook: 'Just looking',
+    forkNow: 'We just got hit',
+    forkLook: 'Just reading',
 
     whenTitle: 'When you would reach for it',
     whenLede: 'All of these are situations we have actually been in.',
@@ -646,8 +646,8 @@ export const ja: Dict = {
   home: {
     title: 'リポジトリがやられたとき、何が変わったのかを掘ります',
     desc: '指定した期間にリポジトリで変わったファイルを、ブランチごとに探して見せます。何もダウンロードせず、このパソコンの外へは何も送りません。',
-    h1: [{ t: '深夜、ブランチを force push で潰されたときに。' }, { t: '何が変わったのかを掘ります', hl: true }],
-    lede: '深夜、誰かがブランチを丸ごと上書きしたときに開く道具です。何もダウンロードしませんし、このパソコンの外へは何も送りません。',
+    h1: [{ t: 'リポジトリがやられたとき、' }, { t: '何が変わったのかを掘ります', hl: true }],
+    lede: 'Events API を読んで、指定した期間に変わったファイルをブランチごとに洗い出します。clone はしませんし、このパソコンの外へは何も送りません。',
     outputLabel: '掘り終わるとこう伝えます',
     output1: '目立つものは 0 件でした。',
     output2: 'それでも、変更された 14 件は一度見てください。',
@@ -662,8 +662,8 @@ export const ja: Dict = {
       ['戻せるか', '攻撃直前のコミットがまだ残っているかを確認します。実行するのは人です。'],
     ],
 
-    forkNow: '今、事故が起きています',
-    forkLook: 'まず知りたい',
+    forkNow: '今やられました',
+    forkLook: '先に中身を見たい',
 
     whenTitle: 'こんなときに使います',
     whenLede: 'どれも実際にあった状況です。',
