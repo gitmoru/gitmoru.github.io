@@ -6,12 +6,17 @@
  * 이 도구를 켜는 사람은 이미 터미널 앞에 앉아 있다.
  */
 
+import { t } from '../i18n/ui'
+import { langOf, type Lang } from '../i18n/config'
+
 interface Props {
   code: string
   class?: string
 }
 
 const { code, class: cls } = Astro.props
+// 주소로 언어를 읽는다. 쓰는 쪽마다 lang 을 넘기게 하면 한 군데는 반드시 빠뜨린다.
+const ui = t(langOf(Astro.url.pathname) as Lang)
 ---
 
 <div class:list={['px bg-[var(--color-ink)]', cls]} style="--px-c: var(--color-edge)">
@@ -22,8 +27,9 @@ const { code, class: cls } = Astro.props
       type="button"
       class="shrink-0 px-2 py-1 font-mono text-[11px] text-[var(--color-faint)] transition-colors hover:text-[var(--color-moss)]"
       data-copy={code}
+      data-copied={ui.nav.copied}
     >
-      복사
+      {ui.nav.copy}
     </button>
   </div>
 </div>
@@ -33,7 +39,7 @@ const { code, class: cls } = Astro.props
     btn.addEventListener('click', async () => {
       await navigator.clipboard.writeText(btn.dataset.copy ?? '')
       const before = btn.textContent
-      btn.textContent = '복사했어요'
+      btn.textContent = btn.dataset.copied ?? 'Copied'
       setTimeout(() => (btn.textContent = before), 1600)
     })
   }

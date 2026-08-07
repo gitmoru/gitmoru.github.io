@@ -17,6 +17,9 @@ export type HeadPart = { t: string; hl?: boolean }
 
 export const ko = {
   nav: {
+    copy: '복사',
+    copied: '복사했어요',
+
     why: '왜 판정 안 하나',
     how: '어떻게 도나',
     start: '시작하기',
@@ -39,7 +42,6 @@ export const ko = {
     safety: '이 도구가 안 하는 것',
     decisions: '결정 기록',
     // 사실이라 쓸 수 있는 농담. 안 그랬으면 안 썼다.
-    noTracking: '분석 도구를 쓰지 않습니다',
   },
 
   home: {
@@ -54,7 +56,7 @@ export const ko = {
     outputLabel: '훑고 나면 이렇게 말해줘요',
     output1: '눈에 띈 건 0개예요.',
     output2: '그래도 바뀐 파일 14개는 한 번 봐주세요.',
-    outputWhy: '다른 도구는 이 자리에 "0건, 이상 없음" 을 씁니다. 저희가 그걸 안 쓰는 게 이 도구의 전부예요.',
+    outputWhy: '0건은 안전하다는 뜻이 아니에요. 규칙에 안 걸렸다는 뜻입니다.',
     ctaStart: '받아서 켜기',
     ctaWhy: '왜 판정 안 하나',
 
@@ -220,6 +222,8 @@ https://github.com/gitmoru/gitmoru
   },
 
   mcp: {
+    mcpPath: '<경로>',
+
     mcpSample: `someorg 2026-08-04  (case-mcpx)
 본 시간대: 2026-08-04 00:00 ~ 2026-08-04 07:00 GMT+9
 
@@ -317,6 +321,9 @@ type Dict = typeof ko
 
 export const en: Dict = {
   nav: {
+    copy: 'Copy',
+    copied: 'Copied',
+
     why: 'Why no verdict',
     how: 'How it works',
     start: 'Get started',
@@ -338,22 +345,21 @@ export const en: Dict = {
     license: 'MIT. A personal tool',
     safety: 'What it will not do',
     decisions: 'Decisions',
-    noTracking: 'No analytics on this site. We don\'t know you were here either',
   },
 
   home: {
     title: 'Find out what changed when your repos got hit',
     desc: 'Finds the files that changed in a repository during a time window, branch by branch. Nothing is downloaded, nothing leaves your machine.',
-    h1: [{ t: 'Someone rewrote your branches. ' }, { t: 'Find out what they left behind', hl: true }, { t: '.' }],
+    h1: [{ t: 'Someone force-pushed over your branches. ' }, { t: 'Find out what they left behind', hl: true }, { t: '.' }],
     lede: 'The thing you open at 3am, after someone force-pushed over every branch you had. Nothing gets downloaded. Nothing leaves your machine.',
     outputLabel: 'Here is what it tells you',
     output1: 'Nothing stood out.',
     output2: 'Still, 14 changed files are worth a look.',
-    outputWhy: 'Other tools put "0 findings, all clear" here. Not writing that is the entire point of this one.',
+    outputWhy: 'Zero findings does not mean you are clear. It means no rule matched.',
     ctaStart: 'Get started',
     ctaWhy: 'Why no verdict',
 
-    threeTitle: 'It does three things',
+    threeTitle: 'What it does',
     three: [
       ['What got hit', 'Which repos out of dozens, and how many branches, narrowed down by time window.'],
       ['What came in', 'The file before the attack and the file now, side by side. What the code does is for an agent to read.'],
@@ -385,7 +391,7 @@ History was overwritten on 1 branch, dropping 6 commits.
 
 Note: 1 branch could not be checked.
       This result should not be read as "nothing found".`,
-    quickTitle: 'Up and running in 30 seconds',
+    quickTitle: 'Running in about a minute',
     quickNote: 'You need Node 22+, pnpm and the GitHub CLI.',
     quickMore: 'See the full steps',
   },
@@ -393,33 +399,33 @@ Note: 1 branch could not be checked.
   why: {
     title: 'Why no verdict',
     desc: 'Detection rules come from attacks someone already survived. If rules render verdicts, whatever they miss gets painted as "all clear".',
-    h1: 'It never tells you you\'re safe',
+    h1: 'It will not tell you you\'re safe',
     lede: 'There\'s exactly one thing this tool will tell you.',
-    quote: 'These files changed, this much, in this window.',
+    quote: 'These files changed, by this much, in this window.',
 
-    reasonTitle: 'Rules only know what they have seen',
+    reasonTitle: 'Rules only catch what someone already hit',
     reason1: 'Detection rules come from attacks someone already survived. A new technique is, by definition, not in them.',
     reason2: 'When rules render verdicts, whatever they miss gets painted as "all clear".',
     reason3: 'That happened to us. We searched by filename, missed the same payload under a different name, and the screen said zero. We believed that screen for a while.',
 
-    zeroTitle: 'So zero gets split four ways',
-    zeroLede: 'There are four ways to get a zero, and they mean completely different things.',
+    zeroTitle: 'A zero means four different things',
+    zeroLede: 'A zero on screen can be any of these four, and they are not the same thing.',
     zero: [
       ['No activity', 'Nobody touched it in that window. There is nothing to compare.'],
       ['No changes', 'There were pushes, but the contents are unchanged.'],
-      ['Not verified', 'A lookup failed, so we can\'t claim anything either way.'],
-      ['No signal', 'It changed, but no rule recognised it. A person has to look.'],
+      ['Could not check', 'A lookup failed, so we can\'t claim anything either way.'],
+      ['No rule matched', 'It changed, and nothing flagged it. Someone still has to read it.'],
     ],
-    zeroNote: 'Collapse those four into one zero and the third one reads as the first. That is the moment the tool starts lying.',
+    zeroNote: 'Collapse those four into one zero and the third one reads as the first. That is where a tool starts lying to you.',
 
-    ruleTitle: 'What follows from that',
+    ruleTitle: 'What that rules out',
     rules: [
-      ['No red anywhere', 'Colour doesn\'t hand down verdicts either. There is no red in the interface.'],
-      ['Levels are not severity', 'A signal carries attention, not risk. Not "how dangerous" but "how soon should you look".'],
-      ['Failures stay visible', 'Anything unverified is counted and shown where you can\'t miss it. Swallowing it quietly is how you end up reassured about nothing.'],
-      ['Zero signals still leaves a list', 'Every changed file is listed whether a rule matched it or not. Rules only set the order.'],
+      ['Nothing is ever red', 'Colour doesn\'t hand down verdicts either. There is no red in the interface.'],
+      ['Levels are not severity', 'A signal carries attention, not risk. Not how dangerous it is, but how soon you should look at it.'],
+      ['Failures stay on screen', 'Anything unverified is counted and shown where you can\'t miss it. Swallowing it quietly is how you end up reassured about nothing.'],
+      ['Zero signals still leaves a full list', 'Every changed file is listed whether a rule matched it or not. Rules only set the order.'],
     ],
-    next: 'So what does it look at',
+    next: 'So what is it actually looking at',
   },
 
   how: {
@@ -428,34 +434,34 @@ Note: 1 branch could not be checked.
     desc: 'GitHub records where a branch pointed right before each push. We go back to that address and compare it against now.',
     h1: 'A force push doesn\'t delete your commits',
 
-    stickyTitle: 'A branch is a sticky note',
-    sticky1: 'A branch just sits somewhere on a pile of commits saying "this one is the latest".',
-    sticky2: 'A force push doesn\'t delete commits. It moves the sticky note. The original commits are still there, you just lost the address.',
-    sticky3: 'And GitHub writes that address down every time a push arrives.',
-    eventLabel: 'GitHub activity record',
+    stickyTitle: 'A branch is just a pointer',
+    sticky1: 'A branch is a label sitting on one commit, saying this one is the tip.',
+    sticky2: 'A force push doesn\'t delete commits. It moves the label. The old commits are still in there. You just lost the address.',
+    sticky3: 'And GitHub records that address on every push it receives.',
+    eventLabel: 'GitHub events API',
     lostAddress: 'the lost address',
-    sticky4: 'Restoring comes from the same place. Put the sticky note back where it was.',
+    sticky4: 'Restoring works the same way. Point the branch back at that commit.',
 
-    flowTitle: 'The steps',
+    flowTitle: 'How a scan runs',
     flow: [
-      ['Collect pushes in the window', 'Events narrow the targets. It doesn\'t crawl the whole org.'],
-      ['Compare the tree before and now', 'Which files appeared, changed, or vanished.'],
+      ['Collect pushes in the window', 'Events narrow the targets, so it does not\'t crawl the whole org.'],
+      ['Diff the tree before against now', 'Which files were added, modified or deleted.'],
       ['Keep every changed file', 'This is the output. It stays whether a rule matched or not.'],
-      ['Highlight what to read first', 'That is ordering, not a verdict.'],
-      ['A person or an agent decides', 'The tool stops before this step.'],
+      ['Rank what to read first', 'That is ordering, not a verdict.'],
+      ['You or your agent take it from here', 'The tool stops right before this step.'],
     ],
 
-    limitTitle: 'The same fact is also the limit',
-    limit1: 'GitHub keeps activity for about 90 days and 300 events. Past that, the address is gone.',
+    limitTitle: 'The same fact sets the limit',
+    limit1: 'The events API keeps roughly 90 days and 300 events. Past that, the address is gone.',
     limit2: 'So you have to look early, and the tool says so on screen. It\'s also why every scan gets written to disk.',
 
-    watchTitle: 'How it picks what to show first',
-    watchLede: 'All four came from a real attack. Not matching one of them doesn\'t make a file fine.',
+    watchTitle: 'How it ranks what to read first',
+    watchLede: 'All four came out of a real incident. Not matching one of them doesn\'t make a file fine.',
     watches: [
-      ['Size jump', 'Padding a config file with whitespace pushes the payload off screen. The name is unchanged, so nothing looks odd, but the size tells on it.'],
-      ['Same file across repos', 'Tooling that overwrites many repos leaves byte-identical files in all of them. Same content hash, same file.'],
-      ['Forged commit', 'Author name and date can be set to anything. The committer date is when the commit was really made, so the gap shows.'],
-      ['Tool marker', 'Automation leaves scratch files behind and adds them to .gitignore so they don\'t get committed. That line is a fingerprint.'],
+      ['Sudden size jump', 'Padding a config file with whitespace pushes the payload off screen. The name is unchanged, so nothing looks odd, but the size tells on it.'],
+      ['Identical file across repos', 'Tooling that overwrites many repos leaves byte-identical files in all of them. Same content hash, same file.'],
+      ['Forged author', 'Author name and date can be set to anything. The committer date is when the commit was really made, so the gap shows.'],
+      ['Tooling left behind', 'Automation leaves scratch files behind and adds them to .gitignore so they don\'t get committed. That line is a fingerprint.'],
     ],
     next: 'Try it',
   },
@@ -480,41 +486,43 @@ Tell us what you got, including if you got nothing.
 It never clones or runs any code. It only reads.
 The token is borrowed from gh and never stored.`,
     teamNote: 'Ask for "nothing showed up" too. If that is indistinguishable from "never ran it", the whole team ends up believing it was checked.',
-    teamCopy: 'Copy this into your team channel',
+    teamCopy: 'Paste this into your team channel',
     teamLede: 'Every account sees a different slice. One person\'s scan is not the whole picture, so it is worth one run each.',
-    teamTitle: 'Telling your team',
+    teamTitle: 'Getting your team to run it',
     title: 'Get started',
     desc: 'With Node 22+, pnpm and the GitHub CLI, clone it and you are running.',
-    h1: 'Clone it and run',
-    needTitle: 'What you need first',
-    needCheck: 'Check all three at once',
+    h1: 'Clone it and run it',
+    needTitle: 'Before you start',
+    needCheck: 'Check all three in one line',
     runTitle: 'Clone and run',
     afterTitle: 'Once the window opens',
-    after1: 'Enter an org name and hit Dig. Leave the time window at its default.',
+    after1: 'Type an org name and hit Dig. Leave the time window on its default.',
     after2: 'It defaults to midnight through 7am today. That\'s usually when this happens.',
 
     stuckTitle: 'Where people get stuck',
     stuck: [
-      ['gh auth login', 'More people stall here than on the install. Check with gh auth status first.'],
-      ['Access check comes back mostly empty', 'Deploy keys and webhooks need admin on the repo. Without it the tool says it could not look, honestly. Don\'t read that as "there are none".'],
-      ['Nothing shows up', 'If the restore is already done, a clean result is expected. Still worth one run per account, since each account sees a different slice.'],
+      ['gh auth login', 'More people stall here than on the install itself. Run gh auth status first.'],
+      ['The access check comes back mostly empty', 'Deploy keys and webhooks need admin on the repo. Without it the tool says so plainly. Don\'t read that as "there are none".'],
+      ['Nothing shows up at all', 'If the restore is already done, a clean result is expected. Still worth one run per account, since each account sees a different slice.'],
     ],
 
     noInstallerTitle: 'There is no installer, on purpose',
     noInstaller1: 'This tool asks for access to your repositories. An unsigned binary asking for exactly that is indistinguishable from the attack it goes looking for.',
     noInstaller2: 'Whoever runs this just got breached. What you hand someone on that day is source they can read.',
 
-    factTitle: 'Worth knowing',
+    factTitle: 'Worth knowing up front',
     facts: [
-      ['Not a website', 'It\'s a window on your machine. No URL to visit, no account to sign up for.'],
+      ['It is not a website', 'It\'s a window on your machine. No URL to visit, no account to sign up for.'],
       ['The token is never stored', 'Borrowed from gh each time, and never handed to the interface.'],
-      ['No code is executed', 'Nothing gets cloned, installed or built. It only reads.'],
+      ['It never executes anything', 'Nothing is cloned, installed or built. It only reads.'],
       ['Three languages', 'Korean, English, Japanese. Written in each, not translated into it.'],
     ],
     next: 'Hook up an agent',
   },
 
   mcp: {
+    mcpPath: '<path>',
+
     mcpSample: `someorg 2026-08-04  (case-mcpx)
 Window: 2026-08-04 00:00 - 2026-08-04 07:00 GMT+9
 
@@ -609,6 +617,9 @@ Total: 6 commits gone
 
 export const ja: Dict = {
   nav: {
+    copy: 'コピー',
+    copied: 'コピーしました',
+
     why: 'なぜ判定しないか',
     how: 'しくみ',
     start: 'はじめかた',
@@ -630,22 +641,21 @@ export const ja: Dict = {
     license: 'MIT。個人用のツールです',
     safety: 'しないこと',
     decisions: '決定の記録',
-    noTracking: '解析ツールは使っていません',
   },
 
   home: {
     title: 'リポジトリがやられたとき、何が変わったのかを掘ります',
     desc: '指定した期間にリポジトリで変わったファイルを、ブランチごとに探して見せます。何もダウンロードせず、このパソコンの外へは何も送りません。',
-    h1: [{ t: 'ブランチを書き換えられた夜に、' }, { t: '何が変わったのかを掘ります', hl: true }],
+    h1: [{ t: '深夜、ブランチを force push で潰されたときに。' }, { t: '何が変わったのかを掘ります', hl: true }],
     lede: '深夜、誰かがブランチを丸ごと上書きしたときに開く道具です。何もダウンロードしませんし、このパソコンの外へは何も送りません。',
     outputLabel: '掘り終わるとこう伝えます',
     output1: '目立つものは 0 件でした。',
     output2: 'それでも、変更された 14 件は一度見てください。',
-    outputWhy: '他のツールはここに「0 件、異常なし」と書きます。それを書かないことが、この道具のすべてです。',
+    outputWhy: '0 件は「問題なし」ではありません。ルールに引っかからなかった、というだけです。',
     ctaStart: 'はじめる',
     ctaWhy: 'なぜ判定しないか',
 
-    threeTitle: '3 つのことをします',
+    threeTitle: 'できること',
     three: [
       ['どこがやられたか', '数十のリポジトリのうちどこで、ブランチ何本が変わったのかを、期間で絞って探します。'],
       ['何が入ったか', '攻撃直前のファイルと今のファイルを並べて見せます。それがどんなコードかは AI が読みます。'],
@@ -677,41 +687,41 @@ export const ja: Dict = {
 
 ※ ブランチ 1 本を確認できませんでした。
    この結果を「異常なし」と判断しないでください。`,
-    quickTitle: '30 秒で動きます',
+    quickTitle: '1 分ほどで動きます',
     quickNote: 'Node 22 以上、pnpm、GitHub CLI が必要です。',
-    quickMore: '詳しい手順を見る',
+    quickMore: '詳しいスキャンの流れを見る',
   },
 
   why: {
     title: 'なぜ判定しないか',
     desc: '検出ルールは、誰かが一度やられた攻撃からできています。ルールが判定を下す形にすると、拾えなかった攻撃が「異常なし」として表示されます。',
-    h1: '「安全です」とは言いません',
-    lede: 'この道具が言うことは 1 つだけです。',
-    quote: 'この期間に、これらのファイルがこう変わりました。',
+    h1: '「問題ありません」とは言いません',
+    lede: 'この道具が報告するのは 1 つだけです。',
+    quote: 'この期間に、これらのファイルがこれだけ変わりました。',
 
-    reasonTitle: 'ルールは見たことのあるものしか知りません',
+    reasonTitle: 'ルールは誰かが一度やられた手口しか知りません',
     reason1: '検出ルールは、誰かが一度やられた攻撃からできています。新しい手口は、定義上そこにありません。',
     reason2: 'ルールが判定を下す形にすると、拾えなかった攻撃が「異常なし」として表示されます。',
     reason3: '実際そうなりました。ファイル名で探していて、別の名前についた同じコードを見落とし、画面には 0 件と出ました。その画面を、しばらく信じていました。',
 
-    zeroTitle: 'だから 0 件を 4 つに分けます',
-    zeroLede: '0 になる理由は 4 つあり、意味がまったく違います。',
+    zeroTitle: '0 件には 4 つの意味があります',
+    zeroLede: '画面の 0 件は、この 4 つのどれかです。同じではありません。',
     zero: [
       ['動きなし', 'その期間は誰も触っていません。比べるものがありません。'],
       ['変化なし', 'プッシュはありましたが、中身はそのままです。'],
-      ['確認できず', '取得に失敗したので、どちらとも言えません。'],
-      ['シグナルなし', '変わってはいますが、ルールが気づけませんでした。人が見る必要があります。'],
+      ['確認できなかった', 'API 呼び出しに失敗したので、どちらとも報告できません。'],
+      ['ルールに未該当', '変更はありましたが、どのルールにも当たりませんでした。人が読む必要があります。'],
     ],
     zeroNote: '4 つをまとめて 0 と書くと、3 番目が 1 番目として読まれます。そこから先は、道具が嘘をついていることになります。',
 
-    ruleTitle: 'そこから決まったこと',
+    ruleTitle: 'そこから外したもの',
     rules: [
-      ['赤を使いません', '色でも判定しません。画面のどこにも赤がありません。'],
+      ['赤はどこにも出しません', '色でも判断を下しません。UI のどこにも赤はありません。'],
       ['レベルは危険度ではありません', 'シグナルにつくのは注目度です。「どれだけ危険か」ではなく「どれだけ先に見るべきか」です。'],
       ['失敗を隠しません', '確認できなかったものは数えて、見落とせない場所に書きます。黙って通すと、それが偽の安心になります。'],
       ['シグナル 0 でも一覧は残ります', 'ルールに引っかからなかった変更も全部一覧にあります。ルールは順番を決めるだけです。'],
     ],
-    next: 'では何を手がかりにするのか',
+    next: 'では実際に何を見ているのか',
   },
 
   how: {
@@ -720,33 +730,33 @@ export const ja: Dict = {
     desc: 'GitHub はプッシュのたびに、ブランチが直前どこを指していたかを記録しています。その住所に戻って、今と突き合わせます。',
     h1: '上書きしてもコミットは残っています',
 
-    stickyTitle: 'ブランチは付箋です',
-    sticky1: 'ブランチはコミットの山のどこかに貼られて、「ここが最新」と指しているだけです。',
-    sticky2: '強制プッシュはコミットを消しません。付箋を別の場所へ動かしただけです。元のコミットはそのままで、住所を見失っただけです。',
-    sticky3: 'そして GitHub は、プッシュが来るたびに直前の住所を書き残しています。',
-    eventLabel: 'GitHub の活動記録',
+    stickyTitle: 'ブランチはただのポインタです',
+    sticky1: 'ブランチは 1 つのコミットに付いたラベルで、「ここが先頭」と指しているだけです。',
+    sticky2: 'force push はコミットを消しません。ラベルを動かしただけです。元のコミットは残っていて、住所を見失っただけです。',
+    sticky3: 'そして GitHub は、プッシュのたびにその住所を記録しています。',
+    eventLabel: 'GitHub Events API',
     lostAddress: '見失った住所',
-    sticky4: '復元も同じところから来ます。付箋を元の場所に貼り直すだけです。',
+    sticky4: '復元も同じ仕組みです。ブランチをそのコミットに指し直すだけです。',
 
-    flowTitle: '手順',
+    flowTitle: 'スキャンの流れ',
     flow: [
-      ['期間内のプッシュを集めます', 'イベントで対象を絞ります。組織全体を総当たりしません。'],
-      ['攻撃直前のツリーと今のツリーを突き合わせます', 'どのファイルが増え、変わり、消えたかが出ます。'],
+      ['期間内のプッシュを集めます', 'イベントで対象を絞るので、組織全体を総当たりしません。'],
+      ['直前のツリーと今のツリーを diff します', 'どのファイルが追加、変更、削除されたかが出ます。'],
       ['変わったファイルを全部残します', 'ここが成果物です。ルールと関係なく残ります。'],
-      ['先に見るものに印をつけます', '判定ではなく順番です。'],
-      ['人か AI が読んで判断します', 'この道具はここまで来ません。'],
+      ['先に読むものを並べ替えます', '判定ではなく順番です。'],
+      ['あとは人か AI が引き取ります', 'この道具はこの手前で止まります。'],
     ],
 
-    limitTitle: '限界も同じところから来ます',
-    limit1: 'GitHub の活動記録は 90 日、300 件ほどしか残りません。それを過ぎると住所が見つかりません。',
+    limitTitle: '同じ事実が限界にもなります',
+    limit1: 'GitHub Events APIは 90 日、300 件ほどしか残りません。それを過ぎると住所が見つかりません。',
     limit2: 'だから早く見る必要があり、道具も画面でそう伝えます。掘った記録をファイルに残すのも同じ理由です。',
 
-    watchTitle: '先に見るものの選び方',
-    watchLede: '4 つとも実際にやられた攻撃から出てきました。ここに引っかからないから大丈夫、という意味ではありません。',
+    watchTitle: '先に読むものの決め方',
+    watchLede: '4 つとも実際の事故から出てきたものです。どれにも当たらないから安全、という意味ではありません。',
     watches: [
       ['サイズの急増', '設定ファイルの後ろに空白を長く入れて、その先にコードを隠す手口があります。名前はそのままなので目につきませんが、サイズは正直に増えます。'],
       ['リポジトリをまたぐ同じファイル', 'ツールで複数のリポジトリを書き換えると、まったく同じ中身があちこちに入ります。内容のハッシュが同じなら同じファイルです。'],
-      ['コミットの偽装', 'author の名前と日付は変えられます。ですが committer の日付は実際に作られた時刻なので、ずれた跡が残ります。'],
+      ['author の偽装', 'author の名前と日付は変えられます。ですが committer の日付は実際に作られた時刻なので、ずれた跡が残ります。'],
       ['ツールの痕跡', '自動化ツールは作業用の一時ファイルを作り、コミットに混ざらないよう .gitignore に書き足します。その行がそのまま指紋です。'],
     ],
     next: '動かしてみる',
@@ -766,7 +776,7 @@ https://github.com/gitmoru/gitmoru
   pnpm install
   pnpm app
 
-ウィンドウが開いたら組織名を入れて「掘る」を押してください。期間は既定のままで大丈夫です。
+ウィンドウが開いたら組織名を入力して「掘る」を押してください。期間は既定のままで構いません。
 何が出ても、何も出なくても教えてください。
 
 コードのダウンロードも実行もせず、読むだけです。
@@ -774,21 +784,21 @@ https://github.com/gitmoru/gitmoru
     teamNote: '「何も出なかった」も必ず集めてください。動かしていない人と見分けがつかなくなると、その時点でチーム全員が確認済みだと思い込みます。',
     teamCopy: 'この文章をチームのチャンネルに貼ってください',
     teamLede: 'アカウントごとに見える範囲が違います。誰か 1 人の結果がすべてではないので、各自 1 回ずつ動かすのが確実です。',
-    teamTitle: 'チームに知らせる',
+    teamTitle: 'チームに動かしてもらう',
     title: 'はじめかた',
     desc: 'Node 22 以上、pnpm、GitHub CLI があれば、クローンしてすぐ動きます。',
     h1: 'クローンして動かす',
-    needTitle: '先に必要なもの',
-    needCheck: '1 行で確認できます',
+    needTitle: 'はじめる前に',
+    needCheck: '1 行でまとめて確認できます',
     runTitle: 'クローンして動かす',
     afterTitle: 'ウィンドウが開いたら',
-    after1: '組織名を入れて「掘る」を押してください。期間は既定のままで大丈夫です。',
+    after1: '組織名を入力して「掘る」を押してください。期間は既定のままで構いません。',
     after2: '既定は今日の 0 時から 7 時までです。だいたいこの時間帯に起きます。',
 
     stuckTitle: 'よく詰まるところ',
     stuck: [
-      ['gh auth login', 'インストールより、ここで止まる人のほうが多いです。gh auth status で先に確認してください。'],
-      ['戸締まりがほとんど見えない', 'デプロイキーと Webhook はリポジトリの管理者権限が必要です。権限がなければ「見られなかった」と正直に出ます。それを「無い」と読まないでください。'],
+      ['gh auth login', 'インストール本体より、ここで止まる人のほうが多いです。まず gh auth status を実行してください。'],
+      ['入り口の点検がほとんど空で返る', 'デプロイキーと Webhook にはリポジトリの管理者権限が要ります。権限がなければその旨をそのまま出します。それを「無い」と読まないでください。'],
       ['何も出てこない', '復元が済んでいれば、きれいな結果になるのが普通です。ただアカウントごとに見える範囲が違うので、各自 1 回ずつ動かすのがいいです。'],
     ],
 
@@ -796,17 +806,19 @@ https://github.com/gitmoru/gitmoru
     noInstaller1: 'この道具はリポジトリへのアクセス権を使います。署名のない実行ファイルがそれを求める姿は、この道具が探している攻撃と見分けがつきません。',
     noInstaller2: '使う人は、たった今やられた人です。その日に渡すべきなのは、読めるソースのほうだと考えています。',
 
-    factTitle: '知っておくと安心なこと',
+    factTitle: '先に知っておくこと',
     facts: [
       ['ウェブサイトではありません', '自分のパソコンに開くウィンドウです。アクセスする URL も、ログインもありません。'],
-      ['トークンを保存しません', 'gh からその都度借ります。画面には渡しません。'],
-      ['コードを実行しません', 'ダウンロードも、インストールも、ビルドもせず、読むだけです。'],
+      ['トークンは保存しません', 'gh からその都度借ります。画面には渡しません。'],
+      ['コードは一切実行しません', 'ダウンロードも、インストールも、ビルドもせず、読むだけです。'],
       ['3 言語で書いています', '한국어、English、日本語。訳したのではなく、その言語で書き直しました。'],
     ],
     next: 'AI につなぐ',
   },
 
   mcp: {
+    mcpPath: '<パス>',
+
     mcpSample: `someorg 2026-08-04  (case-mcpx)
 期間: 2026-08-04 00:00 〜 2026-08-04 07:00 GMT+9
 
@@ -821,7 +833,7 @@ https://github.com/gitmoru/gitmoru
     desc: 'MCP サーバーが同梱されています。Claude Code などにつなぐと、AI が結果を直接読みます。',
     h1: 'コードを読むのは AI の仕事です',
     lede: 'この道具は「何が変わったか」までを引き受けます。それがどんなコードなのかは別の仕事なので、同梱の MCP サーバーにつなげば AI が結果を直接読みます。',
-    addTitle: '1 行でつながります',
+    addTitle: '1 行です',
     addNote: 'アプリで「AI につなぐ」を押すと、このパソコンの実際の設定ファイルの場所まで教えてくれます。',
     clientsTitle: 'つながる先',
     toolsTitle: 'ツール 11 個',
@@ -863,7 +875,7 @@ https://github.com/gitmoru/gitmoru
       ['222 件は目で読めません', 'スクリプトは結果をターミナルに流し込みます。本当に必要なのは「このうちどれから見るか」で、それには画面が要りました。'],
     ],
 
-    nowTitle: '今は',
+    nowTitle: '今の状況',
     now: '復元は終わり、この道具は次のために残しました。似たことがまた起きたら、これを開いてください。',
     thanks: '読んでくださってありがとうございます。',
   },

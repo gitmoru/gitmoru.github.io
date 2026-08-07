@@ -30,7 +30,6 @@ const READ: Array<[PagePath, string]> = [
   ['how', ui.nav.how],
   ['start', ui.nav.start],
   ['mcp', ui.nav.mcp],
-  ['safety', ui.foot.safety],
   ['story', ui.nav.story],
 ]
 
@@ -129,9 +128,7 @@ const GROUPS: Group[] = [
       <div class="h-[3px] w-full" style="background: var(--color-soil-line)"></div>
     </div>
 
-    <div
-      class="mt-6 flex flex-wrap items-center justify-between gap-x-8 gap-y-2 text-[12px] text-[var(--color-faint)]"
-    >
+    <div class="mt-6 text-[12px] text-[var(--color-faint)]">
       <p>
         {ui.foot.license}
         <span class="mx-2 text-[var(--color-edge)]" aria-hidden="true">|</span>
@@ -143,7 +140,6 @@ const GROUPS: Group[] = [
           @{MAKER}
         </a>
       </p>
-      <p>{ui.foot.noTracking}</p>
     </div>
   </div>
 </footer>
