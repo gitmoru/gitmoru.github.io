@@ -95,7 +95,7 @@ export const ko = {
 ※ 브랜치 1개를 확인하지 못했습니다.
    이 결과를 "이상 없음"으로 판단하면 안 됩니다.`,
     quickTitle: '30초면 켭니다',
-    quickNote: 'Node 22 이상, pnpm, GitHub CLI 가 있어야 해요.',
+    quickNote: 'Node 22 이상과 GitHub CLI 만 있으면 돼요.',
     quickMore: '자세한 순서 보기',
   },
 
@@ -175,35 +175,38 @@ export const ko = {
 
   start: {
     seoTitle: 'gitmoru 설치하고 저장소 침해 확인하기',
-    seoDesc: 'Node 22 이상, pnpm, GitHub CLI 만 있으면 클론해서 바로 켭니다. gh auth login 에서 막힐 때, 문단속이 비어 나올 때 어떻게 읽어야 하는지도 함께.',
+    seoDesc: 'gh auth login 하고 npx -y gitmoru 한 줄이면 브라우저에 화면이 뜹니다. 되돌리기까지 쓰려면 클론해서 앱으로 켜세요. gh auth login 에서 막힐 때, 문단속이 비어 나올 때 읽는 법까지.',
     teamMessage: `저장소가 털렸을 때 뭐가 바뀌었는지 확인하는 도구예요.
 각자 계정으로 한 번씩만 돌려주세요.
 
-https://github.com/gitmoru/gitmoru
-
-필요한 것: Node 22 이상, pnpm, GitHub CLI
-
-  git clone https://github.com/gitmoru/gitmoru.git
-  cd gitmoru
   gh auth login
-  pnpm install
-  pnpm app
+  npx -y gitmoru
 
-창이 뜨면 조직 이름 넣고 "파보기" 를 누르세요. 시간대는 기본값 그대로요.
+브라우저에 화면이 뜹니다. 조직 이름 넣고 "파보기" 를 누르세요. 시간대는 기본값 그대로요.
 결과가 뭐가 나오든, 아무것도 안 나와도 알려주세요.
 
+필요한 것: Node 22 이상, GitHub CLI
+
 코드를 내려받거나 실행하지 않고 읽기만 합니다.
-토큰은 gh 에서 빌려 쓰고 저장하지 않아요.`,
+토큰은 gh 에서 빌려 쓰고 저장하지 않아요.
+
+https://gitmoru.dev`,
     teamNote: '"아무것도 안 떴다" 도 꼭 받아두세요. 안 돌려본 사람과 구분이 안 되면, 그 순간 팀 전체가 확인했다고 착각하게 됩니다.',
     teamCopy: '이 글을 복사해서 팀 채널에 붙이세요',
     teamLede: '계정마다 보이는 범위가 달라요. 한 사람이 훑은 결과가 전부가 아니라서, 각자 한 번씩 돌려보는 게 맞습니다.',
     teamTitle: '팀에 알리기',
     title: '시작하기',
-    desc: 'Node 22 이상, pnpm, GitHub CLI 가 있으면 클론해서 바로 켤 수 있어요.',
+    desc: 'Node 22 이상과 GitHub CLI 만 있으면 한 줄로 켤 수 있어요.',
     h1: '받아서 켜기',
     needTitle: '먼저 있어야 하는 것',
     needCheck: '한 줄로 확인해요',
-    runTitle: '받아서 켜기',
+    quickTitle: '한 줄로 켜기',
+    quickLede: 'gh 로 로그인하고 한 줄만 치면 브라우저에 화면이 뜹니다. 미리 받아둘 게 없어요.',
+    quickNote: '내려받는 건 npm 에 올려둔 이 도구뿐이에요. 조사할 저장소는 안 받습니다. 무슨 코드가 도는지 궁금하면 그 자리에서 읽어보세요.',
+    npmLink: 'npm 에서 보기',
+    fullTitle: '되돌리기까지 하려면',
+    fullLede: '브랜치를 되돌리는 건 앱에서만 합니다. 명령 한 줄로 열어두지 않았어요. 되돌리기는 취소가 안 되니까, 사람이 화면을 보고 눌러야 한다고 봤습니다.',
+    fullNeed: '여기엔 하나 더 필요해요',
     afterTitle: '창이 뜨면',
     after1: '조직 이름을 넣고 파보기를 누르세요. 시간대는 기본값 그대로 두면 됩니다.',
     after2: '기본값은 오늘 새벽 0시부터 7시까지예요. 사고는 대개 이 시간대에 납니다.',
@@ -217,7 +220,7 @@ https://github.com/gitmoru/gitmoru
 
     noInstallerTitle: '설치 파일은 안 만들었어요',
     noInstaller1: '이 도구는 저장소 접근 권한을 씁니다. 서명 없는 실행 파일이 그걸 요구하는 모습은, 이 도구가 찾아내는 공격과 구분이 안 돼요.',
-    noInstaller2: '받는 사람은 방금 털린 사람이에요. 그런 날에 건네야 할 건 읽을 수 있는 코드라고 봤습니다.',
+    noInstaller2: 'npx 도 코드를 실행하긴 합니다. 다른 점은 그 코드가 npm 에 그대로 올라가 있어서 누구나 읽을 수 있다는 거예요. 받는 사람은 방금 털린 사람이고, 그런 날에 건네야 할 건 읽을 수 있는 코드라고 봤습니다.',
 
     factTitle: '알아두면 좋은 것',
     facts: [
@@ -407,7 +410,7 @@ History was overwritten on 1 branch, dropping 6 commits.
 Note: 1 branch could not be checked.
       This result should not be read as "nothing found".`,
     quickTitle: 'Running in about a minute',
-    quickNote: 'You need Node 22+, pnpm and the GitHub CLI.',
+    quickNote: 'You need Node 22+ and the GitHub CLI.',
     quickMore: 'See the full steps',
   },
 
@@ -487,35 +490,38 @@ Note: 1 branch could not be checked.
 
   start: {
     seoTitle: 'Install gitmoru and check a repo after a breach',
-    seoDesc: 'Node 22+, pnpm and the GitHub CLI, then clone and run. Includes where people get stuck on gh auth login and how to read an access check that comes back empty.',
+    seoDesc: 'Run gh auth login, then npx -y gitmoru, and the screen opens in your browser. Clone it if you want the restore button. Includes where people get stuck on gh auth login and how to read an access check that comes back empty.',
     teamMessage: `A tool for finding out what changed after repos get hit.
 Please run it once from your own account.
 
-https://github.com/gitmoru/gitmoru
-
-You need: Node 22+, pnpm, GitHub CLI
-
-  git clone https://github.com/gitmoru/gitmoru.git
-  cd gitmoru
   gh auth login
-  pnpm install
-  pnpm app
+  npx -y gitmoru
 
-Enter the org name, hit Dig, leave the time window at its default.
+The screen opens in your browser. Enter the org name, hit Dig, leave the time window at its default.
 Tell us what you got, including if you got nothing.
 
+You need: Node 22+, GitHub CLI
+
 It never clones or runs any code. It only reads.
-The token is borrowed from gh and never stored.`,
+The token is borrowed from gh and never stored.
+
+https://gitmoru.dev`,
     teamNote: 'Ask for "nothing showed up" too. If that is indistinguishable from "never ran it", the whole team ends up believing it was checked.',
     teamCopy: 'Paste this into your team channel',
     teamLede: 'Every account sees a different slice. One person\'s scan is not the whole picture, so it is worth one run each.',
     teamTitle: 'Getting your team to run it',
     title: 'Get started',
-    desc: 'With Node 22+, pnpm and the GitHub CLI, clone it and you are running.',
+    desc: 'Node 22+ and the GitHub CLI, then one line and you are looking at it.',
     h1: 'Clone it and run it',
     needTitle: 'Before you start',
-    needCheck: 'Check all three in one line',
-    runTitle: 'Clone and run',
+    needCheck: 'Check both in one line',
+    quickTitle: 'One line',
+    quickLede: 'Log in with gh, run one line, and the screen opens in your browser. Nothing to set up first.',
+    quickNote: 'The only thing that comes down is this tool, from npm. The repository you are looking at stays where it is. If you want to know what runs, the code is right there.',
+    npmLink: 'Read it on npm',
+    fullTitle: 'If you want the restore button',
+    fullLede: 'Putting a branch back happens in the app, never in a command. A restore cannot be taken back, so someone should be looking at the screen when it happens.',
+    fullNeed: 'One more thing for this one',
     afterTitle: 'Once the window opens',
     after1: 'Type an org name and hit Dig. Leave the time window on its default.',
     after2: 'It defaults to midnight through 7am today. That\'s usually when this happens.',
@@ -529,7 +535,7 @@ The token is borrowed from gh and never stored.`,
 
     noInstallerTitle: 'There is no installer, on purpose',
     noInstaller1: 'This tool asks for access to your repositories. An unsigned binary asking for exactly that is indistinguishable from the attack it goes looking for.',
-    noInstaller2: 'Whoever runs this just got breached. What you hand someone on that day is source they can read.',
+    noInstaller2: 'npx runs code too. The difference is that the code sits on npm where anyone can open it. Whoever runs this just got breached, and what you hand someone on that day should be source they can read.',
 
     factTitle: 'Worth knowing up front',
     facts: [
@@ -716,7 +722,7 @@ export const ja: Dict = {
 ※ ブランチ 1 本を確認できませんでした。
    この結果を「異常なし」と判断しないでください。`,
     quickTitle: '1 分ほどで動きます',
-    quickNote: 'Node 22 以上、pnpm、GitHub CLI が必要です。',
+    quickNote: 'Node 22 以上と GitHub CLI があれば十分です。',
     quickMore: '詳しいスキャンの流れを見る',
   },
 
@@ -796,35 +802,38 @@ export const ja: Dict = {
 
   start: {
     seoTitle: 'gitmoru を入れてリポジトリの侵害を確認する',
-    seoDesc: 'Node 22 以上、pnpm、GitHub CLI があればクローンしてすぐ動きます。gh auth login で詰まるところ、点検が空で返るときの読み方も載せています。',
+    seoDesc: 'gh auth login のあと npx -y gitmoru の 1 行でブラウザに画面が出ます。復元まで使うならクローンしてアプリで開きます。gh auth login でつまずくとき、点検が空で返るときの読み方も。',
     teamMessage: `リポジトリがやられたとき、何が変わったのかを確認する道具です。
 各自のアカウントで 1 回ずつ動かしてください。
 
-https://github.com/gitmoru/gitmoru
-
-必要なもの: Node 22 以上、pnpm、GitHub CLI
-
-  git clone https://github.com/gitmoru/gitmoru.git
-  cd gitmoru
   gh auth login
-  pnpm install
-  pnpm app
+  npx -y gitmoru
 
-ウィンドウが開いたら組織名を入力して「掘る」を押してください。期間は既定のままで構いません。
+ブラウザに画面が出ます。組織名を入力して「掘る」を押してください。期間は既定のままで構いません。
 何が出ても、何も出なくても教えてください。
 
+必要なもの: Node 22 以上、GitHub CLI
+
 コードのダウンロードも実行もせず、読むだけです。
-トークンは gh から借りるだけで保存しません。`,
+トークンは gh から借りるだけで保存しません。
+
+https://gitmoru.dev`,
     teamNote: '「何も出なかった」も必ず集めてください。動かしていない人と見分けがつかなくなると、その時点でチーム全員が確認済みだと思い込みます。',
     teamCopy: 'この文章をチームのチャンネルに貼ってください',
     teamLede: 'アカウントごとに見える範囲が違います。誰か 1 人の結果がすべてではないので、各自 1 回ずつ動かすのが確実です。',
     teamTitle: 'チームに動かしてもらう',
     title: 'はじめかた',
-    desc: 'Node 22 以上、pnpm、GitHub CLI があれば、クローンしてすぐ動きます。',
+    desc: 'Node 22 以上と GitHub CLI があれば 1 行で開きます。',
     h1: 'クローンして動かす',
     needTitle: 'はじめる前に',
-    needCheck: '1 行でまとめて確認できます',
-    runTitle: 'クローンして動かす',
+    needCheck: '1 行で確認します',
+    quickTitle: '1 行で開く',
+    quickLede: 'gh でログインして 1 行打つと、ブラウザに画面が出ます。先に用意しておくものはありません。',
+    quickNote: '降りてくるのは npm に置いたこのツールだけです。調べる側のリポジトリは持ってきません。何が動くのか気になったら、そのまま読めます。',
+    npmLink: 'npm で見る',
+    fullTitle: '復元まで使うなら',
+    fullLede: 'ブランチを戻すのはアプリの中だけです。コマンド 1 行では開けていません。復元は取り消せないので、人が画面を見て押すべきだと考えました。',
+    fullNeed: 'これにはもう 1 つ要ります',
     afterTitle: 'ウィンドウが開いたら',
     after1: '組織名を入力して「掘る」を押してください。期間は既定のままで構いません。',
     after2: '既定は今日の 0 時から 7 時までです。だいたいこの時間帯に起きます。',
@@ -838,7 +847,7 @@ https://github.com/gitmoru/gitmoru
 
     noInstallerTitle: 'インストーラは作っていません',
     noInstaller1: 'この道具はリポジトリへのアクセス権を使います。署名のない実行ファイルがそれを求める姿は、この道具が探している攻撃と見分けがつきません。',
-    noInstaller2: '使う人は、たった今やられた人です。その日に渡すべきなのは、読めるソースのほうだと考えています。',
+    noInstaller2: 'npx もコードを実行します。違うのは、そのコードが npm にそのまま置いてあって誰でも読めることです。受け取るのはついさっきやられた人で、その日に渡すものは読めるコードであるべきだと考えました。',
 
     factTitle: '先に知っておくこと',
     facts: [

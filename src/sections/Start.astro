@@ -11,11 +11,29 @@ const { lang } = Astro.props
 const ui = t(lang)
 const s = ui.start
 
+/*
+  갈래가 둘이다.
+
+  화면만 보면 되는 사람은 Node 와 gh 만 있으면 된다. 되돌리기까지 하려면 클론이
+  필요하고 거기에 pnpm 이 붙는다. 예전에는 셋을 한 덩어리로 적어뒀는데,
+  그건 급한 사람한테 pnpm 부터 깔고 오라는 말이었다.
+*/
 const NEEDS = [
   ['Node 22+', 'https://nodejs.org'],
-  ['pnpm', 'https://pnpm.io'],
   ['GitHub CLI', 'https://cli.github.com'],
 ]
+
+const QUICK = `gh auth login
+npx -y gitmoru`
+
+const CLONE = `git clone https://github.com/gitmoru/gitmoru.git
+cd gitmoru
+gh auth login
+pnpm install
+pnpm app`
+
+const NPM = 'https://www.npmjs.com/package/gitmoru'
+const BADGE = 'px inline-block bg-[var(--color-ink)] px-4 py-2 text-[14px] hover:text-[var(--color-moss)]'
 ---
 
 <Layout lang={lang} page="start" title={s.seoTitle} description={s.seoDesc} tone="var(--color-soil-2)">
@@ -28,28 +46,32 @@ const NEEDS = [
     <ul class="mt-6 flex flex-wrap gap-3">
       {NEEDS.map(([name, url]) => (
         <li>
-          <a
-            href={url}
-            class="px inline-block bg-[var(--color-ink)] px-4 py-2 text-[14px] hover:text-[var(--color-moss)]"
-            style="--px-c: var(--color-soil-line)"
-          >
-            {name}
-          </a>
+          <a href={url} class={BADGE} style="--px-c: var(--color-soil-line)">{name}</a>
         </li>
       ))}
     </ul>
     <p class="mt-8 mb-3 text-[13.5px] text-[var(--color-muted)]">{s.needCheck}</p>
-    <Command class="max-w-2xl" code="node -v && pnpm -v && gh --version" />
+    <Command class="max-w-2xl" code="node -v && gh --version" />
 
-    <h2 class="mt-20 text-[22px] font-bold md:text-[28px]">{s.runTitle}</h2>
-    <Command
-      class="mt-6 max-w-2xl"
-      code={`git clone https://github.com/gitmoru/gitmoru.git
-cd gitmoru
-gh auth login
-pnpm install
-pnpm app`}
-    />
+    {/*
+      짧은 쪽을 먼저 놓는다.
+
+      여기 오는 사람은 이미 사고가 난 뒤다. 그 사람이 먼저 봐야 하는 건
+      화면을 띄우는 두 줄이지, 클론하고 설치하는 다섯 줄이 아니다.
+    */}
+    <h2 class="mt-20 text-[22px] font-bold md:text-[28px]">{s.quickTitle}</h2>
+    <p class="mt-5 max-w-2xl text-[16px] leading-relaxed text-[#e5dcd0]">{s.quickLede}</p>
+    <Command class="mt-6 max-w-2xl" code={QUICK} />
+    <p class="mt-4 max-w-2xl text-[14.5px] leading-relaxed text-[var(--color-muted)]">
+      {s.quickNote}{' '}
+      <a href={NPM} class="text-[var(--color-moss)] hover:underline">{s.npmLink} →</a>
+    </p>
+
+    <h2 class="mt-20 text-[22px] font-bold md:text-[28px]">{s.fullTitle}</h2>
+    <p class="mt-5 max-w-2xl text-[16px] leading-relaxed text-[#e5dcd0]">{s.fullLede}</p>
+    <p class="mt-6 mb-3 text-[13.5px] text-[var(--color-muted)]">{s.fullNeed}</p>
+    <a href="https://pnpm.io" class={BADGE} style="--px-c: var(--color-soil-line)">pnpm</a>
+    <Command class="mt-6 max-w-2xl" code={CLONE} />
 
     <h2 class="mt-20 text-[22px] font-bold md:text-[28px]">{s.afterTitle}</h2>
     <p class="mt-5 max-w-2xl text-[16px] leading-relaxed text-[#e5dcd0]">{s.after1}</p>
