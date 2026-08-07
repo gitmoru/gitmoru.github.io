@@ -55,6 +55,21 @@ const KEEPS: Array<[string, string]> = [
   [`${REPO}/blob/main/docs/decisions/README.md`, ui.foot.decisions],
   [`${REPO}/blob/main/LICENSE`, 'MIT'],
 ]
+
+interface Group {
+  title: string
+  links: Array<{ to: string; label: string }>
+}
+
+/** 그릴 모양으로 미리 다 만들어 둔다. 화면 쪽에서는 돌기만 한다. */
+const GROUPS: Group[] = [
+  {
+    title: ui.foot.groupRead,
+    links: READ.map(([to, label]) => ({ to: href(lang, to), label })),
+  },
+  { title: ui.foot.groupCode, links: CODE.map(([to, label]) => ({ to, label })) },
+  { title: ui.foot.groupKeeps, links: KEEPS.map(([to, label]) => ({ to, label })) },
+]
 ---
 
 <footer class="border-t border-[var(--color-edge-soft)] bg-[var(--color-ink)]">
@@ -75,23 +90,19 @@ const KEEPS: Array<[string, string]> = [
       </div>
 
       {
-        [
-          [ui.foot.groupRead, READ.map(([to, label]) => [href(lang, to), label] as const)],
-          [ui.foot.groupCode, CODE],
-          [ui.foot.groupKeeps, KEEPS],
-        ].map(([title, links]) => (
+        GROUPS.map((group) => (
           <nav>
             <h2 class="text-[11.5px] font-semibold tracking-wide text-[var(--color-faint)]">
-              {title as string}
+              {group.title}
             </h2>
             <ul class="mt-4 space-y-2.5">
-              {(links as ReadonlyArray<readonly [string, string]>).map(([to, label]) => (
+              {group.links.map((link) => (
                 <li>
                   <a
-                    href={to}
+                    href={link.to}
                     class="text-[13.5px] text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
                   >
-                    {label}
+                    {link.label}
                   </a>
                 </li>
               ))}

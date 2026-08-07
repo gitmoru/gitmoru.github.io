@@ -11,8 +11,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check",
-    "shots": "node scripts/shoot.mjs"
+    "check": "astro check && astro build",
+    "shots": "node scripts/shoot.mjs",
+    "typecheck": "astro check"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
@@ -21,6 +22,8 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "playwright-core": "^1.62.1"
+    "@astrojs/check": "^0.9.10",
+    "playwright-core": "^1.62.1",
+    "typescript": "^6.0.3"
   }
 }

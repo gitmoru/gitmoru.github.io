@@ -1,0 +1,29 @@
+# 타입 검사와 빌드.
+#
+# `astro build` 는 타입을 안 본다. 그래서 사전 문구를 엉뚱한 자리에 넣어도
+# 빌드는 통과하고 화면만 빈칸이 된다. 실제로 그렇게 두 군데가 비어 있었다.
+# `astro check` 가 그걸 잡는다.
+name: check
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      # 버전은 package.json 의 packageManager 를 읽어 간다
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm check

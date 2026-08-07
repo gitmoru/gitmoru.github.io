@@ -4,8 +4,14 @@
 
 ```bash
 pnpm install
-pnpm dev
+pnpm dev      # 개발 서버
+pnpm check    # 타입 검사 + 빌드
+pnpm shots    # 앱 화면 다시 찍기
 ```
+
+**올리기 전에 `pnpm check` 를 돌리세요.** `astro build` 는 타입을 안 봅니다.
+그래서 사전 문구를 엉뚱한 자리에 넣어도 빌드는 통과하고 **화면만 빈칸**이 돼요.
+실제로 그렇게 두 군데가 비어 있었습니다.
 
 ## 구조
 

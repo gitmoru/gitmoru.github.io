@@ -1,5 +1,8 @@
 import type { Lang } from './config'
 
+/** 히어로 제목 조각. `hl` 이 붙은 조각만 색이 바뀐다. */
+export type HeadPart = { t: string; hl?: boolean }
+
 /**
  * 세 언어 문구.
  *
@@ -42,7 +45,11 @@ export const ko = {
   home: {
     title: '저장소가 털렸을 때 무엇이 바뀌었는지 파봅니다',
     desc: '특정 시간대에 저장소에서 바뀐 파일을 브랜치별로 찾아서 보여줍니다. 아무것도 내려받지 않고, 이 컴퓨터 밖으로 아무것도 보내지 않아요.',
-    h1: [{ t: '저장소가 털렸을 때 ' }, { t: '무엇이 바뀌었는지', hl: true }, { t: ' 파봅니다' }],
+    h1: [
+      { t: '저장소가 털렸을 때 ' },
+      { t: '무엇이 바뀌었는지', hl: true },
+      { t: ' 파봅니다' },
+    ] as HeadPart[],
     lede: '새벽에 누가 브랜치를 통째로 갈아엎었을 때 켜는 도구예요. 아무것도 내려받지 않고, 이 컴퓨터 밖으로 아무것도 보내지 않아요.',
     outputLabel: '훑고 나면 이렇게 말해줘요',
     output1: '눈에 띈 건 0개예요.',
@@ -73,7 +80,6 @@ export const ko = {
     ],
     shotTitle: '이렇게 생겼어요',
     shotAlt: '조직을 훑은 결과. 바뀐 파일이 브랜치별로 나와 있다',
-    shotDiffAlt: '공격 직전 파일과 지금 파일을 좌우로 비교하는 화면',
     shareSample: `[someorg 2026-08-04]
 검사 범위: someorg
 검사 시간대: 2026-08-04 00:00 ~ 2026-08-04 07:00 (GMT+9)
@@ -122,6 +128,7 @@ export const ko = {
   },
 
   how: {
+    shotDiffAlt: '공격 직전 파일과 지금 파일을 좌우로 비교하는 화면',
     title: '어떻게 도나',
     desc: 'GitHub 은 푸시가 들어올 때마다 옮기기 직전에 브랜치가 어디를 가리켰는지 적어둡니다. 그 주소로 돌아가서 지금과 맞대봅니다.',
     h1: '덮어써도 원래 커밋은 남아 있어요',
@@ -304,7 +311,7 @@ https://github.com/gitmoru/gitmoru
     p: '판 건 확실합니다. 주소가 틀렸거나, 저희가 아직 안 만든 페이지예요.',
     back: '지표로 올라가기',
   },
-} as const
+}
 
 type Dict = typeof ko
 
@@ -368,7 +375,6 @@ export const en: Dict = {
     ],
     shotTitle: 'What it looks like',
     shotAlt: 'Scan results, with changed files grouped by branch',
-    shotDiffAlt: 'The file before the attack and the file now, side by side',
     shareSample: `[someorg 2026-08-04]
 Scope: someorg
 Window: 2026-08-04 00:00 - 2026-08-04 07:00 (GMT+9)
@@ -417,6 +423,7 @@ Note: 1 branch could not be checked.
   },
 
   how: {
+    shotDiffAlt: 'The file before the attack and the file now, side by side',
     title: 'How it works',
     desc: 'GitHub records where a branch pointed right before each push. We go back to that address and compare it against now.',
     h1: 'A force push doesn\'t delete your commits',
@@ -660,7 +667,6 @@ export const ja: Dict = {
     ],
     shotTitle: 'こんな画面です',
     shotAlt: 'スキャン結果。変更されたファイルがブランチごとに並ぶ',
-    shotDiffAlt: '攻撃直前のファイルと今のファイルを左右に並べた画面',
     shareSample: `[someorg 2026-08-04]
 対象: someorg
 期間: 2026-08-04 00:00 〜 2026-08-04 07:00（GMT+9）
@@ -709,6 +715,7 @@ export const ja: Dict = {
   },
 
   how: {
+    shotDiffAlt: '攻撃直前のファイルと今のファイルを左右に並べた画面',
     title: 'しくみ',
     desc: 'GitHub はプッシュのたびに、ブランチが直前どこを指していたかを記録しています。その住所に戻って、今と突き合わせます。',
     h1: '上書きしてもコミットは残っています',
