@@ -152,7 +152,7 @@ export const ko = {
 
     flowTitle: '순서',
     flow: [
-      ['시간대 안의 푸시를 모아요', '이벤트로 대상을 좁혀요. 조직 전체를 다 뒤지지 않습니다.'],
+      ['시간대 안의 활동을 모아요', '푸시로 대상을 좁히고, 비공개였다가 공개로 바뀐 저장소도 같이 봐요. 그건 푸시가 하나도 없어도 일어나거든요.'],
       ['공격 직전 트리와 지금 트리를 맞대요', '어떤 파일이 생기고, 바뀌고, 사라졌는지 나옵니다.'],
       ['바뀐 파일을 전부 모아요', '여기가 결과물이에요. 규칙과 무관하게 다 남습니다.'],
       ['먼저 볼 것에 형광펜을 칩니다', '판정이 아니라 순서예요.'],
@@ -164,12 +164,15 @@ export const ko = {
     limit2: '그래서 사고가 나면 빨리 봐야 하고, 도구도 이걸 화면에서 말해줍니다. 훑은 기록을 파일로 남기는 것도 같은 이유예요.',
 
     watchTitle: '먼저 볼 것을 고르는 방식',
-    watchLede: '넷 다 실제로 당한 공격에서 나왔어요. 여기 안 걸렸다고 괜찮다는 뜻이 아닙니다.',
+    watchLede: '전부 실제로 당한 공격에서 나왔어요. 여기 안 걸렸다고 괜찮다는 뜻이 아닙니다.',
     watches: [
       ['크기 급증', '설정 파일 뒤에 공백을 길게 넣고 그 뒤에 코드를 숨기는 수법이 있어요. 이름은 그대로라 눈에 안 띄는데 크기는 정직하게 늘어납니다.'],
       ['저장소 간 같은 파일', '도구로 여러 저장소를 덮어쓰면 완전히 같은 내용이 여기저기 들어가요. 내용의 해시가 같으면 같은 파일입니다.'],
       ['커밋 위조', 'author 이름과 날짜는 바꿀 수 있어요. 그런데 committer 날짜는 실제로 커밋이 만들어진 시각이라 어긋난 자국이 남습니다.'],
       ['도구 흔적', '자동화 도구는 작업용 임시 파일을 만들고, 그게 커밋에 안 섞이게 .gitignore 에 적어둬요. 그 줄이 그대로 지문입니다.'],
+      ['서명이 끊김', '서명하던 브랜치에서 서명이 빠졌는지 봐요. 원래 서명을 안 쓰던 곳에서는 안 뜹니다. 하던 걸 안 하게 된 것만 사실이에요.'],
+      ['액션 고정 풀림', 'uses 가 커밋 해시에서 태그로 바뀌면 남이 그 태그를 옮길 수 있게 돼요. 2025년에 널리 쓰이던 액션 하나가 그렇게 털렸습니다.'],
+      ['워크플로가 연 문', '남의 PR 코드가 비밀을 들고 돌게 됐는지, PR 제목이 명령이 될 수 있게 됐는지 봐요. 이번 푸시로 생긴 것만요.'],
     ],
     next: '켜보기',
   },
@@ -468,7 +471,7 @@ Note: 1 branch could not be checked.
 
     flowTitle: 'How a scan runs',
     flow: [
-      ['Collect pushes in the window', 'Events narrow the targets, so it does not\'t crawl the whole org.'],
+      ['Collect activity in the window', 'Pushes narrow the targets, and repositories that went from private to public are picked up too. That one happens with no push at all.'],
       ['Diff the tree before against now', 'Which files were added, modified or deleted.'],
       ['Keep every changed file', 'This is the output. It stays whether a rule matched or not.'],
       ['Rank what to read first', 'That is ordering, not a verdict.'],
@@ -480,12 +483,15 @@ Note: 1 branch could not be checked.
     limit2: 'So you have to look early, and the tool says so on screen. It\'s also why every scan gets written to disk.',
 
     watchTitle: 'How it ranks what to read first',
-    watchLede: 'All four came out of a real incident. Not matching one of them doesn\'t make a file fine.',
+    watchLede: 'Every one of these came out of a real incident. Not matching them doesn\'t make a file fine.',
     watches: [
       ['Sudden size jump', 'Padding a config file with whitespace pushes the payload off screen. The name is unchanged, so nothing looks odd, but the size tells on it.'],
       ['Identical file across repos', 'Tooling that overwrites many repos leaves byte-identical files in all of them. Same content hash, same file.'],
       ['Forged author', 'Author name and date can be set to anything. The committer date is when the commit was really made, so the gap shows.'],
       ['Tooling left behind', 'Automation leaves scratch files behind and adds them to .gitignore so they don\'t get committed. That line is a fingerprint.'],
+      ['Signing stopped', 'A branch that signs and suddenly does not. Silent where signing was never the habit, because only the change means anything.'],
+      ['Action pin loosened', 'A uses that went from a commit hash to a tag, which the action owner can move. That is how a widely used action was compromised in 2025.'],
+      ['A workflow opened a door', "Someone else's pull request code now running with the secrets, or a pull request title that can carry a command. Only what this push introduced."],
     ],
     next: 'Try it',
   },
@@ -781,7 +787,7 @@ export const ja: Dict = {
 
     flowTitle: 'スキャンの流れ',
     flow: [
-      ['期間内のプッシュを集めます', 'イベントで対象を絞るので、組織全体を総当たりしません。'],
+      ['期間内の動きを集めます', 'プッシュで対象を絞り、非公開から公開に変わったリポジトリも見ます。これはプッシュが 1 件もなくても起きます。'],
       ['直前のツリーと今のツリーを diff します', 'どのファイルが追加、変更、削除されたかが出ます。'],
       ['変わったファイルを全部残します', 'ここが成果物です。ルールと関係なく残ります。'],
       ['先に読むものを並べ替えます', '判定ではなく順番です。'],
@@ -793,12 +799,15 @@ export const ja: Dict = {
     limit2: 'だから早く見る必要があり、道具も画面でそう伝えます。掘った記録をファイルに残すのも同じ理由です。',
 
     watchTitle: '先に読むものの決め方',
-    watchLede: '4 つとも実際の事故から出てきたものです。どれにも当たらないから安全、という意味ではありません。',
+    watchLede: 'どれも実際の事故から出てきたものです。どれにも当たらないから安全、という意味ではありません。',
     watches: [
       ['サイズの急増', '設定ファイルの後ろに空白を長く入れて、その先にコードを隠す手口があります。名前はそのままなので目につきませんが、サイズは正直に増えます。'],
       ['リポジトリをまたぐ同じファイル', 'ツールで複数のリポジトリを書き換えると、まったく同じ中身があちこちに入ります。内容のハッシュが同じなら同じファイルです。'],
       ['author の偽装', 'author の名前と日付は変えられます。ですが committer の日付は実際に作られた時刻なので、ずれた跡が残ります。'],
       ['ツールの痕跡', '自動化ツールは作業用の一時ファイルを作り、コミットに混ざらないよう .gitignore に書き足します。その行がそのまま指紋です。'],
+      ['署名が途切れた', '署名していたブランチで署名が抜けたかを見ます。もともと署名しない場所では出ません。変わったことだけが事実です。'],
+      ['アクションの固定外れ', 'uses がコミットハッシュからタグに変わると、持ち主がそのタグを動かせます。2025 年に広く使われていたアクションがそうして乗っ取られました。'],
+      ['ワークフローが開けた口', '他人の PR のコードが秘密を持って動くようになったか、PR のタイトルが命令になり得るか。今回のプッシュで生じたものだけです。'],
     ],
     next: '動かしてみる',
   },
