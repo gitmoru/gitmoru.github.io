@@ -4,6 +4,7 @@ import Band from '../components/Band.astro'
 import Command from '../components/Command.astro'
 import Mole from '../components/Mole.astro'
 import Output from '../components/Output.astro'
+import Shot from '../components/Shot.astro'
 import { href, type Lang } from '../i18n/config'
 import { t } from '../i18n/ui'
 
@@ -63,7 +64,11 @@ const SHARE = `[someorg 2026-08-04]
             style="--px-c: var(--color-moss)"
           >
             <span class="block text-[15px] font-semibold">{h.forkNow}</span>
-            <span class="mt-0.5 block text-[12.5px] opacity-70">{h.forkNowSub}</span>
+            {/*
+              투명도로 흐리게 만들면 대비가 4.58 까지 떨어진다. 12px 대에서는 부족하다.
+              색을 직접 정해서 6.7 로 올린다. 부제로 보이는 건 유지된다.
+            */}
+            <span class="mt-1 block text-[13px]" style="color: #283f31">{h.forkNowSub}</span>
           </a>
           <a
             href={href(lang, 'why')}
@@ -71,7 +76,7 @@ const SHARE = `[someorg 2026-08-04]
             style="--px-c: var(--color-edge)"
           >
             <span class="block text-[15px] font-semibold">{h.forkLook}</span>
-            <span class="mt-0.5 block text-[12.5px] text-[var(--color-muted)]">{h.forkLookSub}</span>
+            <span class="mt-1 block text-[13px] text-[var(--color-muted)]">{h.forkLookSub}</span>
           </a>
         </div>
       </div>
@@ -132,8 +137,20 @@ const SHARE = `[someorg 2026-08-04]
     </ul>
   </Band>
 
-  <!-- ── 실제 출력 ────────────────────────────────────── -->
+  <!-- ── 이렇게 생겼어요 ──────────────────────────────── -->
   <Band tone={1} grit edge>
+    <h2 class="text-[24px] font-bold md:text-[32px]">{h.shotTitle}</h2>
+    <Shot
+      class="mt-8"
+      lang={lang}
+      name="scan"
+      alt={h.shotAlt}
+      caption={h.shotCaption}
+    />
+  </Band>
+
+  <!-- ── 실제 출력 ────────────────────────────────────── -->
+  <Band tone={2} grit edge>
     <div class="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
       <div>
         <h2 class="text-[24px] leading-snug font-bold md:text-[32px]">{ui.why.h1}</h2>

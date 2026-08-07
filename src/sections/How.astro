@@ -3,6 +3,7 @@ import Layout from '../components/Layout.astro'
 import Band from '../components/Band.astro'
 import PageHead from '../components/PageHead.astro'
 import Output from '../components/Output.astro'
+import Shot from '../components/Shot.astro'
 import { href, type Lang } from '../i18n/config'
 import { t } from '../i18n/ui'
 
@@ -62,6 +63,14 @@ head:    9d2b04e`}
       <p class="mt-4 text-[15.5px] leading-relaxed text-[#e5dcd0]">{h.limit1}</p>
       <p class="mt-3 text-[15.5px] leading-relaxed text-[var(--color-muted)]">{h.limit2}</p>
     </div>
+
+    <Shot
+      class="mt-20"
+      lang={lang}
+      name="diff"
+      alt={h.shotDiffAlt}
+      caption={h.shotDiffCaption}
+    />
 
     <h2 class="mt-20 text-[24px] font-bold md:text-[30px]">{h.watchTitle}</h2>
     <p class="mt-4 max-w-2xl text-[15px] text-[var(--color-muted)]">{h.watchLede}</p>

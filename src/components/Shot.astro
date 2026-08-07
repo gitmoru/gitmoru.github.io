@@ -1,0 +1,45 @@
+---
+import type { Lang } from '../i18n/config'
+
+/**
+ * 앱 화면.
+ *
+ * **언어마다 다른 그림을 쓴다.** 영어로 읽는 사람에게 한국어 화면을 보여주면
+ * 그 순간 "이건 저 사람들 물건이구나" 가 된다. 번역까지 해놓고 화면에서 무너뜨릴 이유가 없다.
+ *
+ * 그림은 `pnpm shots` 이 진짜 앱을 띄워서 진짜 저장소를 훑고 찍은 것이다.
+ * 목업을 그리지 않는다. 앱이 바뀌면 다시 찍는다.
+ */
+
+interface Props {
+  lang: Lang
+  /** shots 폴더의 이름. `scan`, `diff` */
+  name: 'scan' | 'diff'
+  alt: string
+  caption?: string
+  class?: string
+}
+
+const { lang, name, alt, caption, class: cls } = Astro.props
+---
+
+<figure class={cls}>
+  <div class="px overflow-hidden bg-[var(--color-ink)]" style="--px-c: var(--color-edge)">
+    <img
+      src={`/shots/${name}-${lang}.png`}
+      alt={alt}
+      width="1440"
+      height="900"
+      loading="lazy"
+      decoding="async"
+      class="block h-auto w-full"
+    />
+  </div>
+  {
+    caption && (
+      <figcaption class="mt-3 text-[12.5px] leading-relaxed text-[var(--color-faint)]">
+        {caption}
+      </figcaption>
+    )
+  }
+</figure>
