@@ -133,6 +133,35 @@ svg[data-pixel] {
   opacity: 0.28;
 }
 
+/*
+ * 줄 나누기는 브라우저한테 맡긴다.
+ *
+ * 예전에는 문구에 개행을 직접 박아뒀는데, 화면 폭이 조금만 달라져도
+ * 엉뚱한 데서 끊긴다. 게다가 언어마다 끊어 읽는 자리가 달라서
+ * 한국어 기준으로 넣은 개행이 영어와 일본어에서는 그냥 틀린 자리가 된다.
+ *
+ *   balance - 제목의 각 줄 길이를 비슷하게 맞춘다
+ *   pretty  - 마지막 줄에 한 단어만 남는 것을 막는다
+ */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+/* 한국어와 일본어는 단어 중간에서 끊기면 읽기 나쁘다 */
+:lang(ko),
+:lang(ja) {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
 a {
   color: inherit;
 }
