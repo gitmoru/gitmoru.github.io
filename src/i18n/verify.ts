@@ -12,7 +12,7 @@
  */
 export const VERIFY: Record<string, string> = {
   /** 네이버 서치어드바이저. `<meta name="naver-site-verification" content="...">` 의 content */
-  'naver-site-verification': '',
+  'naver-site-verification': '7513f35c6088ce9f8b5778c4983586a9340f3e5f',
 
   /** 구글. DNS 로 했으면 비워둔다 */
   'google-site-verification': '',
