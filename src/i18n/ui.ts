@@ -45,6 +45,8 @@ export const ko = {
   },
 
   home: {
+    seoTitle: 'force push 로 덮어쓴 브랜치 복구, 사라진 커밋 찾기',
+    seoDesc: 'GitHub 저장소가 털렸을 때 어떤 파일이 바뀌었는지 브랜치별로 찾습니다. force push 로 사라진 커밋을 되돌리고, 무엇을 확인 못 했는지까지 알려줍니다. 내려받지 않고 읽기만 해요.',
     title: '저장소가 털렸을 때 무엇이 바뀌었는지 파봅니다',
     desc: '특정 시간대에 저장소에서 바뀐 파일을 브랜치별로 찾아서 보여줍니다. 아무것도 내려받지 않고, 이 컴퓨터 밖으로 아무것도 보내지 않아요.',
     h1: [
@@ -98,6 +100,8 @@ export const ko = {
   },
 
   why: {
+    seoTitle: '탐지 규칙이 못 잡은 공격은 왜 이상 없음으로 보이나',
+    seoDesc: '보안 도구가 0건이라고 할 때 그게 안전하다는 뜻이 아닌 이유. 활동 없음, 변화 없음, 확인 실패, 규칙 미해당을 갈라서 봐야 하는 까닭을 설명합니다.',
     title: '왜 판정하지 않나',
     desc: '탐지 규칙은 겪어본 공격에서 나옵니다. 규칙이 판정을 내리면, 규칙이 못 잡은 공격이 "이상 없음" 으로 표시돼요.',
     h1: '"안전합니다" 라고 말하지 않아요',
@@ -130,6 +134,8 @@ export const ko = {
   },
 
   how: {
+    seoTitle: 'force push 로 사라진 커밋을 되돌리는 원리',
+    seoDesc: 'GitHub 활동 기록의 payload.before 로 강제 푸시 직전 커밋을 찾는 방법. 브랜치를 덮어써도 커밋은 남아 있고, 90일 안에는 되돌릴 수 있습니다.',
     shotDiffAlt: '공격 직전 파일과 지금 파일을 좌우로 비교하는 화면',
     title: '어떻게 도나',
     desc: 'GitHub 은 푸시가 들어올 때마다 옮기기 직전에 브랜치가 어디를 가리켰는지 적어둡니다. 그 주소로 돌아가서 지금과 맞대봅니다.',
@@ -168,6 +174,8 @@ export const ko = {
   },
 
   start: {
+    seoTitle: 'gitmoru 설치하고 저장소 침해 확인하기',
+    seoDesc: 'Node 22 이상, pnpm, GitHub CLI 만 있으면 클론해서 바로 켭니다. gh auth login 에서 막힐 때, 문단속이 비어 나올 때 어떻게 읽어야 하는지도 함께.',
     teamMessage: `저장소가 털렸을 때 뭐가 바뀌었는지 확인하는 도구예요.
 각자 계정으로 한 번씩만 돌려주세요.
 
@@ -222,6 +230,8 @@ https://github.com/gitmoru/gitmoru
   },
 
   mcp: {
+    seoTitle: 'Claude Code 에 붙이는 GitHub 저장소 조사 MCP 서버',
+    seoDesc: '읽기 전용 MCP 도구 11개. 스캔, 트리아지, diff, 배포 키와 웹훅 점검까지 AI 가 직접 읽습니다. Claude Code, Cursor, Codex CLI 에 한 줄로 붙습니다.',
     mcpPath: '<경로>',
 
     mcpSample: `someorg 2026-08-04  (case-mcpx)
@@ -264,6 +274,8 @@ https://github.com/gitmoru/gitmoru
   },
 
   story: {
+    seoTitle: '브랜치 222개가 덮어써진 사고를 수습하며 만든 도구',
+    seoDesc: '계정 하나가 털려 몇 시간 만에 브랜치 222개가 사라진 실제 사고. gh api 스크립트로는 왜 안 됐는지, 0건이 왜 제일 무서웠는지.',
     title: '만든 이유',
     desc: '실제 사고를 터미널로 수습하면서 만들었습니다. 브랜치가 222개가 되니 명령을 손으로 치는 게 불가능했어요.',
     h1: '0건이 무서웠어요',
@@ -286,6 +298,8 @@ https://github.com/gitmoru/gitmoru
   },
 
   safety: {
+    seoTitle: '악성 코드가 든 저장소를 안전하게 들여다보는 방법',
+    seoDesc: 'clone 도 실행도 하지 않고 GitHub API 로만 읽습니다. 토큰은 화면에 안 내려가고, 페이로드는 무력화해서 글자로만 그립니다. 지키는 규칙 10가지.',
     title: '이 도구가 안 하는 것',
     desc: '악성 코드가 들어 있을 수 있는 저장소를 들여다보는 도구예요. 그래서 편해 보이는 방법이 대개 막혀 있습니다.',
     h1: '이 도구가 안 하는 것',
@@ -348,6 +362,8 @@ export const en: Dict = {
   },
 
   home: {
+    seoTitle: 'Undo a force push and find the commits that went missing',
+    seoDesc: 'Find every file that changed in a GitHub org during a time window, branch by branch. Recover commits lost to a force push, and see exactly what could not be verified. Nothing is cloned.',
     title: 'Find out what changed when your repos got hit',
     desc: 'Finds the files that changed in a repository during a time window, branch by branch. Nothing is downloaded, nothing leaves your machine.',
     h1: [{ t: 'Your repos got hit. ' }, { t: 'Find out what actually changed', hl: true }, { t: '.' }],
@@ -397,6 +413,8 @@ Note: 1 branch could not be checked.
   },
 
   why: {
+    seoTitle: 'Why a security tool saying zero findings does not mean you are clear',
+    seoDesc: 'A zero can mean no activity, no change, a failed lookup, or a rule that matched nothing. Collapsing them into one number is how tools end up reassuring you about nothing.',
     title: 'Why no verdict',
     desc: 'Detection rules come from attacks someone already survived. If rules render verdicts, whatever they miss gets painted as "all clear".',
     h1: 'It will not tell you you\'re safe',
@@ -429,6 +447,8 @@ Note: 1 branch could not be checked.
   },
 
   how: {
+    seoTitle: 'How to recover a branch after a force push, using the GitHub events API',
+    seoDesc: 'A force push does not delete commits. GitHub records the commit a branch pointed at before every push, and for about 90 days you can go back and diff it against now.',
     shotDiffAlt: 'The file before the attack and the file now, side by side',
     title: 'How it works',
     desc: 'GitHub records where a branch pointed right before each push. We go back to that address and compare it against now.',
@@ -467,6 +487,8 @@ Note: 1 branch could not be checked.
   },
 
   start: {
+    seoTitle: 'Install gitmoru and check a repo after a breach',
+    seoDesc: 'Node 22+, pnpm and the GitHub CLI, then clone and run. Includes where people get stuck on gh auth login and how to read an access check that comes back empty.',
     teamMessage: `A tool for finding out what changed after repos get hit.
 Please run it once from your own account.
 
@@ -521,6 +543,8 @@ The token is borrowed from gh and never stored.`,
   },
 
   mcp: {
+    seoTitle: 'A read-only GitHub incident MCP server for Claude Code',
+    seoDesc: 'Eleven read-only MCP tools: scan, triage, diff, forced-push history, deploy keys and webhooks. One line to connect from Claude Code, Cursor or Codex CLI.',
     mcpPath: '<path>',
 
     mcpSample: `someorg 2026-08-04  (case-mcpx)
@@ -563,6 +587,8 @@ Total: 6 commits gone
   },
 
   story: {
+    seoTitle: 'Built while cleaning up 222 force-pushed branches',
+    seoDesc: 'One account was taken over and within hours 222 branches were overwritten. Why a gh api script was not enough, and why a printed zero was the scariest part.',
     title: 'Why we built it',
     desc: 'Built while cleaning up a real incident from a terminal. At 222 branches, typing commands by hand stopped being an option.',
     h1: 'The zero was the scary part',
@@ -585,6 +611,8 @@ Total: 6 commits gone
   },
 
   safety: {
+    seoTitle: 'Inspecting a possibly compromised repo without cloning or running it',
+    seoDesc: 'No clone, no install, no build. Everything is read through the GitHub API, the token never reaches the interface, and payloads are defanged and shown as plain text.',
     title: 'What this tool will not do',
     desc: 'It looks into repositories that may contain malicious code. That is why the convenient way is usually closed off.',
     h1: 'What this tool will not do',
@@ -644,6 +672,8 @@ export const ja: Dict = {
   },
 
   home: {
+    seoTitle: 'force push で消えたコミットを探して復元する',
+    seoDesc: 'GitHub の組織で、指定した期間に変わったファイルをブランチごとに洗い出します。force push で消えたコミットを戻し、確認できなかった箇所も明示します。clone はしません。',
     title: 'リポジトリがやられたとき、何が変わったのかを掘ります',
     desc: '指定した期間にリポジトリで変わったファイルを、ブランチごとに探して見せます。何もダウンロードせず、このパソコンの外へは何も送りません。',
     h1: [{ t: 'リポジトリがやられたとき、' }, { t: '何が変わったのかを掘ります', hl: true }],
@@ -693,6 +723,8 @@ export const ja: Dict = {
   },
 
   why: {
+    seoTitle: 'セキュリティツールの「0 件」が安全を意味しない理由',
+    seoDesc: '0 件には、動きがない、変化がない、取得に失敗した、ルールに当たらなかったの 4 つがあります。まとめて 1 つの 0 にすると、そこから道具が嘘をつきはじめます。',
     title: 'なぜ判定しないか',
     desc: '検出ルールは、誰かが一度やられた攻撃からできています。ルールが判定を下す形にすると、拾えなかった攻撃が「異常なし」として表示されます。',
     h1: '「問題ありません」とは言いません',
@@ -725,6 +757,8 @@ export const ja: Dict = {
   },
 
   how: {
+    seoTitle: 'force push 後にブランチを復元するしくみ',
+    seoDesc: 'force push はコミットを消しません。GitHub はプッシュ直前にブランチが指していたコミットを記録していて、90 日ほどの間なら戻って今と比較できます。',
     shotDiffAlt: '攻撃直前のファイルと今のファイルを左右に並べた画面',
     title: 'しくみ',
     desc: 'GitHub はプッシュのたびに、ブランチが直前どこを指していたかを記録しています。その住所に戻って、今と突き合わせます。',
@@ -763,6 +797,8 @@ export const ja: Dict = {
   },
 
   start: {
+    seoTitle: 'gitmoru を入れてリポジトリの侵害を確認する',
+    seoDesc: 'Node 22 以上、pnpm、GitHub CLI があればクローンしてすぐ動きます。gh auth login で詰まるところ、点検が空で返るときの読み方も載せています。',
     teamMessage: `リポジトリがやられたとき、何が変わったのかを確認する道具です。
 各自のアカウントで 1 回ずつ動かしてください。
 
@@ -817,6 +853,8 @@ https://github.com/gitmoru/gitmoru
   },
 
   mcp: {
+    seoTitle: 'Claude Code につなぐ読み取り専用の GitHub 調査 MCP サーバー',
+    seoDesc: '読み取り専用の MCP ツール 11 個。スキャン、トリアージ、diff、force push 履歴、デプロイキーと Webhook の点検まで。Claude Code や Cursor に 1 行でつながります。',
     mcpPath: '<パス>',
 
     mcpSample: `someorg 2026-08-04  (case-mcpx)
@@ -859,6 +897,8 @@ https://github.com/gitmoru/gitmoru
   },
 
   story: {
+    seoTitle: '222 本のブランチが force push で潰された事故から作りました',
+    seoDesc: 'アカウントが 1 つ乗っ取られ、数時間でブランチ 222 本が上書きされました。gh api のスクリプトでは何が足りなかったのか、なぜ 0 件がいちばん怖かったのか。',
     title: 'つくった理由',
     desc: '実際の事故をターミナルで片付けながら作りました。ブランチが 222 本になると、コマンドを手で打つのは無理でした。',
     h1: '0 件が怖かったんです',
@@ -881,6 +921,8 @@ https://github.com/gitmoru/gitmoru
   },
 
   safety: {
+    seoTitle: '侵害された可能性のあるリポジトリを、clone せずに調べる',
+    seoDesc: 'clone もインストールもビルドもしません。すべて GitHub API 経由で読み、トークンは画面に渡さず、ペイロードは無力化して文字としてだけ表示します。',
     title: 'この道具がしないこと',
     desc: '悪意あるコードが入っているかもしれないリポジトリを覗く道具です。だから楽に見える方法はたいてい塞いであります。',
     h1: 'この道具がしないこと',
