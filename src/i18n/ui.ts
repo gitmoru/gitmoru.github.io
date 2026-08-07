@@ -35,10 +35,8 @@ export const ko = {
   home: {
     title: '저장소가 털렸을 때 무엇이 바뀌었는지 파봅니다',
     desc: '특정 시간대에 저장소에서 바뀐 파일을 브랜치별로 찾아서 보여줍니다. 아무것도 내려받지 않고, 이 컴퓨터 밖으로 아무것도 보내지 않아요.',
-    h1a: '저장소가 털렸을 때',
-    h1b: '무엇이 바뀌었는지',
-    h1c: '파봅니다',
-    lede: '새벽에 누가 브랜치를 통째로 갈아엎었을 때 켜는 도구예요.\n아무것도 내려받지 않고, 이 컴퓨터 밖으로 아무것도 보내지 않아요.',
+    h1: [{ t: '저장소가 털렸을 때 ' }, { t: '무엇이 바뀌었는지', hl: true }, { t: ' 파봅니다' }],
+    lede: '새벽에 누가 브랜치를 통째로 갈아엎었을 때 켜는 도구예요. 아무것도 내려받지 않고, 이 컴퓨터 밖으로 아무것도 보내지 않아요.',
     outputLabel: '훑고 나면 이렇게 말해줘요',
     output1: '눈에 띈 건 0개예요.',
     output2: '그래도 바뀐 파일 14개는 한 번 봐주세요.',
@@ -61,7 +59,7 @@ export const ko = {
   why: {
     title: '왜 판정하지 않나',
     desc: '탐지 규칙은 겪어본 공격에서 나옵니다. 규칙이 판정을 내리면, 규칙이 못 잡은 공격이 "이상 없음" 으로 표시돼요.',
-    h1: '"안전합니다" 라고\n말하지 않아요',
+    h1: '"안전합니다" 라고 말하지 않아요',
     lede: '이 도구가 하는 말은 하나뿐이에요.',
     quote: '이 시간대에 이 파일들이 이렇게 바뀌었습니다.',
 
@@ -93,7 +91,7 @@ export const ko = {
   how: {
     title: '어떻게 도나',
     desc: 'GitHub 은 푸시가 들어올 때마다 옮기기 직전에 브랜치가 어디를 가리켰는지 적어둡니다. 그 주소로 돌아가서 지금과 맞대봅니다.',
-    h1: '덮어써도\n원래 커밋은 남아 있어요',
+    h1: '덮어써도 원래 커밋은 남아 있어요',
 
     stickyTitle: '브랜치는 포스트잇이에요',
     sticky1: '브랜치는 커밋 더미 어딘가에 붙어서 "여기가 최신" 이라고 가리킬 뿐이에요.',
@@ -163,7 +161,7 @@ export const ko = {
     title: 'AI 붙이기',
     desc: 'MCP 서버가 같이 들어 있어요. Claude Code 같은 곳에 붙이면 AI 가 결과를 직접 읽습니다.',
     h1: '읽는 건 AI 한테 넘겨요',
-    lede: '이 도구는 무엇이 바뀌었는지까지 합니다. 그게 무슨 코드인지는 안 해요.\n대신 MCP 서버가 같이 들어 있어서, 붙이면 AI 가 결과를 직접 읽습니다.',
+    lede: '이 도구는 무엇이 바뀌었는지까지 합니다. 그게 무슨 코드인지는 안 해요. 대신 MCP 서버가 같이 들어 있어서, 붙이면 AI 가 결과를 직접 읽습니다.',
     addTitle: '한 줄로 붙여요',
     addNote: '앱에서 AI 붙이기를 누르면 이 컴퓨터의 실제 설정 파일 경로까지 알려줘요.',
     clientsTitle: '붙는 곳',
@@ -238,31 +236,29 @@ export const en: Dict = {
     license: 'MIT. A personal tool',
     safety: 'Isolation rules',
     decisions: 'Decisions',
-    noTracking: 'No analytics on this site. We do not know you were here either',
+    noTracking: 'No analytics on this site. We don\'t know you were here either',
   },
 
   home: {
     title: 'Find out what changed when your repos got hit',
     desc: 'Finds the files that changed in a repository during a time window, branch by branch. Nothing is downloaded, nothing leaves your machine.',
-    h1a: 'Your repos got hit.',
-    h1b: 'Find out what',
-    h1c: 'actually changed.',
-    lede: 'The tool you open at 3am, when someone rewrote every branch you had.\nNothing is downloaded. Nothing leaves your machine.',
+    h1: [{ t: 'Someone rewrote your branches. ' }, { t: 'Find out what they left behind', hl: true }, { t: '.' }],
+    lede: 'The thing you open at 3am, after someone force-pushed over every branch you had. Nothing gets downloaded. Nothing leaves your machine.',
     outputLabel: 'Here is what it tells you',
     output1: 'Nothing stood out.',
     output2: 'Still, 14 changed files are worth a look.',
-    outputWhy: 'Other tools put "0 findings, all clear" here. Not writing that is the whole point of this one.',
+    outputWhy: 'Other tools put "0 findings, all clear" here. Not writing that is the entire point of this one.',
     ctaStart: 'Get started',
     ctaWhy: 'Why no verdict',
 
-    threeTitle: 'Three things',
+    threeTitle: 'It does three things',
     three: [
       ['What got hit', 'Which repos out of dozens, and how many branches, narrowed down by time window.'],
       ['What came in', 'The file before the attack and the file now, side by side. What the code does is for an agent to read.'],
       ['Can it be undone', 'Whether the commit from just before the attack is still reachable. You press the button, not us.'],
     ],
 
-    quickTitle: 'Running in 30 seconds',
+    quickTitle: 'Up and running in 30 seconds',
     quickNote: 'You need Node 22+, pnpm and the GitHub CLI.',
     quickMore: 'See the full steps',
   },
@@ -270,8 +266,8 @@ export const en: Dict = {
   why: {
     title: 'Why no verdict',
     desc: 'Detection rules come from attacks someone already survived. If rules render verdicts, whatever they miss gets painted as "all clear".',
-    h1: 'It never says\n"you are safe"',
-    lede: 'There is only one thing this tool tells you.',
+    h1: 'It never tells you you\'re safe',
+    lede: 'There\'s exactly one thing this tool will tell you.',
     quote: 'These files changed, this much, in this window.',
 
     reasonTitle: 'Rules only know what they have seen',
@@ -284,16 +280,16 @@ export const en: Dict = {
     zero: [
       ['No activity', 'Nobody touched it in that window. There is nothing to compare.'],
       ['No changes', 'There were pushes, but the contents are unchanged.'],
-      ['Not verified', 'A lookup failed, so we cannot make a claim either way.'],
+      ['Not verified', 'A lookup failed, so we can\'t claim anything either way.'],
       ['No signal', 'It changed, but no rule recognised it. A person has to look.'],
     ],
     zeroNote: 'Collapse those four into one zero and the third one reads as the first. That is the moment the tool starts lying.',
 
     ruleTitle: 'What follows from that',
     rules: [
-      ['No red anywhere', 'Colour does not render verdicts either. There is no red in the interface.'],
+      ['No red anywhere', 'Colour doesn\'t hand down verdicts either. There is no red in the interface.'],
       ['Levels are not severity', 'A signal carries attention, not risk. Not "how dangerous" but "how soon should you look".'],
-      ['Failures stay visible', 'Anything unverified is counted and shown where you cannot miss it. Swallowing it quietly is false reassurance.'],
+      ['Failures stay visible', 'Anything unverified is counted and shown where you can\'t miss it. Swallowing it quietly is how you end up reassured about nothing.'],
       ['Zero signals still leaves a list', 'Every changed file is listed whether a rule matched it or not. Rules only set the order.'],
     ],
     next: 'So what does it look at',
@@ -302,11 +298,11 @@ export const en: Dict = {
   how: {
     title: 'How it works',
     desc: 'GitHub records where a branch pointed right before each push. We go back to that address and compare it against now.',
-    h1: 'A force push\ndoes not delete commits',
+    h1: 'A force push doesn\'t delete your commits',
 
     stickyTitle: 'A branch is a sticky note',
     sticky1: 'A branch just sits somewhere on a pile of commits saying "this one is the latest".',
-    sticky2: 'A force push does not delete commits. It moves the sticky note. The original commits are still there, you just lost the address.',
+    sticky2: 'A force push doesn\'t delete commits. It moves the sticky note. The original commits are still there, you just lost the address.',
     sticky3: 'And GitHub writes that address down every time a push arrives.',
     eventLabel: 'GitHub activity record',
     lostAddress: 'the lost address',
@@ -314,24 +310,24 @@ export const en: Dict = {
 
     flowTitle: 'The steps',
     flow: [
-      ['Collect pushes in the window', 'Events narrow the targets. It does not crawl the whole org.'],
+      ['Collect pushes in the window', 'Events narrow the targets. It doesn\'t crawl the whole org.'],
       ['Compare the tree before and now', 'Which files appeared, changed, or vanished.'],
       ['Keep every changed file', 'This is the output. It stays whether a rule matched or not.'],
       ['Highlight what to read first', 'That is ordering, not a verdict.'],
       ['A person or an agent decides', 'The tool stops before this step.'],
     ],
 
-    limitTitle: 'The limit comes from the same place',
+    limitTitle: 'The same fact is also the limit',
     limit1: 'GitHub keeps activity for about 90 days and 300 events. Past that, the address is gone.',
-    limit2: 'So you have to look early, and the tool says so on screen. It is also why every scan is written to disk.',
+    limit2: 'So you have to look early, and the tool says so on screen. It\'s also why every scan gets written to disk.',
 
     watchTitle: 'How it picks what to show first',
-    watchLede: 'All four came from a real attack. Not matching them does not mean a file is fine.',
+    watchLede: 'All four came from a real attack. Not matching one of them doesn\'t make a file fine.',
     watches: [
       ['Size jump', 'Padding a config file with whitespace pushes the payload off screen. The name is unchanged, so nothing looks odd, but the size tells on it.'],
       ['Same file across repos', 'Tooling that overwrites many repos leaves byte-identical files in all of them. Same content hash, same file.'],
       ['Forged commit', 'Author name and date can be set to anything. The committer date is when the commit was really made, so the gap shows.'],
-      ['Tool marker', 'Automation leaves scratch files behind and adds them to .gitignore so they do not get committed. That line is a fingerprint.'],
+      ['Tool marker', 'Automation leaves scratch files behind and adds them to .gitignore so they don\'t get committed. That line is a fingerprint.'],
     ],
     next: 'Try it',
   },
@@ -345,12 +341,12 @@ export const en: Dict = {
     runTitle: 'Clone and run',
     afterTitle: 'Once the window opens',
     after1: 'Enter an org name and hit Dig. Leave the time window at its default.',
-    after2: 'It defaults to midnight through 7am today. That is when this usually happens.',
+    after2: 'It defaults to midnight through 7am today. That\'s usually when this happens.',
 
     stuckTitle: 'Where people get stuck',
     stuck: [
       ['gh auth login', 'More people stall here than on the install. Check with gh auth status first.'],
-      ['Access check comes back mostly empty', 'Deploy keys and webhooks need admin on the repo. Without it the tool says it could not look, honestly. Do not read that as "there are none".'],
+      ['Access check comes back mostly empty', 'Deploy keys and webhooks need admin on the repo. Without it the tool says it could not look, honestly. Don\'t read that as "there are none".'],
       ['Nothing shows up', 'If the restore is already done, a clean result is expected. Still worth one run per account, since each account sees a different slice.'],
     ],
 
@@ -360,9 +356,9 @@ export const en: Dict = {
 
     factTitle: 'Worth knowing',
     facts: [
-      ['Not a website', 'It is a window on your machine. No URL to visit, no account to make.'],
+      ['Not a website', 'It\'s a window on your machine. No URL to visit, no account to sign up for.'],
       ['The token is never stored', 'Borrowed from gh each time, and never handed to the interface.'],
-      ['No code is executed', 'Nothing is cloned, installed or built. It only reads.'],
+      ['No code is executed', 'Nothing gets cloned, installed or built. It only reads.'],
       ['Three languages', 'Korean, English, Japanese. Written in each, not translated into it.'],
     ],
     next: 'Hook up an agent',
@@ -371,9 +367,9 @@ export const en: Dict = {
   mcp: {
     title: 'Hook up an agent',
     desc: 'An MCP server ships with it. Point Claude Code at it and the agent reads the results directly.',
-    h1: 'Reading the code\nis the agent’s job',
-    lede: 'This tool goes as far as what changed. It does not tell you what the code does.\nAn MCP server ships with it, so an agent can read the results directly.',
-    addTitle: 'One line',
+    h1: 'Let the agent read the code',
+    lede: 'This tool gets you as far as what changed. Working out what that code does is a different job, so an MCP server ships with it and the agent reads the results itself.',
+    addTitle: "One line and you\'re done",
     addNote: 'Hit "Hook up an agent" in the app and it prints the real config path on your machine.',
     clientsTitle: 'Works with',
     toolsTitle: 'Eleven tools',
@@ -392,30 +388,30 @@ export const en: Dict = {
     ],
     sampleTitle: 'What comes back',
     readTitle: 'All eleven are read-only',
-    read1: 'Restore is not exposed as a tool. Not because it was hard to add.',
+    read1: 'Restore isn\'t exposed as a tool, and not because it was hard to add.',
     read2: 'The agent reads text an attacker wrote. That text can contain "ignore your previous instructions", and a write tool sitting open is the path in.',
-    read3: 'With reads only, the worst case is a wrong explanation. The repository is untouched. A person pulls the restore trigger, in the app.',
+    read3: 'With reads only, the worst case is a wrong explanation. The repository stays untouched. A person pulls the restore trigger, in the app.',
     next: 'Why we built it',
   },
 
   story: {
     title: 'Why we built it',
-    desc: 'Built while cleaning up a real incident from a terminal. At 222 branches, typing commands by hand stopped being possible.',
-    h1: 'The zero was\nthe scary part',
+    desc: 'Built while cleaning up a real incident from a terminal. At 222 branches, typing commands by hand stopped being an option.',
+    h1: 'The zero was the scary part',
     p1: 'Built while cleaning up a real incident from a terminal. One account was taken over, and within hours 222 branches had been overwritten.',
-    p2: 'It started as a script that checked a few branches with gh api. At 222, we stopped trusting the output.',
-    p3: 'When it printed zero, there was no way to tell a genuinely clean result from a failed lookup. One badly written command quietly returning zero was the scariest part.',
-    p4: 'Building something that told those apart is how this became a tool.',
+    p2: 'It started as a script that checked a few branches with gh api. At 222, we stopped trusting what it printed.',
+    p3: 'When it printed zero, there was no way to tell a genuinely clean result from a lookup that had failed. One badly written command quietly returning zero was the scariest part.',
+    p4: 'Telling those two apart is the thing that turned a script into a tool.',
 
     scriptTitle: 'What a script could not do',
     scripts: [
-      ['The activity record does not say whether a push was forced', 'It has before and head, and no forced flag. A normal push and an overwrite look identical. Write the obvious script and all 222 look normal.'],
-      ['One error, two meanings', 'A 404 on compare can mean the history was replaced, or that the commit was garbage collected. The first is a fact to report, the second is a failure to verify. A script treats both as an error.'],
-      ['One wrong character in a timestamp scans the wrong window, silently', 'Date.parse does not throw on input it cannot read. It invents January 1st 2000. You scan 26 years ago and get "nothing happened".'],
-      ['Nobody can read 222 of anything', 'A script dumps results into a terminal. What you actually need is "which of these first", and that needs a screen.'],
+      ['The activity record doesn\'t say whether a push was forced', 'It has before and head, and no forced flag. A normal push and an overwrite look identical. Write the obvious script and all 222 look normal.'],
+      ['One error, two meanings', 'A 404 on compare can mean the history was replaced, or that the commit was garbage collected. The first is a fact to report, the second is a failure to verify. A script logs both as an error and moves on.'],
+      ['One wrong character in a timestamp scans the wrong window, silently', 'Date.parse doesn\'t throw on input it can\'t read. It invents January 1st, 2000. You scan 26 years ago and get "nothing happened".'],
+      ['Nobody can read 222 of anything', 'A script just dumps everything into a terminal. What you actually need is "which of these first", and that needs a screen.'],
     ],
 
-    nowTitle: 'Now',
+    nowTitle: 'Where it stands now',
     now: 'The restore is done. The tool stayed for next time. If it happens again, this is what you open.',
     thanks: 'Thanks for reading.',
   },
@@ -423,7 +419,7 @@ export const en: Dict = {
   notFound: {
     title: 'Nothing here',
     h1: 'Nothing turned up here',
-    p: 'We definitely dug. Either the address is wrong, or this page does not exist yet.',
+    p: 'We definitely dug. Either the address is wrong, or this page doesn\'t exist yet.',
     back: 'Back to the surface',
   },
 }
@@ -450,10 +446,8 @@ export const ja: Dict = {
   home: {
     title: 'リポジトリがやられたとき、何が変わったのかを掘ります',
     desc: '指定した期間にリポジトリで変わったファイルを、ブランチごとに探して見せます。何もダウンロードせず、このパソコンの外へは何も送りません。',
-    h1a: 'リポジトリがやられたとき',
-    h1b: '何が変わったのかを',
-    h1c: '掘ります',
-    lede: '深夜に誰かがブランチを丸ごと書き換えたとき、開くための道具です。\n何もダウンロードせず、このパソコンの外へは何も送りません。',
+    h1: [{ t: 'ブランチを書き換えられた夜に、' }, { t: '何が変わったのかを掘ります', hl: true }],
+    lede: '深夜、誰かがブランチを丸ごと上書きしたときに開く道具です。何もダウンロードしませんし、このパソコンの外へは何も送りません。',
     outputLabel: '掘り終わるとこう伝えます',
     output1: '目立つものは 0 件でした。',
     output2: 'それでも、変更された 14 件は一度見てください。',
@@ -476,14 +470,14 @@ export const ja: Dict = {
   why: {
     title: 'なぜ判定しないか',
     desc: '検出ルールは、誰かが一度やられた攻撃からできています。ルールが判定を下す形にすると、拾えなかった攻撃が「異常なし」として表示されます。',
-    h1: '「安全です」とは\n言いません',
+    h1: '「安全です」とは言いません',
     lede: 'この道具が言うことは 1 つだけです。',
     quote: 'この期間に、これらのファイルがこう変わりました。',
 
     reasonTitle: 'ルールは見たことのあるものしか知りません',
     reason1: '検出ルールは、誰かが一度やられた攻撃からできています。新しい手口は、定義上そこにありません。',
     reason2: 'ルールが判定を下す形にすると、拾えなかった攻撃が「異常なし」として表示されます。',
-    reason3: '実際そうなりました。ファイル名で探していて、別の名前についた同じコードを見落とし、画面には 0 件と出ました。その画面をしばらく信じていました。',
+    reason3: '実際そうなりました。ファイル名で探していて、別の名前についた同じコードを見落とし、画面には 0 件と出ました。その画面を、しばらく信じていました。',
 
     zeroTitle: 'だから 0 件を 4 つに分けます',
     zeroLede: '0 になる理由は 4 つあり、意味がまったく違います。',
@@ -493,7 +487,7 @@ export const ja: Dict = {
       ['確認できず', '取得に失敗したので、どちらとも言えません。'],
       ['シグナルなし', '変わってはいますが、ルールが気づけませんでした。人が見る必要があります。'],
     ],
-    zeroNote: '4 つを 1 つの 0 にまとめると、3 番目が 1 番目として読まれます。その瞬間から、道具が嘘をつきはじめます。',
+    zeroNote: '4 つをまとめて 0 と書くと、3 番目が 1 番目として読まれます。そこから先は、道具が嘘をついていることになります。',
 
     ruleTitle: 'そこから決まったこと',
     rules: [
@@ -508,11 +502,11 @@ export const ja: Dict = {
   how: {
     title: 'しくみ',
     desc: 'GitHub はプッシュのたびに、ブランチが直前どこを指していたかを記録しています。その住所に戻って、今と突き合わせます。',
-    h1: '上書きしても\nコミットは残っています',
+    h1: '上書きしてもコミットは残っています',
 
     stickyTitle: 'ブランチは付箋です',
     sticky1: 'ブランチはコミットの山のどこかに貼られて、「ここが最新」と指しているだけです。',
-    sticky2: '強制プッシュはコミットを消したのではなく、付箋を別の場所へ動かしただけです。元のコミットはそのままで、住所を見失っただけです。',
+    sticky2: '強制プッシュはコミットを消しません。付箋を別の場所へ動かしただけです。元のコミットはそのままで、住所を見失っただけです。',
     sticky3: 'そして GitHub は、プッシュが来るたびに直前の住所を書き残しています。',
     eventLabel: 'GitHub の活動記録',
     lostAddress: '見失った住所',
@@ -555,7 +549,7 @@ export const ja: Dict = {
 
     stuckTitle: 'よく詰まるところ',
     stuck: [
-      ['gh auth login', 'インストールよりここで詰まる人のほうが多いです。gh auth status で先に確認してください。'],
+      ['gh auth login', 'インストールより、ここで止まる人のほうが多いです。gh auth status で先に確認してください。'],
       ['戸締まりがほとんど見えない', 'デプロイキーと Webhook はリポジトリの管理者権限が必要です。権限がなければ「見られなかった」と正直に出ます。それを「無い」と読まないでください。'],
       ['何も出てこない', '復元が済んでいれば、きれいな結果になるのが普通です。ただアカウントごとに見える範囲が違うので、各自 1 回ずつ動かすのがいいです。'],
     ],
@@ -577,8 +571,8 @@ export const ja: Dict = {
   mcp: {
     title: 'AI につなぐ',
     desc: 'MCP サーバーが同梱されています。Claude Code などにつなぐと、AI が結果を直接読みます。',
-    h1: 'コードを読むのは\nAI の仕事です',
-    lede: 'この道具は「何が変わったか」までをやります。それがどんなコードかはやりません。\n代わりに MCP サーバーが入っているので、つなげば AI が結果を直接読みます。',
+    h1: 'コードを読むのは AI の仕事です',
+    lede: 'この道具は「何が変わったか」までを引き受けます。それがどんなコードなのかは別の仕事なので、同梱の MCP サーバーにつなげば AI が結果を直接読みます。',
     addTitle: '1 行でつながります',
     addNote: 'アプリで「AI につなぐ」を押すと、このパソコンの実際の設定ファイルの場所まで教えてくれます。',
     clientsTitle: 'つながる先',
@@ -607,11 +601,11 @@ export const ja: Dict = {
   story: {
     title: 'つくった理由',
     desc: '実際の事故をターミナルで片付けながら作りました。ブランチが 222 本になると、コマンドを手で打つのは無理でした。',
-    h1: '0 件が\n怖かったんです',
+    h1: '0 件が怖かったんです',
     p1: '実際の事故をターミナルで片付けながら作りました。アカウントが 1 つ乗っ取られ、数時間でブランチ 222 本が上書きされました。',
     p2: '最初は gh api でブランチを数本確認するスクリプトでした。222 本になったとき、結果が信じられなくなりました。',
-    p3: '0 と出ても、本当にきれいなのか、取得に失敗したのかが分かりません。書き損じたコマンドが黙って 0 件を返すのが、いちばん怖かったです。',
-    p4: 'それを見分けるものを作っているうちに、道具になりました。',
+    p3: '0 と出ても、本当にきれいなのか、取得に失敗したのかが分かりません。書き損じた 1 行が黙って 0 件を返す。それがいちばん怖かったです。',
+    p4: 'その 2 つを見分けるものを作っているうちに、道具になっていました。',
 
     scriptTitle: 'スクリプトでは無理だったこと',
     scripts: [
@@ -622,14 +616,14 @@ export const ja: Dict = {
     ],
 
     nowTitle: '今は',
-    now: '復元は終わり、この道具は次のために残しました。似たことがまた起きたら、これを開けば大丈夫です。',
+    now: '復元は終わり、この道具は次のために残しました。似たことがまた起きたら、これを開いてください。',
     thanks: '読んでくださってありがとうございます。',
   },
 
   notFound: {
     title: '何も出てきませんでした',
     h1: 'ここには何もありませんでした',
-    p: '掘ったのは確かです。住所が違うか、まだ作っていないページです。',
+    p: '掘ったことは確かです。住所が違うか、まだ作っていないページです。',
     back: '地表へ戻る',
   },
 }
