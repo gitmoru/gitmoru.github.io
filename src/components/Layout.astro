@@ -4,6 +4,7 @@ import Nav from './Nav.astro'
 import Footer from './Footer.astro'
 import { DEFAULT_LANG, HREFLANG, LANGS, href, type Lang, type PagePath } from '../i18n/config'
 import { t } from '../i18n/ui'
+import { VERIFY } from '../i18n/verify'
 
 interface Props {
   lang: Lang
@@ -61,6 +62,13 @@ const alternates = LANGS.map((l) => ({
     <meta property="og:site_name" content="gitmoru" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={new URL(`/og-${lang}.png`, site).href} />
+
+    {/* 값이 든 것만 내보낸다. 빈 태그는 확인이 안 되는데도 된 줄 알게 만든다. */}
+    {
+      Object.entries(VERIFY)
+        .filter(([, code]) => code)
+        .map(([name, code]) => <meta name={name} content={code} />)
+    }
 
     <link rel="icon" type="image/svg+xml" href="/mole.svg" />
 

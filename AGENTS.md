@@ -15,6 +15,7 @@ gitmoru 소개 사이트입니다. 작업 전에 아래를 보세요.
 | 앱 화면을 다시 찍는다 | `pnpm shots` |
 | 공유 카드를 다시 만든다 | `pnpm og` |
 | 배포를 손본다 | [.github/workflows/deploy.yml](.github/workflows/deploy.yml) |
+| 검색 엔진 소유 확인 | [src/i18n/verify.ts](src/i18n/verify.ts) |
 
 ## 올리기 전에
 
