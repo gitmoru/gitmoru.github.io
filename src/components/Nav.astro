@@ -49,7 +49,7 @@ const DIRT = SEQ_MOUND.map((f) => frameToSvg(f, { scale: 2, outline: false }))
 ---
 
 <header
-  class="sticky top-0 z-30 border-b border-[var(--color-edge-soft)] bg-[var(--color-ink)]/92 backdrop-blur"
+  class="sticky top-0 z-30 isolate border-b border-[var(--color-edge-soft)] bg-[var(--color-ink)]/92 backdrop-blur"
 >
   <div class="mx-auto flex h-14 max-w-6xl items-center gap-6 px-5">
     <a
@@ -160,10 +160,13 @@ const DIRT = SEQ_MOUND.map((f) => frameToSvg(f, { scale: 2, outline: false }))
 
     여는 방식은 흙을 걷어내는 모양으로 한다. `clip-path` 를 몇 칸으로 끊어서
     위에서 아래로 파내려간다. 스르륵 내려오면 이 사이트의 다른 움직임과 결이 달라진다.
+
+    본문 위에 덮는다. 흐름에 두면 열 때마다 히어로가 통째로 아래로 밀린다.
+    메뉴를 잠깐 보려던 것뿐인데 읽던 자리가 사라지는 셈이라 낯설게 느껴진다.
   -->
   <div
     id="menu"
-    class="menu-sheet overflow-hidden border-b-[3px] border-[var(--color-soil-line)] bg-[var(--color-ink)] md:hidden"
+    class="menu-sheet absolute inset-x-0 top-full z-40 overflow-hidden border-b-[3px] border-[var(--color-soil-line)] bg-[var(--color-ink)] md:hidden"
     data-menu
     hidden
   >
@@ -202,6 +205,8 @@ const DIRT = SEQ_MOUND.map((f) => frameToSvg(f, { scale: 2, outline: false }))
   .menu-sheet {
     clip-path: inset(0 0 100% 0);
     transition: clip-path 220ms steps(4, end);
+    /* 본문 위에 떠 있다는 표시. 흐릿하게 번지지 않고 한 칸 밀어서 찍는다 */
+    box-shadow: 0 6px 0 rgb(0 0 0 / 0.45);
   }
   .menu-sheet[data-open] {
     clip-path: inset(0 0 0 0);
@@ -265,6 +270,18 @@ const DIRT = SEQ_MOUND.map((f) => frameToSvg(f, { scale: 2, outline: false }))
     for (const link of sheet.querySelectorAll('a')) {
       link.addEventListener('click', () => setOpen(false))
     }
+
+    // 본문을 덮고 있으니 뒤를 눌러 닫을 수 있어야 한다
+    addEventListener('click', (e) => {
+      if (btn.getAttribute('aria-expanded') !== 'true') return
+      const at = e.target as Node
+      if (!sheet.contains(at) && !btn.contains(at)) setOpen(false)
+    })
+
+    // 스크롤하면 닫는다. 덮은 채로 따라다니면 읽는 걸 방해한다.
+    addEventListener('scroll', () => {
+      if (btn.getAttribute('aria-expanded') === 'true') setOpen(false)
+    }, { passive: true })
   }
 
   const nav = document.querySelector<HTMLElement>('[data-burrow-nav]')
