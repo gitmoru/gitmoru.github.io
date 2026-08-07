@@ -93,8 +93,14 @@ const ZERO_TONE = [
       ))}
     </ul>
 
-    <a href={href(lang, 'how')} class="mt-12 inline-block text-[15px] text-[var(--color-moss)] hover:underline">
-      {w.next} →
-    </a>
+    <div class="mt-12 flex flex-wrap gap-x-8 gap-y-3">
+      <a href={href(lang, 'how')} class="text-[15px] text-[var(--color-moss)] hover:underline">
+        {w.next} →
+      </a>
+      {/* 여기까지 읽은 사람은 "이 사람들 뭘 겪은 거지" 가 된다. 그 자리에서만 사연을 내민다. */}
+      <a href={href(lang, 'story')} class="text-[15px] text-[var(--color-faint)] hover:text-[var(--color-muted)]">
+        {ui.nav.story} →
+      </a>
+    </div>
   </Band>
 </Layout>
