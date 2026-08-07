@@ -37,6 +37,7 @@ export const ko = {
     groupKeeps: '지키는 것',
     madeBy: '만든 사람',
     issues: '문제 알리기',
+    releases: '바뀐 것',
 
     license: 'MIT. 개인용 도구입니다',
     safety: '이 도구가 안 하는 것',
@@ -357,6 +358,7 @@ export const en: Dict = {
     groupKeeps: 'What we keep to',
     madeBy: 'Made by',
     issues: 'Report a problem',
+    releases: 'What changed',
 
     license: 'MIT. A personal tool',
     safety: 'What it will not do',
@@ -669,6 +671,7 @@ export const ja: Dict = {
     groupKeeps: '守っていること',
     madeBy: '作った人',
     issues: '問題を知らせる',
+    releases: '変わったこと',
 
     license: 'MIT。個人用のツールです',
     safety: 'しないこと',

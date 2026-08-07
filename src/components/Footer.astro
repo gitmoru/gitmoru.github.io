@@ -34,13 +34,20 @@ const READ: Array<[PagePath, string]> = [
 ]
 
 /*
-  릴리스는 아직 안 건다. 지금 누르면 빈 페이지가 뜬다.
-  없는 링크보다 나쁜 게 아무것도 없는 링크다. 첫 태그를 끊고 나서 넣는다.
+  릴리스를 이제 건다.
+
+  한동안 비워뒀다. 누르면 빈 페이지가 뜨는 링크는 없는 링크보다 나쁘다.
+  첫 태그를 끊고 나서 넣기로 했고, 그 태그가 v0.2.0 이다.
+
+  여기서 사이트 안에 목록을 그리지 않는다. 그 글은 영어 커밋에서 자동으로 만들어지는데,
+  사이트는 세 언어로 말한다고 해놨다. 옮겨 적으면 어느 순간부터 원본과 어긋나고,
+  그때부터 어느 쪽이 맞는지 아무도 모른다. 한 벌만 두고 그리로 보낸다.
 */
 const CODE: Array<[string, string]> = [
   [REPO, ui.nav.github],
   // 패키지 이름은 어느 언어에서도 그대로 읽힌다. 사전에 넣을 것이 없다.
   ['https://www.npmjs.com/package/gitmoru', 'npm'],
+  [`${REPO}/releases`, ui.foot.releases],
   [`${REPO}/issues`, ui.foot.issues],
 ]
 
