@@ -232,7 +232,6 @@ https://github.com/gitmoru/gitmoru
   mcp: {
     seoTitle: 'Claude Code 에 붙이는 GitHub 저장소 조사 MCP 서버',
     seoDesc: '읽기 전용 MCP 도구 11개. 스캔, 트리아지, diff, 배포 키와 웹훅 점검까지 AI 가 직접 읽습니다. Claude Code, Cursor, Codex CLI 에 한 줄로 붙습니다.',
-    mcpPath: '<경로>',
 
     mcpSample: `someorg 2026-08-04  (case-mcpx)
 본 시간대: 2026-08-04 00:00 ~ 2026-08-04 07:00 GMT+9
@@ -545,7 +544,6 @@ The token is borrowed from gh and never stored.`,
   mcp: {
     seoTitle: 'A read-only GitHub incident MCP server for Claude Code',
     seoDesc: 'Eleven read-only MCP tools: scan, triage, diff, forced-push history, deploy keys and webhooks. One line to connect from Claude Code, Cursor or Codex CLI.',
-    mcpPath: '<path>',
 
     mcpSample: `someorg 2026-08-04  (case-mcpx)
 Window: 2026-08-04 00:00 - 2026-08-04 07:00 GMT+9
@@ -855,7 +853,6 @@ https://github.com/gitmoru/gitmoru
   mcp: {
     seoTitle: 'Claude Code につなぐ読み取り専用の GitHub 調査 MCP サーバー',
     seoDesc: '読み取り専用の MCP ツール 11 個。スキャン、トリアージ、diff、force push 履歴、デプロイキーと Webhook の点検まで。Claude Code や Cursor に 1 行でつながります。',
-    mcpPath: '<パス>',
 
     mcpSample: `someorg 2026-08-04  (case-mcpx)
 期間: 2026-08-04 00:00 〜 2026-08-04 07:00 GMT+9

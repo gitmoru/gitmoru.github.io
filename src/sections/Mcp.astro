@@ -24,7 +24,7 @@ const CLIENTS = ['Claude Code', 'Claude Desktop', 'Codex CLI', 'Gemini CLI', 'Cu
 
   <Band tone="rock" grit edge>
     <h2 class="text-[22px] font-bold md:text-[28px]">{m.addTitle}</h2>
-    <Command class="mt-6 max-w-3xl" code={`claude mcp add gitmoru -- npx tsx ${m.mcpPath}/src/mcp/index.ts`} />
+    <Command class="mt-6 max-w-3xl" code="claude mcp add gitmoru -- npx -y gitmoru mcp" />
     <p class="mt-4 text-[14px] text-[var(--color-muted)]">{m.addNote}</p>
 
     <h3 class="mt-14 text-[13px] font-semibold text-[var(--color-faint)]">{m.clientsTitle}</h3>
