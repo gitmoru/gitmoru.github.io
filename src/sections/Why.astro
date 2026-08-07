@@ -9,6 +9,19 @@ interface Props { lang: Lang }
 const { lang } = Astro.props
 const ui = t(lang)
 const w = ui.why
+
+/*
+  0 이 나오는 네 경우에 붙는 색.
+
+  앞의 둘은 실제로 아무 일이 없었던 0 이고, 뒤의 둘은 **모르는 0** 이다.
+  뒤쪽에 모래색과 살구색을 주는 이유가 이거다. 앱에서도 같은 뜻으로 쓴다.
+*/
+const ZERO_TONE = [
+  'var(--color-moss)',
+  'var(--color-moss)',
+  'var(--color-sand)',
+  'var(--color-apricot)',
+]
 ---
 
 <Layout lang={lang} page="why" title={`${w.title} - gitmoru`} description={w.desc} tone="var(--color-soil-0)">
@@ -42,11 +55,24 @@ const w = ui.why
     <ol class="mt-10 grid gap-px overflow-hidden md:grid-cols-2" style="background: var(--color-soil-line)">
       {w.zero.map(([name, what], i) => (
         <li class="bg-[var(--color-ink)] p-6">
-          <div class="flex items-baseline gap-3">
-            <span class="font-mono text-[26px] leading-none" style="color: var(--color-soil-line)">0</span>
-            <span class="text-[16px] font-semibold" style={i >= 2 ? 'color: var(--color-sand)' : ''}>{name}</span>
+          <div class="flex items-start gap-4">
+            {/*
+              앱이 상태를 칠하는 색을 그대로 쓴다.
+              이끼색은 확인한 것, 모래색은 확인 못 한 것, 살구색은 사람이 읽어야 할 것이다.
+              화면에서 이미 그 뜻으로 쓰고 있는 색이라, 여기서 새로 배울 게 없다.
+            */}
+            <span
+              class="px mt-0.5 grid h-8 w-8 shrink-0 place-items-center font-mono text-[15px]"
+              style={`--px-c: ${ZERO_TONE[i]}; color: ${ZERO_TONE[i]}`}
+              aria-hidden="true"
+            >
+              0
+            </span>
+            <div class="min-w-0">
+              <p class="text-[16px] font-semibold" style={`color: ${ZERO_TONE[i]}`}>{name}</p>
+              <p class="mt-2 text-[14px] leading-relaxed text-[var(--color-muted)]">{what}</p>
+            </div>
           </div>
-          <p class="mt-3 text-[14px] leading-relaxed text-[var(--color-muted)]">{what}</p>
         </li>
       ))}
     </ol>

@@ -2,7 +2,7 @@
 import { href, LANG_NAME, LANGS, type Lang, type PagePath } from '../i18n/config'
 import { t } from '../i18n/ui'
 import { frameToSvg } from '../lib/mole'
-import { SEQ_PEEK } from '../lib/sprites'
+import { SEQ_MOUND, SEQ_PEEK } from '../lib/sprites'
 
 interface Props {
   lang: Lang
@@ -21,12 +21,18 @@ const ITEMS: Array<[PagePath, string]> = [
 ]
 
 /*
-  지금 보고 있는 자리에 모루가 고개를 내밀고 있다.
+  내비게이션 밑을 모루가 파고 다닌다.
 
-  밑줄을 그어도 되지만, 이 사이트에는 땅을 파는 캐릭터가 이미 있다.
+  지금 보고 있는 자리에서 머리를 내밀고 있다가, 다른 항목에 마우스를 올리면
+  머리를 집어넣고 흙을 밀며 그쪽으로 간다. 마우스를 떼면 원래 자리로 돌아온다.
+
+  밑줄을 그으면 될 일이지만, 이 사이트에는 땅을 파는 캐릭터가 이미 있다.
   현재 위치 표시를 캐릭터가 맡으면 장식이 아니라 쓸모가 생긴다.
+
+  움직임은 부드럽게 흐르지 않고 몇 칸으로 끊어서 간다. 도트는 한 칸씩 움직인다.
 */
-const peeking = frameToSvg(SEQ_PEEK[2] ?? [], { scale: 2 })
+const HEAD = frameToSvg(SEQ_PEEK[2] ?? [], { scale: 2 })
+const DIRT = SEQ_MOUND.map((f) => frameToSvg(f, { scale: 2, outline: false }))
 ---
 
 <header
@@ -37,29 +43,44 @@ const peeking = frameToSvg(SEQ_PEEK[2] ?? [], { scale: 2 })
       <img src="/wordmark.svg" alt="gitmoru" width="104" height="33" data-pixel />
     </a>
 
-    <nav class="hidden min-w-0 flex-1 items-center gap-1 md:flex" aria-label={ui.nav.menu}>
+    <nav
+      class="relative hidden min-w-0 flex-1 items-center gap-1 md:flex"
+      aria-label={ui.nav.menu}
+      data-burrow-nav
+    >
       {
         ITEMS.map(([to, label]) => (
           <a
             href={href(lang, to)}
+            data-nav-item
             aria-current={page === to ? 'page' : undefined}
             class:list={[
-              'relative px-3 py-2 text-[13.5px] whitespace-nowrap transition-colors',
+              'px-3 py-2 text-[13.5px] whitespace-nowrap transition-colors',
               page === to
                 ? 'text-[var(--color-text)]'
                 : 'text-[var(--color-muted)] hover:text-[var(--color-text)]',
             ]}
           >
             {label}
-            {page === to && (
-              <span
-                class="absolute -bottom-[7px] left-1/2 -translate-x-1/2"
-                set:html={peeking}
-              />
-            )}
           </a>
         ))
       }
+
+      <!--
+        모루는 항목마다 그리지 않고 하나만 두고 옮긴다.
+        항목마다 그려두면 옮겨 다니는 게 아니라 여러 마리가 깜빡이는 것으로 보인다.
+        자바스크립트가 없으면 지금 자리에 가만히 머리를 내밀고 있다.
+      -->
+      <span
+        class="pointer-events-none absolute -bottom-[9px] hidden"
+        data-burrow-mole
+        aria-hidden="true"
+      >
+        <span class="col-start-1 row-start-1" data-mole-head set:html={HEAD} />
+        {DIRT.map((d, i) => (
+          <span class="col-start-1 row-start-1" data-mole-dirt hidden={i > 0} set:html={d} />
+        ))}
+      </span>
     </nav>
 
     <div class="ml-auto flex shrink-0 items-center gap-2">
@@ -118,3 +139,92 @@ const peeking = frameToSvg(SEQ_PEEK[2] ?? [], { scale: 2 })
     }
   </nav>
 </header>
+
+<script>
+  const nav = document.querySelector<HTMLElement>('[data-burrow-nav]')
+  const mole = nav?.querySelector<HTMLElement>('[data-burrow-mole]')
+
+  if (nav && mole) {
+    const items = [...nav.querySelectorAll<HTMLAnchorElement>('[data-nav-item]')]
+    const head = mole.querySelector<HTMLElement>('[data-mole-head]')!
+    const dirt = [...mole.querySelectorAll<HTMLElement>('[data-mole-dirt]')]
+    const home = items.find((a) => a.getAttribute('aria-current') === 'page')
+
+    // 지금 페이지가 내비게이션에 없으면(홈, 404) 나올 자리도 없다
+    if (home) {
+      const still = matchMedia('(prefers-reduced-motion: reduce)').matches
+
+      mole.classList.remove('hidden')
+      mole.classList.add('grid')
+
+      const settle = (el: HTMLElement) => {
+        mole.style.left = `${el.offsetLeft + el.offsetWidth / 2 - mole.offsetWidth / 2}px`
+      }
+
+      // 자리를 먼저 잡고 나서 움직임을 켠다. 안 그러면 처음 뜰 때 왼쪽 끝에서 미끄러져 온다.
+      settle(home)
+      requestAnimationFrame(() => {
+        if (!still) mole.style.transition = 'left 260ms steps(7, end)'
+      })
+
+      let digging: ReturnType<typeof setInterval> | null = null
+      let arriving: ReturnType<typeof setTimeout> | null = null
+
+      /** 머리를 내밀거나(도착) 흙만 보이게 한다(이동 중) */
+      const surface = (up: boolean) => {
+        head.hidden = !up
+        dirt.forEach((d, i) => (d.hidden = up || i > 0))
+      }
+
+      const dive = () => {
+        if (still || digging) return
+        surface(false)
+        let at = 0
+        digging = setInterval(() => {
+          dirt[at]!.hidden = true
+          at = (at + 1) % dirt.length
+          dirt[at]!.hidden = false
+        }, 130)
+      }
+
+      const emerge = () => {
+        if (digging) {
+          clearInterval(digging)
+          digging = null
+        }
+        surface(true)
+      }
+
+      // 도착한 다음에 머리를 내민다. 가는 중에 내밀면 흙을 뚫고 미끄러지는 것처럼 보인다.
+      const emergeAfter = (ms: number) => {
+        if (arriving) clearTimeout(arriving)
+        arriving = setTimeout(emerge, ms)
+      }
+
+      const moveTo = (el: HTMLElement) => {
+        if (arriving) clearTimeout(arriving)
+        if (el === home && !digging) {
+          settle(el)
+          return
+        }
+        dive()
+        settle(el)
+        emergeAfter(300)
+      }
+
+      for (const item of items) {
+        item.addEventListener('mouseenter', () => moveTo(item))
+        item.addEventListener('focus', () => moveTo(item))
+        // 누르면 그 자리에서 머리를 내민 채로 다음 페이지가 열린다
+        item.addEventListener('click', () => {
+          if (arriving) clearTimeout(arriving)
+          emerge()
+          settle(item)
+        })
+      }
+
+      nav.addEventListener('mouseleave', () => moveTo(home))
+      addEventListener('resize', () => settle(home), { passive: true })
+    }
+  }
+</script>
