@@ -25,6 +25,13 @@ export const ko = {
   },
 
   foot: {
+    blurb: '저장소에 무슨 일이 있었는지 파보는 도구예요. 아무것도 내려받지 않고, 이 컴퓨터 밖으로 아무것도 보내지 않아요.',
+    groupRead: '읽을 것',
+    groupCode: '코드',
+    groupKeeps: '지키는 것',
+    changes: '바뀐 것',
+    issues: '문제 알리기',
+
     license: 'MIT. 개인용 도구입니다',
     safety: '격리 원칙',
     decisions: '결정 기록',
@@ -66,9 +73,17 @@ export const ko = {
     ],
     shotTitle: '이렇게 생겼어요',
     shotAlt: '조직을 훑은 결과. 바뀐 파일이 브랜치별로 나와 있다',
-    shotCaption: '실제로 훑은 화면입니다. 목업이 아니라 앱을 띄워서 찍었어요.',
     shotDiffAlt: '공격 직전 파일과 지금 파일을 좌우로 비교하는 화면',
-    shotDiffCaption: '파일을 누르면 공격 직전과 지금을 나란히 봅니다. 왼쪽에서 파일 사이를 오갈 수 있어요.',
+    shareSample: `[someorg 2026-08-04]
+검사 범위: someorg
+검사 시간대: 2026-08-04 00:00 ~ 2026-08-04 07:00 (GMT+9)
+
+저장소 3곳, 브랜치 12개를 확인했습니다.
+변경됨 4, 원복됨 0, 변경 없음 7, 확인 실패 1
+기록을 덮어쓴 푸시가 브랜치 1개에 있었고, 커밋 6개가 사라졌습니다.
+
+※ 브랜치 1개를 확인하지 못했습니다.
+   이 결과를 "이상 없음"으로 판단하면 안 됩니다.`,
     quickTitle: '30초면 켭니다',
     quickNote: 'Node 22 이상, pnpm, GitHub CLI 가 있어야 해요.',
     quickMore: '자세한 순서 보기',
@@ -144,6 +159,28 @@ export const ko = {
   },
 
   start: {
+    teamMessage: `저장소가 털렸을 때 뭐가 바뀌었는지 확인하는 도구예요.
+각자 계정으로 한 번씩만 돌려주세요.
+
+https://github.com/gitmoru/gitmoru
+
+필요한 것: Node 22 이상, pnpm, GitHub CLI
+
+  git clone https://github.com/gitmoru/gitmoru.git
+  cd gitmoru
+  gh auth login
+  pnpm install
+  pnpm app
+
+창이 뜨면 조직 이름 넣고 "파보기" 를 누르세요. 시간대는 기본값 그대로요.
+결과가 뭐가 나오든, 아무것도 안 나와도 알려주세요.
+
+코드를 내려받거나 실행하지 않고 읽기만 합니다.
+토큰은 gh 에서 빌려 쓰고 저장하지 않아요.`,
+    teamNote: '"아무것도 안 떴다" 도 꼭 받아두세요. 안 돌려본 사람과 구분이 안 되면, 그 순간 팀 전체가 확인했다고 착각하게 됩니다.',
+    teamCopy: '이 글을 복사해서 팀 채널에 붙이세요',
+    teamLede: '계정마다 보이는 범위가 달라요. 한 사람이 훑은 결과가 전부가 아니라서, 각자 한 번씩 돌려보는 게 맞습니다.',
+    teamTitle: '팀에 알리기',
     title: '시작하기',
     desc: 'Node 22 이상, pnpm, GitHub CLI 가 있으면 클론해서 바로 켤 수 있어요.',
     h1: '받아서 켜기',
@@ -176,6 +213,16 @@ export const ko = {
   },
 
   mcp: {
+    mcpSample: `someorg 2026-08-04  (case-mcpx)
+본 시간대: 2026-08-04 00:00 ~ 2026-08-04 07:00 GMT+9
+
+- [덮어씀]   a/b@main   커밋 6개 사라짐
+- [갈아치움] a/c@dev    이전 기록과 이어지지 않음
+- [확인 실패] a/e@main  커밋이 정리돼 없습니다
+
+합계: 사라진 커밋 6개
+기록이 갈아치워진 브랜치 1곳 - 되돌리기로도 못 살립니다
+확인하지 못한 푸시 1건 - 없었다는 뜻이 아닙니다`,
     title: 'AI 붙이기',
     desc: 'MCP 서버가 같이 들어 있어요. Claude Code 같은 곳에 붙이면 AI 가 결과를 직접 읽습니다.',
     h1: '읽는 건 AI 한테 넘겨요',
@@ -251,6 +298,13 @@ export const en: Dict = {
   },
 
   foot: {
+    blurb: 'A tool for digging into what happened to your repositories. Nothing is downloaded, nothing leaves your machine.',
+    groupRead: 'Read',
+    groupCode: 'Code',
+    groupKeeps: 'What we keep to',
+    changes: 'Releases',
+    issues: 'Report a problem',
+
     license: 'MIT. A personal tool',
     safety: 'Isolation rules',
     decisions: 'Decisions',
@@ -291,9 +345,17 @@ export const en: Dict = {
     ],
     shotTitle: 'What it looks like',
     shotAlt: 'Scan results, with changed files grouped by branch',
-    shotCaption: 'A real scan, not a mockup. The app was launched and photographed.',
     shotDiffAlt: 'The file before the attack and the file now, side by side',
-    shotDiffCaption: 'Click a file and you get before and now, side by side. The left rail moves between files.',
+    shareSample: `[someorg 2026-08-04]
+Scope: someorg
+Window: 2026-08-04 00:00 - 2026-08-04 07:00 (GMT+9)
+
+Checked 3 repositories and 12 branches.
+Changed 4, reverted 0, untouched 7, unchecked 1
+History was overwritten on 1 branch, dropping 6 commits.
+
+Note: 1 branch could not be checked.
+      This result should not be read as "nothing found".`,
     quickTitle: 'Up and running in 30 seconds',
     quickNote: 'You need Node 22+, pnpm and the GitHub CLI.',
     quickMore: 'See the full steps',
@@ -369,6 +431,28 @@ export const en: Dict = {
   },
 
   start: {
+    teamMessage: `A tool for finding out what changed after repos get hit.
+Please run it once from your own account.
+
+https://github.com/gitmoru/gitmoru
+
+You need: Node 22+, pnpm, GitHub CLI
+
+  git clone https://github.com/gitmoru/gitmoru.git
+  cd gitmoru
+  gh auth login
+  pnpm install
+  pnpm app
+
+Enter the org name, hit Dig, leave the time window at its default.
+Tell us what you got, including if you got nothing.
+
+It never clones or runs any code. It only reads.
+The token is borrowed from gh and never stored.`,
+    teamNote: 'Ask for "nothing showed up" too. If that is indistinguishable from "never ran it", the whole team ends up believing it was checked.',
+    teamCopy: 'Copy this into your team channel',
+    teamLede: 'Every account sees a different slice. One person\'s scan is not the whole picture, so it is worth one run each.',
+    teamTitle: 'Telling your team',
     title: 'Get started',
     desc: 'With Node 22+, pnpm and the GitHub CLI, clone it and you are running.',
     h1: 'Clone it and run',
@@ -401,6 +485,16 @@ export const en: Dict = {
   },
 
   mcp: {
+    mcpSample: `someorg 2026-08-04  (case-mcpx)
+Window: 2026-08-04 00:00 - 2026-08-04 07:00 GMT+9
+
+- [overwritten] a/b@main   6 commits gone
+- [replaced]    a/c@dev    no common ancestor with the old history
+- [unverified]  a/e@main   the commit has been garbage collected
+
+Total: 6 commits gone
+1 branch was replaced outright, and a restore cannot bring it back
+1 push could not be verified, which does not mean it did not happen`,
     title: 'Hook up an agent',
     desc: 'An MCP server ships with it. Point Claude Code at it and the agent reads the results directly.',
     h1: 'Let the agent read the code',
@@ -473,6 +567,13 @@ export const ja: Dict = {
   },
 
   foot: {
+    blurb: 'リポジトリに何があったのかを掘る道具です。何もダウンロードせず、このパソコンの外へは何も送りません。',
+    groupRead: '読むもの',
+    groupCode: 'コード',
+    groupKeeps: '守っていること',
+    changes: 'リリース',
+    issues: '問題を知らせる',
+
     license: 'MIT。個人用のツールです',
     safety: '隔離の原則',
     decisions: '決定の記録',
@@ -513,9 +614,17 @@ export const ja: Dict = {
     ],
     shotTitle: 'こんな画面です',
     shotAlt: 'スキャン結果。変更されたファイルがブランチごとに並ぶ',
-    shotCaption: '実際に掘った画面です。モックアップではなく、アプリを立ち上げて撮りました。',
     shotDiffAlt: '攻撃直前のファイルと今のファイルを左右に並べた画面',
-    shotDiffCaption: 'ファイルを押すと、直前と今を並べて見られます。左の列でファイル間を移動できます。',
+    shareSample: `[someorg 2026-08-04]
+対象: someorg
+期間: 2026-08-04 00:00 〜 2026-08-04 07:00（GMT+9）
+
+リポジトリ 3 件、ブランチ 12 本を確認しました。
+変更 4、復元済み 0、変化なし 7、未確認 1
+ブランチ 1 本で履歴が上書きされ、コミット 6 件が消えました。
+
+※ ブランチ 1 本を確認できませんでした。
+   この結果を「異常なし」と判断しないでください。`,
     quickTitle: '30 秒で動きます',
     quickNote: 'Node 22 以上、pnpm、GitHub CLI が必要です。',
     quickMore: '詳しい手順を見る',
@@ -591,6 +700,28 @@ export const ja: Dict = {
   },
 
   start: {
+    teamMessage: `リポジトリがやられたとき、何が変わったのかを確認する道具です。
+各自のアカウントで 1 回ずつ動かしてください。
+
+https://github.com/gitmoru/gitmoru
+
+必要なもの: Node 22 以上、pnpm、GitHub CLI
+
+  git clone https://github.com/gitmoru/gitmoru.git
+  cd gitmoru
+  gh auth login
+  pnpm install
+  pnpm app
+
+ウィンドウが開いたら組織名を入れて「掘る」を押してください。期間は既定のままで大丈夫です。
+何が出ても、何も出なくても教えてください。
+
+コードのダウンロードも実行もせず、読むだけです。
+トークンは gh から借りるだけで保存しません。`,
+    teamNote: '「何も出なかった」も必ず集めてください。動かしていない人と見分けがつかなくなると、その時点でチーム全員が確認済みだと思い込みます。',
+    teamCopy: 'この文章をチームのチャンネルに貼ってください',
+    teamLede: 'アカウントごとに見える範囲が違います。誰か 1 人の結果がすべてではないので、各自 1 回ずつ動かすのが確実です。',
+    teamTitle: 'チームに知らせる',
     title: 'はじめかた',
     desc: 'Node 22 以上、pnpm、GitHub CLI があれば、クローンしてすぐ動きます。',
     h1: 'クローンして動かす',
@@ -623,6 +754,16 @@ export const ja: Dict = {
   },
 
   mcp: {
+    mcpSample: `someorg 2026-08-04  (case-mcpx)
+期間: 2026-08-04 00:00 〜 2026-08-04 07:00 GMT+9
+
+- [上書き]   a/b@main   コミット 6 件が消失
+- [置き換え] a/c@dev    以前の履歴とつながっていません
+- [確認不可] a/e@main   コミットが整理されて存在しません
+
+合計: 消えたコミット 6 件
+履歴ごと置き換わったブランチ 1 本。復元しても戻せません
+確認できなかったプッシュ 1 件。なかったという意味ではありません`,
     title: 'AI につなぐ',
     desc: 'MCP サーバーが同梱されています。Claude Code などにつなぐと、AI が結果を直接読みます。',
     h1: 'コードを読むのは AI の仕事です',

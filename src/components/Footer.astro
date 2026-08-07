@@ -1,5 +1,5 @@
 ---
-import { href, type Lang } from '../i18n/config'
+import { href, type Lang, type PagePath } from '../i18n/config'
 import { t } from '../i18n/ui'
 import Mole from './Mole.astro'
 
@@ -10,35 +10,107 @@ interface Props {
 const { lang } = Astro.props
 const ui = t(lang)
 const REPO = 'https://github.com/gitmoru/gitmoru'
+
+/*
+  바닥글.
+
+  링크를 한 줄로 늘어놓으면 "만들다 만 페이지" 로 보인다. 실제 제품 사이트의 바닥글은
+  묶음이 나뉘어 있고, 각 묶음이 무엇인지 이름이 붙어 있다. 읽는 사람이 자기가 찾는 게
+  어느 묶음인지부터 고르게 하는 것이다.
+
+  여기서는 세 묶음으로 나눈다.
+    읽을 것   - 이 사이트 안
+    코드      - 저장소로 나가는 것
+    지키는 것 - 우리가 뭘 안 하는지. 보안 도구라 이게 궁금해서 오는 사람이 있다
+*/
+const READ: Array<[PagePath, string]> = [
+  ['why', ui.nav.why],
+  ['how', ui.nav.how],
+  ['start', ui.nav.start],
+  ['mcp', ui.nav.mcp],
+  ['story', ui.nav.story],
+]
+
+const CODE: Array<[string, string]> = [
+  [REPO, ui.nav.github],
+  [`${REPO}/releases`, ui.foot.changes],
+  [`${REPO}/issues`, ui.foot.issues],
+]
+
+const KEEPS: Array<[string, string]> = [
+  [`${REPO}/blob/main/SAFETY.md`, ui.foot.safety],
+  [`${REPO}/blob/main/docs/decisions/README.md`, ui.foot.decisions],
+  [`${REPO}/blob/main/LICENSE`, 'MIT'],
+]
 ---
 
 <footer class="border-t border-[var(--color-edge-soft)] bg-[var(--color-ink)]">
-  <div class="mx-auto max-w-6xl px-5 py-12">
-    <div class="flex flex-wrap items-end justify-between gap-8">
-      <div class="flex items-end gap-4">
-        <Mole motion="idle" scale={4} label="모루" class="hidden sm:block" />
-        <div>
-          <img src="/wordmark.svg" alt="gitmoru" width="120" height="38" data-pixel />
-          <p class="mt-3 text-[12.5px] text-[var(--color-faint)]">{ui.foot.license}</p>
-        </div>
+  <div class="mx-auto max-w-6xl px-5 pt-14 pb-10">
+    <div class="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div>
+        <img src="/wordmark.svg" alt="gitmoru" width="132" height="42" data-pixel />
+        <p class="mt-4 max-w-[19rem] text-[13px] leading-relaxed text-[var(--color-muted)]">
+          {ui.foot.blurb}
+        </p>
+        <a
+          href={href(lang, 'start')}
+          class="px-btn mt-6 inline-block bg-[var(--color-moss)] px-4 py-2.5 text-[13.5px] font-semibold text-[#16241c]"
+          style="--px-c: var(--color-moss)"
+        >
+          {ui.home.forkNow}
+        </a>
       </div>
 
-      <nav class="flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-[var(--color-muted)]">
-        <a href={href(lang, 'why')} class="hover:text-[var(--color-text)]">{ui.nav.why}</a>
-        <a href={href(lang, 'start')} class="hover:text-[var(--color-text)]">{ui.nav.start}</a>
-        <a href={href(lang, 'mcp')} class="hover:text-[var(--color-text)]">{ui.nav.mcp}</a>
-        <a href={href(lang, 'story')} class="hover:text-[var(--color-text)]">{ui.nav.story}</a>
-        <a href={REPO} class="hover:text-[var(--color-text)]">{ui.nav.github}</a>
-        <a href={`${REPO}/blob/main/SAFETY.md`} class="hover:text-[var(--color-text)]">
-          {ui.foot.safety}
-        </a>
-        <a href={`${REPO}/blob/main/docs/decisions/README.md`} class="hover:text-[var(--color-text)]">
-          {ui.foot.decisions}
-        </a>
-      </nav>
+      {
+        [
+          [ui.foot.groupRead, READ.map(([to, label]) => [href(lang, to), label] as const)],
+          [ui.foot.groupCode, CODE],
+          [ui.foot.groupKeeps, KEEPS],
+        ].map(([title, links]) => (
+          <nav>
+            <h2 class="text-[11.5px] font-semibold tracking-wide text-[var(--color-faint)]">
+              {title as string}
+            </h2>
+            <ul class="mt-4 space-y-2.5">
+              {(links as ReadonlyArray<readonly [string, string]>).map(([to, label]) => (
+                <li>
+                  <a
+                    href={to}
+                    class="text-[13.5px] text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
     </div>
 
-    <!-- 사실이라서 쓸 수 있는 문장. 안 그랬으면 안 썼다. -->
-    <p class="mt-10 text-[12px] text-[var(--color-faint)]">{ui.foot.noTracking}</p>
+    {/*
+      땅 위로 모루가 올라와 있는 줄.
+
+      바닥글은 페이지의 바닥이고, 이 사이트에서 바닥은 땅속이다.
+      선 하나 긋고 끝내는 것보다 여기서 굴이 끝나는 게 앞뒤가 맞는다.
+    */}
+    {/*
+      땅 위에 모루가 서 있는 줄.
+
+      선 아래로 내리면 저작권 줄과 겹친다. 선 위에 세우면 겹치지도 않고,
+      "여기가 바닥이고 모루는 그 위에 서 있다" 로 읽힌다.
+    */}
+    <div class="relative mt-16">
+      <Mole motion="idle" scale={3} ms={620} label="모루" class="absolute bottom-[3px] left-1" />
+      <div class="h-[3px] w-full" style="background: var(--color-soil-line)"></div>
+    </div>
+
+    <div
+      class="mt-6 flex flex-wrap items-center justify-between gap-x-8 gap-y-2 text-[12px] text-[var(--color-faint)]"
+    >
+      <p>{ui.foot.license}</p>
+      <!-- 사실이라서 쓸 수 있는 문장. 안 그랬으면 안 썼다. -->
+      <p>{ui.foot.noTracking}</p>
+    </div>
   </div>
 </footer>

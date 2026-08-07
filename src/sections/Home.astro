@@ -21,17 +21,10 @@ const h = ui.home
 
   화면 사진을 넣고 싶은 자리인데, 지금 있는 진짜 산출물이 이 글이라서 이걸 쓴다.
   실물 대신 그럴듯한 목업을 그려 넣는 순간 이 사이트도 우리가 싫어하는 부류가 된다.
+
+  **언어를 따라간다.** 예전에는 한국어가 박혀 있어서 영어판에도 한국어가 떴다.
+  제품이 세 언어로 말하는데 사이트가 한 언어만 보여주면 그 번역이 거짓말이 된다.
 */
-const SHARE = `[someorg 2026-08-04]
-검사 범위: someorg
-검사 시간대: 2026-08-04 00:00 ~ 2026-08-04 07:00 (GMT+9)
-
-저장소 3곳, 브랜치 12개를 확인했습니다.
-변경됨 4, 원복됨 0, 변경 없음 7, 확인 실패 1
-기록을 덮어쓴 푸시가 브랜치 1개에 있었고, 커밋 6개가 사라졌습니다.
-
-※ 브랜치 1개를 확인하지 못했습니다.
-   이 결과를 "이상 없음"으로 판단하면 안 됩니다.`
 ---
 
 <Layout lang={lang} page="" title={`gitmoru - ${h.title}`} description={h.desc}>
@@ -142,7 +135,6 @@ const SHARE = `[someorg 2026-08-04]
       lang={lang}
       name="scan"
       alt={h.shotAlt}
-      caption={h.shotCaption}
     />
   </Band>
 
@@ -159,7 +151,7 @@ const SHARE = `[someorg 2026-08-04]
           {ui.why.title} →
         </a>
       </div>
-      <Output label="share_summary" code={SHARE} />
+      <Output label="share_summary" code={h.shareSample} />
     </div>
   </Band>
 

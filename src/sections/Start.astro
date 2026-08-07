@@ -83,6 +83,26 @@ pnpm app`}
       ))}
     </dl>
 
+    {/*
+      팀에 알리기.
+
+      혼자 훑고 끝나는 도구가 아니다. 계정마다 보이는 범위가 달라서
+      한 사람의 결과가 전부가 아닌데, 그 사실을 아무도 안 알려준다.
+      그래서 붙여넣을 글까지 여기서 준다. 매번 다시 쓰게 두면 결국 안 알리게 된다.
+    */}
+    <h2 class="mt-20 text-[22px] font-bold md:text-[28px]">{s.teamTitle}</h2>
+    <p class="mt-5 max-w-2xl text-[16px] leading-relaxed text-[#e5dcd0]">{s.teamLede}</p>
+
+    <p class="mt-8 mb-3 text-[13.5px] text-[var(--color-muted)]">{s.teamCopy}</p>
+    <Command class="max-w-2xl" code={s.teamMessage} />
+
+    <p
+      class="px mt-6 max-w-2xl bg-black/25 p-4 text-[14px] leading-relaxed"
+      style="--px-c: var(--color-sand); color: var(--color-sand)"
+    >
+      {s.teamNote}
+    </p>
+
     <a href={href(lang, 'mcp')} class="mt-12 inline-block text-[15px] text-[var(--color-moss)] hover:underline">
       {s.next} →
     </a>

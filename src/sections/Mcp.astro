@@ -14,17 +14,7 @@ const m = ui.mcp
 
 const CLIENTS = ['Claude Code', 'Claude Desktop', 'Codex CLI', 'Gemini CLI', 'Cursor', 'Windsurf', 'VS Code']
 
-/* 실제 응답이다. 보기 좋으라고 손보지 않았다. */
-const SAMPLE = `someorg 2026-08-04  (case-mcpx)
-본 시간대: 2026-08-04 00:00 ~ 2026-08-04 07:00 GMT+9
-
-- [덮어씀]   a/b@main   커밋 6개 사라짐
-- [갈아치움] a/c@dev    이전 기록과 이어지지 않음
-- [확인 실패] a/e@main  커밋이 정리돼 없습니다
-
-합계: 사라진 커밋 6개
-기록이 갈아치워진 브랜치 1곳 - 되돌리기로도 못 살립니다
-확인하지 못한 푸시 1건 - 없었다는 뜻이 아닙니다`
+/* 실제 응답이다. 보기 좋으라고 손보지 않았고, 언어도 따라간다. */
 ---
 
 <Layout lang={lang} page="mcp" title={`${m.title} - gitmoru`} description={m.desc} tone="var(--color-soil-3)">
@@ -63,7 +53,7 @@ const SAMPLE = `someorg 2026-08-04  (case-mcpx)
 
       <div>
         <h2 class="text-[22px] font-bold md:text-[28px]">{m.sampleTitle}</h2>
-        <Output class="mt-8" label="list_forced_pushes" code={SAMPLE} />
+        <Output class="mt-8" label="list_forced_pushes" code={m.mcpSample} />
       </div>
     </div>
   </Band>

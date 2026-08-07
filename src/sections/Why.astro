@@ -72,9 +72,16 @@ const ZERO_TONE = [
               : 'border-top: 1px solid color-mix(in srgb, var(--color-soil-line) 45%, transparent)'
           }
         >
+          {/*
+            테두리 상자를 씌우면 0 이 아니라 상자가 먼저 보인다.
+            여기서 필요한 건 넷이 줄 맞아 서 있는 모습이지 액자가 아니다.
+
+            고정폭 글꼴을 안 쓴다. JetBrains Mono 는 0 안에 점을 찍어서
+            숫자가 아니라 기호처럼 보인다. 여기서는 그냥 0 이어야 한다.
+          */}
           <span
-            class="px grid h-9 w-9 shrink-0 translate-y-1 place-items-center font-mono text-[16px]"
-            style={`--px-c: ${ZERO_TONE[i]}; color: ${ZERO_TONE[i]}`}
+            class="w-9 shrink-0 text-center text-[30px] leading-none font-semibold tabular-nums"
+            style={`color: ${ZERO_TONE[i]}`}
             aria-hidden="true"
           >
             0
