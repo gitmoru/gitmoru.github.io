@@ -45,16 +45,10 @@ const mole = frameToSvg(SEQ_PEEK[2] ?? [], { scale: 9 })
       <img src="/wordmark.svg" alt="" width="188" height="60" data-pixel />
 
       <h1
-        style="margin: 34px 0 0; font-size: 55px; line-height: 1.22; font-weight: 700; color: var(--color-text); max-width: 900px; text-wrap: balance"
+        style="margin: 40px 0 0; font-size: 64px; line-height: 1.2; font-weight: 700; color: var(--color-text); max-width: 940px; text-wrap: balance"
       >
         {ui.home.h1.map((part) => <span style={part.hl ? 'color: var(--color-apricot)' : ''}>{part.t}</span>)}
       </h1>
-
-      <p
-        style="margin: 28px 0 0; font-size: 23px; line-height: 1.6; color: var(--color-muted); max-width: 780px"
-      >
-        {ui.foot.blurb}
-      </p>
 
       <!-- 아래는 땅속이다. 사이트와 같은 규칙이라 카드만 봐도 같은 물건인 걸 안다. -->
       <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 74px; background: var(--color-soil-0)">

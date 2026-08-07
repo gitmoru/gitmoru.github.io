@@ -25,12 +25,19 @@ const h = ui.home
   **언어를 따라간다.** 예전에는 한국어가 박혀 있어서 영어판에도 한국어가 떴다.
   제품이 세 언어로 말하는데 사이트가 한 언어만 보여주면 그 번역이 거짓말이 된다.
 */
+
+/** 받아서 켜는 다섯 줄. 첫 화면에서 바로 복사할 수 있어야 한다. */
+const CLONE = `git clone https://github.com/gitmoru/gitmoru.git
+cd gitmoru
+gh auth login
+pnpm install
+pnpm app`
 ---
 
 <Layout lang={lang} page="" title={`gitmoru - ${h.title}`} description={h.desc}>
   <!-- ── 지표 ─────────────────────────────────────────── -->
   <div class="relative overflow-hidden bg-[var(--color-ink)]">
-    <div class="mx-auto grid max-w-6xl gap-14 px-5 pt-16 pb-24 lg:grid-cols-[1.05fr_1fr] lg:pt-24">
+    <div class="mx-auto grid max-w-6xl gap-14 px-5 pt-14 pb-20 lg:grid-cols-[1.05fr_1fr] lg:pt-20">
       <div>
         <!-- 줄 나누기는 balance 가 한다. 강조할 조각만 언어별로 정해져 있다. -->
         <h1 class="text-[36px] leading-[1.2] font-bold md:text-[54px]">
@@ -47,11 +54,7 @@ const h = ui.home
           상황을 묻는 갈림길.
 
           이 도구를 여는 사람은 두 부류로 갈린다. 지금 사고가 난 사람과, 알아보러 온 사람이다.
-          앞쪽은 1초라도 빨리 설치 화면에 닿아야 하고, 뒤쪽은 읽을 시간이 있다.
-
-          부제는 뺐다. "지금 사고가 났어요" 면 설치로 가는 게 당연한데
-          "바로 켜는 법으로 갑니다" 를 또 적으면 읽을 것만 늘어난다.
-          두 줄짜리 버튼 둘은 덩어리로도 무겁다.
+          앞쪽은 1초라도 빨리 켜야 하고, 뒤쪽은 읽을 시간이 있다.
         */}
         <div class="mt-10 flex flex-wrap items-center gap-3">
           <a
@@ -71,15 +74,23 @@ const h = ui.home
         </div>
       </div>
 
-      <div class="min-w-0">
-        <div class="px bg-[var(--color-slate)] p-5" style="--px-c: var(--color-edge)">
-          <p class="font-mono text-[11px] text-[var(--color-faint)]">{h.outputLabel}</p>
-          <p class="mt-4 text-[16px] leading-relaxed">
-            {h.output1}<br />
-            <span style="color: var(--color-apricot)">{h.output2}</span>
-          </p>
+      {/*
+        받아서 켜는 다섯 줄.
+
+        급한 사람이 버튼을 눌러 다음 화면으로 가서 하는 일이 결국 이걸 복사하는 것이다.
+        그러면 첫 화면에서 준다. 버튼은 자세한 순서가 필요한 사람을 위해 남겨둔다.
+
+        제품이 뭐라고 말하는지 보여주는 상자는 아래 띠로 내렸다.
+        첫 화면에 모루 머리까지 들어와야 "여기서부터 땅속" 이 한눈에 읽힌다.
+      */}
+      <div class="min-w-0 lg:pt-2">
+        <Command code={CLONE} />
+        <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px]">
+          <span class="text-[var(--color-faint)]">{h.quickNote}</span>
+          <a href={href(lang, 'start')} class="text-[var(--color-moss)] hover:underline">
+            {h.quickMore} →
+          </a>
         </div>
-        <p class="mt-4 text-[13px] leading-relaxed text-[var(--color-faint)]">{h.outputWhy}</p>
       </div>
     </div>
 
@@ -140,10 +151,20 @@ const h = ui.home
 
   <!-- ── 실제 출력 ────────────────────────────────────── -->
   <Band tone={2} grit edge>
-    <div class="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+    <div class="grid min-w-0 gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
       <div>
         <h2 class="text-[24px] leading-snug font-bold md:text-[32px]">{ui.why.h1}</h2>
-        <p class="mt-6 max-w-md text-[15.5px] leading-relaxed text-[#e5dcd0]">{ui.why.zeroNote}</p>
+
+        <div class="px mt-7 bg-[var(--color-ink)] p-5" style="--px-c: var(--color-edge)">
+          <p class="font-mono text-[11px] text-[var(--color-faint)]">{h.outputLabel}</p>
+          <p class="mt-4 text-[16px] leading-relaxed">
+            {h.output1}<br />
+            <span style="color: var(--color-apricot)">{h.output2}</span>
+          </p>
+        </div>
+        <p class="mt-4 text-[13px] leading-relaxed text-[var(--color-faint)]">{h.outputWhy}</p>
+
+        <p class="mt-7 max-w-md text-[15.5px] leading-relaxed text-[#e5dcd0]">{ui.why.zeroNote}</p>
         <a
           href={href(lang, 'why')}
           class="mt-7 inline-block text-[14px] text-[var(--color-moss)] hover:underline"
@@ -155,26 +176,4 @@ const h = ui.home
     </div>
   </Band>
 
-  <!-- ── 켜기 ─────────────────────────────────────────── -->
-  <Band tone="rock" edge>
-    <div class="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-      <div>
-        <h2 class="text-[24px] font-bold md:text-[32px]">{h.quickTitle}</h2>
-        <p class="mt-4 text-[14px] text-[var(--color-muted)]">{h.quickNote}</p>
-        <a
-          href={href(lang, 'start')}
-          class="mt-6 inline-block text-[14px] text-[var(--color-moss)] hover:underline"
-        >
-          {h.quickMore} →
-        </a>
-      </div>
-      <Command
-        code={`git clone https://github.com/gitmoru/gitmoru.git
-cd gitmoru
-gh auth login
-pnpm install
-pnpm app`}
-      />
-    </div>
-  </Band>
 </Layout>

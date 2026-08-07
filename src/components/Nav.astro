@@ -126,38 +126,147 @@ const DIRT = SEQ_MOUND.map((f) => frameToSvg(f, { scale: 2, outline: false }))
 
       <a
         href="https://github.com/gitmoru/gitmoru"
-        class="hidden px-2.5 py-1.5 text-[12.5px] text-[var(--color-muted)] transition-colors hover:bg-white/5 hover:text-[var(--color-text)] sm:block"
+        class="hidden px-2.5 py-1.5 text-[12.5px] text-[var(--color-muted)] transition-colors hover:bg-white/5 hover:text-[var(--color-text)] md:block"
       >
         {ui.nav.github}
       </a>
+
+      <!--
+        여닫는 단추. 도트 세 줄이라 둥글리지 않는다.
+        열리면 가운데 줄이 사라지고 위아래가 모여서 X 가 된다.
+      -->
+      <button
+        type="button"
+        class="menu-btn -mr-1 grid h-9 w-9 place-items-center md:hidden"
+        aria-controls="menu"
+        aria-expanded="false"
+        aria-label={ui.nav.menu}
+        data-menu-btn
+      >
+        <span class="grid gap-[5px]">
+          <span class="menu-bar block h-[3px] w-[19px] bg-[var(--color-muted)]"></span>
+          <span class="menu-bar block h-[3px] w-[19px] bg-[var(--color-muted)]"></span>
+          <span class="menu-bar block h-[3px] w-[19px] bg-[var(--color-muted)]"></span>
+        </span>
+      </button>
     </div>
   </div>
 
-  <!-- 좁은 화면에서는 가로로 밀어서 본다. 햄버거를 열게 하는 것보다 한 번 덜 누른다. -->
-  <nav
-    class="flex gap-1 overflow-x-auto border-t border-[var(--color-edge-soft)] px-5 py-2 md:hidden"
-    aria-label={ui.nav.menu}
+  <!--
+    좁은 화면에서 여는 메뉴.
+
+    예전에는 항목을 가로로 밀어 보게 했는데, 화면 아래쪽에 늘 한 줄이 눌러앉아
+    본문을 밀어냈고 오른쪽 항목은 밀어야 보였다. 있는 줄도 모르고 지나간다.
+
+    여는 방식은 흙을 걷어내는 모양으로 한다. `clip-path` 를 몇 칸으로 끊어서
+    위에서 아래로 파내려간다. 스르륵 내려오면 이 사이트의 다른 움직임과 결이 달라진다.
+  -->
+  <div
+    id="menu"
+    class="menu-sheet overflow-hidden border-b-[3px] border-[var(--color-soil-line)] bg-[var(--color-ink)] md:hidden"
+    data-menu
+    hidden
   >
-    {
-      ITEMS.map(([to, label]) => (
-        <a
-          href={href(lang, to)}
-          aria-current={page === to ? 'page' : undefined}
-          class:list={[
-            'border-b-[3px] px-2.5 py-1 text-[12.5px] whitespace-nowrap',
-            page === to
-              ? 'border-[var(--color-sand)] text-[var(--color-sand)]'
-              : 'border-transparent text-[var(--color-muted)]',
-          ]}
-        >
-          {label}
-        </a>
-      ))
-    }
-  </nav>
+    <nav class="px-5 pt-1 pb-3" aria-label={ui.nav.menu}>
+      {
+        ITEMS.map(([to, label]) => (
+          <a
+            href={href(lang, to)}
+            aria-current={page === to ? 'page' : undefined}
+            class:list={[
+              'relative flex items-center justify-between py-3 text-[15px]',
+              page === to ? 'text-[var(--color-sand)]' : 'text-[var(--color-muted)]',
+            ]}
+          >
+            <span>{label}</span>
+            {page === to && <span class="pr-1" set:html={HEAD[2]} />}
+          </a>
+        ))
+      }
+
+      <a
+        href="https://github.com/gitmoru/gitmoru"
+        class="flex py-3 text-[15px] text-[var(--color-muted)]"
+      >
+        {ui.nav.github}
+      </a>
+    </nav>
+  </div>
 </header>
 
+<style>
+  /*
+    흙을 걷어내듯 위에서 아래로 열린다.
+    부드럽게 늘어나지 않고 네 칸으로 끊어서 파내려간다.
+  */
+  .menu-sheet {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 220ms steps(4, end);
+  }
+  .menu-sheet[data-open] {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /* 열리면 가운데 줄이 사라지고 위아래가 모여 X 가 된다 */
+  .menu-bar {
+    transition:
+      transform 120ms steps(2, end),
+      opacity 120ms steps(2, end);
+  }
+  [aria-expanded='true'] .menu-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  [aria-expanded='true'] .menu-bar:nth-child(2) {
+    opacity: 0;
+  }
+  [aria-expanded='true'] .menu-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-sheet,
+    .menu-bar {
+      transition: none;
+    }
+  }
+</style>
+
 <script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-btn]')
+  const sheet = document.querySelector<HTMLElement>('[data-menu]')
+
+  if (btn && sheet) {
+    const setOpen = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open))
+      if (open) {
+        sheet.hidden = false
+        // 숨김을 푼 직후에 열면 브라우저가 시작 상태를 못 잡아 그냥 나타난다
+        requestAnimationFrame(() => sheet.setAttribute('data-open', ''))
+      } else {
+        sheet.removeAttribute('data-open')
+        setTimeout(() => {
+          if (btn.getAttribute('aria-expanded') === 'false') sheet.hidden = true
+        }, 240)
+      }
+    }
+
+    btn.addEventListener('click', () =>
+      setOpen(btn.getAttribute('aria-expanded') !== 'true'),
+    )
+
+    addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        setOpen(false)
+        btn.focus()
+      }
+    })
+
+    // 항목을 누르면 페이지가 바뀐다. 열린 채로 두면 다음 화면에서 잠깐 겹쳐 보인다.
+    for (const link of sheet.querySelectorAll('a')) {
+      link.addEventListener('click', () => setOpen(false))
+    }
+  }
+
   const nav = document.querySelector<HTMLElement>('[data-burrow-nav]')
   const mole = nav?.querySelector<HTMLElement>('[data-burrow-mole]')
 

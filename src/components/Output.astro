@@ -15,7 +15,11 @@ interface Props {
 const { label, code, class: cls } = Astro.props
 ---
 
-<figure class:list={['px bg-[var(--color-ink)]', cls]} style="--px-c: var(--color-edge)">
+{/*
+  min-w-0 이 필요하다. 격자나 flex 안에 들어가면 자식의 기본 최소 너비가 auto 라,
+  안에 든 `<pre>` 의 가장 긴 줄만큼 칸이 벌어진다. 좁은 화면에서 페이지가 통째로 넘친다.
+*/}
+<figure class:list={['px min-w-0 bg-[var(--color-ink)]', cls]} style="--px-c: var(--color-edge)">
   <figcaption
     class="border-b border-[var(--color-edge-soft)] px-4 py-2 font-mono text-[11px] text-[var(--color-faint)]"
   >

@@ -19,10 +19,15 @@ const { code, class: cls } = Astro.props
 const ui = t(langOf(Astro.url.pathname) as Lang)
 ---
 
-<div class:list={['px bg-[var(--color-ink)]', cls]} style="--px-c: var(--color-edge)">
+<div class:list={['px min-w-0 bg-[var(--color-ink)]', cls]} style="--px-c: var(--color-edge)">
   <div class="flex items-start gap-3 p-4">
+    {/*
+      좁은 화면에서는 긴 줄이 그냥 잘려 보인다. 잘린 건지 끝난 건지 알 수가 없다.
+      글자를 줄이고, 오른쪽 끝에 그늘을 둬서 "더 있다" 를 보이게 한다.
+      줄바꿈은 안 한다. 셸 명령이 접히면 그것대로 잘못 읽힌다.
+    */}
     <pre
-      class="min-w-0 flex-1 overflow-x-auto font-mono text-[13px] leading-relaxed whitespace-pre"><code>{code}</code></pre>
+      class="cmd min-w-0 flex-1 overflow-x-auto font-mono text-[12px] leading-relaxed whitespace-pre sm:text-[13px]"><code>{code}</code></pre>
     <button
       type="button"
       class="shrink-0 px-2 py-1 font-mono text-[11px] text-[var(--color-faint)] transition-colors hover:text-[var(--color-moss)]"
@@ -33,6 +38,19 @@ const ui = t(langOf(Astro.url.pathname) as Lang)
     </button>
   </div>
 </div>
+
+<style>
+  /* 오른쪽에 더 있다는 표시. 스크롤 끝에 닿으면 자연스럽게 옅어진다 */
+  .cmd {
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  }
+  .cmd::-webkit-scrollbar {
+    height: 6px;
+  }
+  .cmd::-webkit-scrollbar-thumb {
+    background: var(--color-edge);
+  }
+</style>
 
 <script>
   for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-copy]')) {
