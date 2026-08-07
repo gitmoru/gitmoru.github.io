@@ -1,0 +1,67 @@
+---
+import '../../styles/tokens.css'
+import { LANGS, type Lang } from '../../i18n/config'
+import { t } from '../../i18n/ui'
+import { frameToSvg } from '../../lib/mole'
+import { SEQ_PEEK } from '../../lib/sprites'
+
+/**
+ * 공유 카드로 찍을 화면.
+ *
+ * 링크를 붙였을 때 뜨는 그림이다. 예전에는 워드마크 SVG 를 그대로 걸어뒀는데,
+ * **대부분의 메신저는 SVG 를 안 그린다.** 슬랙에도 카카오톡에도 빈 카드가 떴다.
+ * 홍보하려고 만든 사이트에서 이게 비어 있으면 아무 데도 못 쓴다.
+ *
+ * 그래서 1200x630 짜리 화면을 하나 만들어 두고 `pnpm og` 가 사진으로 찍는다.
+ * 사이트와 같은 색, 같은 글꼴, 같은 모루를 쓴다. 따로 그린 그림은 언젠가 사이트와 달라진다.
+ *
+ * 이 페이지는 사람이 볼 자리가 아니라서 사이트맵과 검색에서 뺀다.
+ */
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }))
+}
+
+const lang = Astro.params.lang as Lang
+const ui = t(lang)
+const mole = frameToSvg(SEQ_PEEK[2] ?? [], { scale: 9 })
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{ui.home.title}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+  </head>
+
+  <body style="margin: 0; overflow: hidden">
+    <div
+      style="width: 1200px; height: 630px; background: var(--color-ink); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: 0 76px; box-sizing: border-box"
+    >
+      <img src="/wordmark.svg" alt="" width="188" height="60" data-pixel />
+
+      <h1
+        style="margin: 34px 0 0; font-size: 55px; line-height: 1.22; font-weight: 700; color: var(--color-text); max-width: 900px; text-wrap: balance"
+      >
+        {ui.home.h1.map((part) => <span style={part.hl ? 'color: var(--color-apricot)' : ''}>{part.t}</span>)}
+      </h1>
+
+      <p
+        style="margin: 28px 0 0; font-size: 23px; line-height: 1.6; color: var(--color-muted); max-width: 780px"
+      >
+        {ui.foot.blurb}
+      </p>
+
+      <!-- 아래는 땅속이다. 사이트와 같은 규칙이라 카드만 봐도 같은 물건인 걸 안다. -->
+      <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 74px; background: var(--color-soil-0)">
+      </div>
+      <div style="position: absolute; left: 0; right: 0; bottom: 74px; height: 8px; background: var(--color-grass)">
+      </div>
+      <span style="position: absolute; right: 88px; bottom: 74px" set:html={mole} />
+    </div>
+  </body>
+</html>

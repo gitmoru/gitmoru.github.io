@@ -13,7 +13,8 @@
     "preview": "astro preview",
     "check": "astro check && astro build",
     "shots": "node scripts/shoot.mjs",
-    "typecheck": "astro check"
+    "typecheck": "astro check",
+    "og": "node scripts/og.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

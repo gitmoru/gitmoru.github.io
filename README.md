@@ -7,6 +7,7 @@ pnpm install
 pnpm dev      # 개발 서버
 pnpm check    # 타입 검사 + 빌드
 pnpm shots    # 앱 화면 다시 찍기
+pnpm og       # 공유 카드 다시 만들기
 ```
 
 **올리기 전에 `pnpm check` 를 돌리세요.** `astro build` 는 타입을 안 봅니다.
@@ -81,3 +82,29 @@ pnpm shots    # 앱 화면 다시 찍기
 
 **문구 규칙은 [WRITING.md](WRITING.md) 에 있습니다.** 토스와 당근 원칙을 읽고 우리 상황에 맞게 고쳤어요.
 특히 **일부러 어기는 것 셋**을 먼저 보세요.
+
+## 올리기
+
+`main` 에 밀면 GitHub Pages 로 나갑니다. 타입 검사를 통과해야 올라가요.
+
+서버가 할 일이 없어서 정적 호스팅으로 갑니다. 남의 플랫폼을 끼우면
+그쪽이 방문 기록을 갖게 되는데, 화면에 "분석 도구를 쓰지 않습니다" 라고 적어뒀어요.
+그 말과 어긋나지 않는 쪽을 골랐습니다.
+
+도메인은 [public/CNAME](public/CNAME) 에 있습니다. 바꾸려면 거기와
+[astro.config.mjs](astro.config.mjs) 의 `site` 를 같이 고치세요.
+`site` 가 틀리면 사이트맵과 공유 카드 주소가 통째로 어긋납니다.
+
+## 검색과 공유
+
+| | |
+|---|---|
+| 사이트맵 | `xhtml:link` 로 언어별 대체 링크까지. 21개 URL |
+| `hreflang` | 세 언어 + `x-default` |
+| `canonical` | 페이지마다 자기 언어 |
+| 공유 카드 | 언어별 1200x630 PNG. **SVG 는 대부분의 메신저가 안 그립니다** |
+| 구조화 데이터 | `SoftwareApplication` |
+| `robots.txt` | 사이트맵 위치를 알려주고, 공유 카드 화면은 막습니다 |
+
+`keywords` 메타는 안 씁니다. 검색 엔진이 안 봐요. 대신 페이지마다
+제목과 설명을 그 언어로 따로 씁니다.

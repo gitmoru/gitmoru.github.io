@@ -47,10 +47,46 @@ const alternates = LANGS.map((l) => ({
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={HREFLANG[lang].replace('-', '_')} />
-    <meta property="og:image" content={new URL('/wordmark.svg', site).href} />
+    {/*
+      공유 카드.
+
+      워드마크 SVG 를 걸어뒀더니 슬랙에도 카카오톡에도 빈 카드가 떴다.
+      **대부분의 메신저는 SVG 를 안 그린다.** 1200x630 PNG 여야 한다.
+      언어마다 다른 카드를 쓴다. `pnpm og` 가 사이트 화면을 그대로 찍어 만든다.
+    */}
+    <meta property="og:image" content={new URL(`/og-${lang}.png`, site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:site_name" content="gitmoru" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={new URL(`/og-${lang}.png`, site).href} />
 
     <link rel="icon" type="image/svg+xml" href="/mole.svg" />
+
+    {/*
+      검색 엔진에 무엇인지 알려준다.
+
+      개발자 도구이고, 공짜이고, 어느 운영체제에서 도는지까지 적는다.
+      광고 문구를 넣지 않는다. 여기 적은 게 화면에 있는 것과 다르면 그게 곧 낚시다.
+    */}
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: 'gitmoru',
+        applicationCategory: 'DeveloperApplication',
+        operatingSystem: 'Windows, macOS, Linux',
+        description,
+        url: canonical,
+        inLanguage: HREFLANG[lang],
+        license: 'https://opensource.org/licenses/MIT',
+        codeRepository: 'https://github.com/gitmoru/gitmoru',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      })}
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"

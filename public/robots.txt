@@ -1,0 +1,8 @@
+# 다 읽어가도 됩니다. 숨길 게 없어요.
+User-agent: *
+Allow: /
+
+# 공유 카드용 화면. 사람이 볼 자리가 아닙니다.
+Disallow: /og/
+
+Sitemap: https://gitmoru.dev/sitemap-index.xml

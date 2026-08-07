@@ -26,6 +26,8 @@ export default defineConfig({
 
   integrations: [
     sitemap({
+      // 공유 카드용 화면은 사람이 볼 자리가 아니다. 검색 결과에 뜨면 안 된다.
+      filter: (page) => !page.includes('/og/'),
       i18n: {
         defaultLocale: 'ko',
         locales: { ko: 'ko-KR', en: 'en', ja: 'ja-JP' },
