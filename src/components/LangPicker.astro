@@ -1,0 +1,83 @@
+---
+import { href, LANG_NAME, LANGS, type Lang, type PagePath } from '../i18n/config'
+import { t } from '../i18n/ui'
+
+interface Props {
+  lang: Lang
+  page: PagePath
+}
+
+const { lang, page } = Astro.props
+const ui = t(lang)
+
+/*
+  언어 고르기.
+
+  세 개를 나란히 늘어놓으면 머리에 항상 세 칸이 눌러앉는다. 언어가 넷이 되면 더 나빠지고,
+  정작 대부분의 사람은 한 번 고른 뒤 다시 안 만진다. 평소에는 지금 언어만 보이면 된다.
+
+  `<details>` 를 쓴다. 자바스크립트 없이 열리고, 키보드로 닫히고,
+  **안에 든 것이 진짜 링크로 남는다.** 셀렉트 상자로 만들어 주소를 갈아치우면
+  검색 엔진이 다른 언어판을 못 따라간다.
+*/
+---
+
+<details class="relative" data-lang-picker>
+  <summary
+    class="flex cursor-pointer list-none items-center gap-1.5 px-2.5 py-1.5 text-[12.5px] text-[var(--color-muted)] transition-colors hover:bg-white/5 hover:text-[var(--color-text)]"
+    aria-label={ui.nav.lang}
+  >
+    <span>{LANG_NAME[lang]}</span>
+    <span class="text-[9px] text-[var(--color-faint)]" aria-hidden="true">▼</span>
+  </summary>
+
+  <ul
+    class="px absolute right-0 z-40 mt-1 min-w-[8.5rem] bg-[var(--color-slate)] py-1"
+    style="--px-c: var(--color-edge)"
+  >
+    {
+      LANGS.map((l) => (
+        <li>
+          <a
+            href={href(l, page)}
+            hreflang={l}
+            lang={l}
+            aria-current={l === lang ? 'true' : undefined}
+            class:list={[
+              'block px-3 py-1.5 text-[12.5px] transition-colors hover:bg-white/5',
+              l === lang
+                ? 'text-[var(--color-sand)]'
+                : 'text-[var(--color-muted)] hover:text-[var(--color-text)]',
+            ]}
+          >
+            {LANG_NAME[l]}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</details>
+
+<style>
+  /* 사파리가 기본으로 붙이는 삼각형을 지운다 */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>
+
+<script>
+  // 바깥을 누르거나 Esc 를 누르면 닫는다. 열어두고 잊는 게 제일 흔한 일이다.
+  const picker = document.querySelector<HTMLDetailsElement>('[data-lang-picker]')
+
+  if (picker) {
+    addEventListener('click', (e) => {
+      if (picker.open && !picker.contains(e.target as Node)) picker.open = false
+    })
+    addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && picker.open) {
+        picker.open = false
+        picker.querySelector('summary')?.focus()
+      }
+    })
+  }
+</script>
