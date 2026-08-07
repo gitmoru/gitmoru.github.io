@@ -53,7 +53,7 @@ const peeking = frameToSvg(SEQ_PEEK[2] ?? [], { scale: 2 })
             {label}
             {page === to && (
               <span
-                class="absolute -bottom-[7px] left-1/2 -translate-x-1/2"
+                class="absolute -bottom-[7px] left-1/2 -translate-x-1/2 bg-[var(--color-ink)] px-1"
                 set:html={peeking}
               />
             )}

@@ -38,12 +38,14 @@ const SHARE = `[someorg 2026-08-04]
   <div class="relative overflow-hidden bg-[var(--color-ink)]">
     <div class="mx-auto grid max-w-6xl gap-14 px-5 pt-16 pb-24 lg:grid-cols-[1.05fr_1fr] lg:pt-24">
       <div>
+        <!-- 줄 나누기는 balance 가 한다. 강조할 조각만 언어별로 정해져 있다. -->
         <h1 class="text-[36px] leading-[1.2] font-bold md:text-[54px]">
-          {h.h1a}<br />
-          <span style="color: var(--color-apricot)">{h.h1b}</span> {h.h1c}
+          {h.h1.map((part) => (
+            <span style={part.hl ? 'color: var(--color-apricot)' : undefined}>{part.t}</span>
+          ))}
         </h1>
 
-        <p class="mt-7 max-w-lg text-[17px] leading-relaxed whitespace-pre-line text-[var(--color-muted)]">
+        <p class="mt-7 max-w-lg text-[17px] leading-relaxed text-[var(--color-muted)]">
           {h.lede}
         </p>
 
@@ -81,6 +83,7 @@ const SHARE = `[someorg 2026-08-04]
     <div class="h-3 w-full" style="background: var(--color-grass)"></div>
     <Mole
       motion="peek"
+      burrow
       scale={7}
       ms={420}
       label="모루"

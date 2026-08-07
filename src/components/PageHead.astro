@@ -25,17 +25,17 @@ const { eyebrow, title, lede, motion = 'idle' } = Astro.props
         <p class="mb-4 font-mono text-[12px] tracking-wide text-[var(--color-sand)]">{eyebrow}</p>
       )
     }
-    <h1 class="text-[30px] leading-[1.25] font-bold whitespace-pre-line md:text-[44px]">
+    <h1 class="text-[30px] leading-[1.25] font-bold md:text-[44px]">
       {title}
     </h1>
     {
       lede && (
-        <p class="mt-6 max-w-2xl text-[16.5px] leading-relaxed whitespace-pre-line text-[#e5dcd0]">
+        <p class="mt-6 max-w-2xl text-[16.5px] leading-relaxed text-[#e5dcd0]">
           {lede}
         </p>
       )
     }
   </div>
 
-  <Mole motion={motion} scale={6} class="hidden shrink-0 lg:block" />
+  <Mole motion={motion} burrow scale={6} class="hidden shrink-0 lg:block" />
 </div>
