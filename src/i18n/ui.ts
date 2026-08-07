@@ -29,14 +29,14 @@ export const ko = {
     groupRead: '읽을 것',
     groupCode: '코드',
     groupKeeps: '지키는 것',
-    changes: '바뀐 것',
+    madeBy: '만든 사람',
     issues: '문제 알리기',
 
     license: 'MIT. 개인용 도구입니다',
-    safety: '격리 원칙',
+    safety: '이 도구가 안 하는 것',
     decisions: '결정 기록',
     // 사실이라 쓸 수 있는 농담. 안 그랬으면 안 썼다.
-    noTracking: '이 사이트는 분석 도구를 안 씁니다. 누가 왔는지 저희도 몰라요',
+    noTracking: '분석 도구를 쓰지 않습니다',
   },
 
   home: {
@@ -274,6 +274,29 @@ https://github.com/gitmoru/gitmoru
     thanks: '읽어주셔서 고맙습니다.',
   },
 
+  safety: {
+    title: '이 도구가 안 하는 것',
+    desc: '악성 코드가 들어 있을 수 있는 저장소를 들여다보는 도구예요. 그래서 편해 보이는 방법이 대개 막혀 있습니다.',
+    h1: '이 도구가 안 하는 것',
+    lede: '악성 코드가 들어 있을 수 있는 저장소를 들여다보는 도구예요. 분석 대상이 악성이라는 전제 위에서 만들었습니다. 그래서 편해 보이는 방법이 대개 막혀 있어요.',
+    rulesTitle: '지키는 것',
+    rules: [
+      ['내려받지 않아요', 'git clone 도, fetch 도, checkout 도 하지 않습니다. 폴더를 편집기로 여는 순간 실행되는 페이로드가 있어요. 내려받는 순간 진 겁니다.'],
+      ['실행하지 않아요', '대상 저장소에 설치도, 빌드도, 린트도 돌리지 않습니다. package.json 도 텍스트로 읽기만 해요.'],
+      ['바깥으로 통신하지 않아요', '화면에 CSP 를 걸어서, 페이로드에 박힌 주소로 요청을 보내는 것 자체가 불가능합니다. GitHub 호출은 목적지가 코드에 고정돼 있어요.'],
+      ['토큰이 화면으로 안 내려가요', 'gh 에서 빌린 토큰은 로컬 프로세스 안에만 있습니다. 파일로 저장하지 않고, 로그와 기록에서도 가려요.'],
+      ['남이 접속할 수 없어요', '브라우저로 볼 때도 127.0.0.1 에만 열립니다. 같은 와이파이의 다른 기기에서도 안 보여요.'],
+      ['페이로드를 그리지 않아요', '대상 저장소의 HTML 이나 마크다운을 렌더링하지 않습니다. 주소는 눌리지 않게 무력화해서 글자로만 보여줘요.'],
+      ['AI 에게 쓰기 권한을 안 줘요', '에이전트는 공격자가 쓴 글을 읽습니다. 거기에 지시문이 섞여 있을 수 있고, 쓰기 도구가 열려 있으면 그게 곧 공격 경로예요.'],
+      ['되돌리기는 사람이 눌러요', '기본은 미리보기입니다. 실제 실행은 잠금을 풀어야 하고, 보호 규칙이 걸린 브랜치는 우리가 임의로 바꾸지 않아요.'],
+      ['조용히 실패하지 않아요', '검사에 실패한 대상을 깨끗함으로 칠하지 않습니다. 확인 못 한 개수를 세서 눈에 띄는 자리에 적어요.'],
+      ['남의 설정 파일을 안 고쳐요', 'AI 도구에 붙일 때, 그 도구의 설정 파일을 대신 편집하지 않습니다. 넣을 내용을 보여주고 사람이 적용해요.'],
+    ],
+    sourceTitle: '더 자세히',
+    sourceNote: '위 내용은 사용자용으로 다시 쓴 것이에요. 코드를 고치는 사람이 지켜야 할 원문과 그렇게 정한 이유는 저장소에 있습니다.',
+    sourceRules: '원문 규칙',
+    sourceWhy: '그렇게 정한 이유',
+  },
   notFound: {
     title: '아무것도 안 나왔어요',
     // 이 도구가 0건을 다루는 방식 그대로. 없다고 하지 않고 못 찾았다고 한다.
@@ -302,11 +325,11 @@ export const en: Dict = {
     groupRead: 'Read',
     groupCode: 'Code',
     groupKeeps: 'What we keep to',
-    changes: 'Releases',
+    madeBy: 'Made by',
     issues: 'Report a problem',
 
     license: 'MIT. A personal tool',
-    safety: 'Isolation rules',
+    safety: 'What it will not do',
     decisions: 'Decisions',
     noTracking: 'No analytics on this site. We don\'t know you were here either',
   },
@@ -546,6 +569,29 @@ Total: 6 commits gone
     thanks: 'Thanks for reading.',
   },
 
+  safety: {
+    title: 'What this tool will not do',
+    desc: 'It looks into repositories that may contain malicious code. That is why the convenient way is usually closed off.',
+    h1: 'What this tool will not do',
+    lede: 'It looks into repositories that may contain malicious code, and it is built on the assumption that what it reads is hostile. That is why the convenient way is usually closed off.',
+    rulesTitle: 'What we keep to',
+    rules: [
+      ['It never downloads anything', 'No clone, no fetch, no checkout. Some payloads run the moment a folder is opened in an editor. Downloading is already losing.'],
+      ['It never runs anything', 'No install, no build, no lint against the target. Even package.json is only ever parsed as text.'],
+      ['It cannot talk to the outside', 'A CSP on the interface makes it impossible to request the addresses embedded in a payload. GitHub calls have their destination pinned in code.'],
+      ['The token never reaches the interface', 'The token borrowed from gh stays inside the local process. It is not written to a file, and it is masked in logs and records.'],
+      ['Nobody else can reach it', 'Even in the browser it binds to 127.0.0.1 only. Another device on the same wifi cannot see it.'],
+      ['Payloads are never rendered', 'HTML and markdown from the target are not rendered. URLs are defanged so they cannot be clicked, and shown as plain text.'],
+      ['The agent gets no write access', 'The agent reads text an attacker wrote. That text can contain instructions, and a write tool sitting open is the path in.'],
+      ['You press restore, not us', 'Preview is the default. Running it takes an explicit unlock, and protected branches are never quietly reconfigured.'],
+      ['It never fails silently', 'A target that failed a check is never painted as clean. Whatever could not be verified is counted and shown where you cannot miss it.'],
+      ['It never edits your other config', 'Hooking up an AI tool does not mean editing that tool\'s config for you. It shows you what to paste, and you paste it.'],
+    ],
+    sourceTitle: 'The long version',
+    sourceNote: 'The above is rewritten for people using the tool. The rules as written for people changing the code, and the reasoning behind each one, live in the repository.',
+    sourceRules: 'The rules themselves',
+    sourceWhy: 'Why each one',
+  },
   notFound: {
     title: 'Nothing here',
     h1: 'Nothing turned up here',
@@ -571,13 +617,13 @@ export const ja: Dict = {
     groupRead: '読むもの',
     groupCode: 'コード',
     groupKeeps: '守っていること',
-    changes: 'リリース',
+    madeBy: '作った人',
     issues: '問題を知らせる',
 
     license: 'MIT。個人用のツールです',
-    safety: '隔離の原則',
+    safety: 'しないこと',
     decisions: '決定の記録',
-    noTracking: 'このサイトは解析ツールを使っていません。誰が来たのか私たちも知りません',
+    noTracking: '解析ツールは使っていません',
   },
 
   home: {
@@ -815,6 +861,29 @@ https://github.com/gitmoru/gitmoru
     thanks: '読んでくださってありがとうございます。',
   },
 
+  safety: {
+    title: 'この道具がしないこと',
+    desc: '悪意あるコードが入っているかもしれないリポジトリを覗く道具です。だから楽に見える方法はたいてい塞いであります。',
+    h1: 'この道具がしないこと',
+    lede: '悪意あるコードが入っているかもしれないリポジトリを覗く道具です。読む対象が敵だという前提で作っています。だから楽に見える方法はたいてい塞いであります。',
+    rulesTitle: '守っていること',
+    rules: [
+      ['ダウンロードしません', 'clone も fetch も checkout もしません。エディタでフォルダを開いた瞬間に走るペイロードがあります。落とした時点で負けです。'],
+      ['実行しません', '対象に対してインストールもビルドも lint も走らせません。package.json もテキストとして読むだけです。'],
+      ['外へ通信できません', '画面に CSP をかけているので、ペイロードに書かれたアドレスへ要求を出すこと自体ができません。GitHub 呼び出しは宛先をコードで固定しています。'],
+      ['トークンが画面に降りてきません', 'gh から借りたトークンはローカルのプロセス内だけにあります。ファイルに保存せず、ログや記録でも隠します。'],
+      ['他の人からは見えません', 'ブラウザで見るときも 127.0.0.1 にしか開きません。同じ Wi-Fi の別の端末からも見えません。'],
+      ['ペイロードを描画しません', '対象の HTML やマークダウンをレンダリングしません。URL は押せない形に無力化して、文字としてだけ見せます。'],
+      ['AI に書き込み権限を渡しません', 'エージェントは攻撃者が書いた文章を読みます。そこに指示文が混ざっていることがあり、書き込みツールが開いていればそれが侵入経路になります。'],
+      ['復元を押すのは人です', '既定はプレビューです。実行には明示的なロック解除が要り、保護ルールのかかったブランチを勝手に変えることもしません。'],
+      ['黙って失敗しません', '確認に失敗した対象を「きれい」とは塗りません。確認できなかった件数を数えて、見落とせない場所に書きます。'],
+      ['他のツールの設定を書き換えません', 'AI ツールにつなぐとき、そのツールの設定ファイルを代わりに編集しません。貼る内容を見せて、人が貼ります。'],
+    ],
+    sourceTitle: 'もっと詳しく',
+    sourceNote: '上は使う人向けに書き直したものです。コードを触る人が守る原文と、そう決めた理由はリポジトリにあります。',
+    sourceRules: '原文のルール',
+    sourceWhy: 'そう決めた理由',
+  },
   notFound: {
     title: '何も出てきませんでした',
     h1: 'ここには何もありませんでした',

@@ -1,0 +1,103 @@
+---
+import Layout from '../components/Layout.astro'
+import Band from '../components/Band.astro'
+import PageHead from '../components/PageHead.astro'
+import { href, type Lang } from '../i18n/config'
+import { t } from '../i18n/ui'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const ui = t(lang)
+const s = ui.safety
+const REPO = 'https://github.com/gitmoru/gitmoru'
+
+/*
+  격리 원칙.
+
+  저장소의 SAFETY.md 를 옮겨온 게 아니라 **다시 쓴 것**이다.
+  원문은 코드를 고치는 사람에게 하는 말이라 "이걸 어기는 코드는 머지하지 않는다" 로 되어 있다.
+  여기 오는 사람은 그걸 지킬 사람이 아니라, 이 도구를 켜도 되는지 알고 싶은 사람이다.
+
+  같은 문서를 번역해 두면 둘이 어긋나는 순간 어느 쪽이 맞는지 아무도 모르게 된다.
+  독자가 다르니 글도 다른 게 맞고, 원문은 저장소에 있다고 링크로 밝힌다.
+*/
+---
+
+<Layout
+  lang={lang}
+  page="safety"
+  title={`${s.title} - gitmoru`}
+  description={s.desc}
+  tone="var(--color-soil-1)"
+>
+  <Band tone={1} grit>
+    <PageHead title={s.h1} lede={s.lede} motion="shake" />
+  </Band>
+
+  <Band tone={2} grit edge>
+    <h2 class="text-[24px] font-bold md:text-[30px]">{s.rulesTitle}</h2>
+
+    <ol class="mt-10">
+      {
+        s.rules.map(([name, why], i) => (
+          <li
+            class="flex items-baseline gap-5 py-5 sm:gap-7"
+            style={
+              i === 0
+                ? undefined
+                : 'border-top: 1px solid color-mix(in srgb, var(--color-soil-line) 45%, transparent)'
+            }
+          >
+            <span
+              class="w-8 shrink-0 text-right text-[15px] leading-relaxed tabular-nums"
+              style="color: var(--color-soil-line)"
+              aria-hidden="true"
+            >
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div class="min-w-0 flex-1 sm:flex sm:items-baseline sm:gap-7">
+              <p class="w-[13rem] shrink-0 text-[16.5px] font-semibold">{name}</p>
+              <p class="mt-1.5 text-[15px] leading-relaxed text-[var(--color-muted)] sm:mt-0">
+                {why}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </Band>
+
+  <Band tone="rock" edge>
+    <h2 class="text-[22px] font-bold md:text-[28px]">{s.sourceTitle}</h2>
+    <p class="mt-5 max-w-2xl text-[15.5px] leading-relaxed text-[var(--color-muted)]">
+      {s.sourceNote}
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        href={`${REPO}/blob/main/SAFETY.md`}
+        class="px-btn px-5 py-3 text-[14.5px]"
+        style="--px-c: var(--color-edge)"
+      >
+        {s.sourceRules}
+      </a>
+      <a
+        href={`${REPO}/blob/main/docs/decisions/README.md`}
+        class="px-btn px-5 py-3 text-[14.5px]"
+        style="--px-c: var(--color-edge)"
+      >
+        {s.sourceWhy}
+      </a>
+    </div>
+
+    <a
+      href={href(lang, 'start')}
+      class="mt-12 inline-block text-[15px] text-[var(--color-moss)] hover:underline"
+    >
+      {ui.nav.start} →
+    </a>
+  </Band>
+</Layout>

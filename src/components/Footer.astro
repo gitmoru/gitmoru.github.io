@@ -10,6 +10,8 @@ interface Props {
 const { lang } = Astro.props
 const ui = t(lang)
 const REPO = 'https://github.com/gitmoru/gitmoru'
+/** 만든 사람의 GitHub 아이디. 바꾸려면 여기만 고치면 된다. */
+const MAKER = 'INSANE-P'
 
 /*
   바닥글.
@@ -28,17 +30,28 @@ const READ: Array<[PagePath, string]> = [
   ['how', ui.nav.how],
   ['start', ui.nav.start],
   ['mcp', ui.nav.mcp],
+  ['safety', ui.foot.safety],
   ['story', ui.nav.story],
 ]
 
+/*
+  릴리스는 아직 안 건다. 지금 누르면 빈 페이지가 뜬다.
+  없는 링크보다 나쁜 게 아무것도 없는 링크다. 첫 태그를 끊고 나서 넣는다.
+*/
 const CODE: Array<[string, string]> = [
   [REPO, ui.nav.github],
-  [`${REPO}/releases`, ui.foot.changes],
   [`${REPO}/issues`, ui.foot.issues],
 ]
 
+/*
+  격리 원칙은 사이트 안에 있다. 결정 기록은 저장소에 둔다.
+
+  앞은 이 도구를 켜도 되는지 알고 싶은 사람이 읽고, 뒤는 코드를 고칠 사람이 읽는다.
+  독자가 다르면 자리도 달라야 한다. 12개짜리 결정 기록을 세 언어로 옮겨두면
+  원본과 어긋나는 순간부터 아무도 어느 쪽이 맞는지 모르게 된다.
+*/
 const KEEPS: Array<[string, string]> = [
-  [`${REPO}/blob/main/SAFETY.md`, ui.foot.safety],
+  [href(lang, 'safety'), ui.foot.safety],
   [`${REPO}/blob/main/docs/decisions/README.md`, ui.foot.decisions],
   [`${REPO}/blob/main/LICENSE`, 'MIT'],
 ]
@@ -108,8 +121,17 @@ const KEEPS: Array<[string, string]> = [
     <div
       class="mt-6 flex flex-wrap items-center justify-between gap-x-8 gap-y-2 text-[12px] text-[var(--color-faint)]"
     >
-      <p>{ui.foot.license}</p>
-      <!-- 사실이라서 쓸 수 있는 문장. 안 그랬으면 안 썼다. -->
+      <p>
+        {ui.foot.license}
+        <span class="mx-2 text-[var(--color-edge)]" aria-hidden="true">|</span>
+        {ui.foot.madeBy}{' '}
+        <a
+          href={`https://github.com/${MAKER}`}
+          class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
+        >
+          @{MAKER}
+        </a>
+      </p>
       <p>{ui.foot.noTracking}</p>
     </div>
   </div>
