@@ -52,30 +52,48 @@ const ZERO_TONE = [
     <h2 class="text-[24px] font-bold md:text-[30px]">{w.zeroTitle}</h2>
     <p class="mt-4 text-[15.5px] text-[#e5dcd0]">{w.zeroLede}</p>
 
-    <ol class="mt-10 grid gap-px overflow-hidden md:grid-cols-2" style="background: var(--color-soil-line)">
+    {/*
+      한 줄에 하나씩, 0 을 세로로 줄 세운다.
+
+      이 자리에서 하려는 말은 "넷 다 화면에는 똑같이 0 으로 뜬다" 이다.
+      카드 넷으로 흩어 놓으면 서로 다른 항목 넷으로 읽히고, 정작 그 말이 안 보인다.
+      왼쪽 끝에 0 이 딱 맞아떨어져 있으면 읽기 전에 눈으로 먼저 알아본다.
+
+      색은 앱이 상태를 칠하는 그대로다. 이끼색은 확인한 것, 모래색은 확인 못 한 것,
+      살구색은 사람이 읽어야 할 것이다. 화면에서 이미 그 뜻이라 새로 배울 게 없다.
+    */}
+    <ul class="mt-10">
       {w.zero.map(([name, what], i) => (
-        <li class="bg-[var(--color-ink)] p-6">
-          <div class="flex items-start gap-4">
-            {/*
-              앱이 상태를 칠하는 색을 그대로 쓴다.
-              이끼색은 확인한 것, 모래색은 확인 못 한 것, 살구색은 사람이 읽어야 할 것이다.
-              화면에서 이미 그 뜻으로 쓰고 있는 색이라, 여기서 새로 배울 게 없다.
-            */}
-            <span
-              class="px mt-0.5 grid h-8 w-8 shrink-0 place-items-center font-mono text-[15px]"
-              style={`--px-c: ${ZERO_TONE[i]}; color: ${ZERO_TONE[i]}`}
-              aria-hidden="true"
+        <li
+          class="flex items-baseline gap-5 py-5 sm:gap-7"
+          style={
+            i === 0
+              ? undefined
+              : 'border-top: 1px solid color-mix(in srgb, var(--color-soil-line) 45%, transparent)'
+          }
+        >
+          <span
+            class="px grid h-9 w-9 shrink-0 translate-y-1 place-items-center font-mono text-[16px]"
+            style={`--px-c: ${ZERO_TONE[i]}; color: ${ZERO_TONE[i]}`}
+            aria-hidden="true"
+          >
+            0
+          </span>
+
+          <div class="min-w-0 flex-1 sm:flex sm:items-baseline sm:gap-6">
+            <p
+              class="w-[7.5rem] shrink-0 text-[16.5px] font-semibold"
+              style={`color: ${ZERO_TONE[i]}`}
             >
-              0
-            </span>
-            <div class="min-w-0">
-              <p class="text-[16px] font-semibold" style={`color: ${ZERO_TONE[i]}`}>{name}</p>
-              <p class="mt-2 text-[14px] leading-relaxed text-[var(--color-muted)]">{what}</p>
-            </div>
+              {name}
+            </p>
+            <p class="mt-1.5 text-[15px] leading-relaxed text-[var(--color-muted)] sm:mt-0">
+              {what}
+            </p>
           </div>
         </li>
       ))}
-    </ol>
+    </ul>
 
     <p class="mt-8 max-w-2xl text-[15.5px] leading-relaxed" style="color: var(--color-apricot)">
       {w.zeroNote}

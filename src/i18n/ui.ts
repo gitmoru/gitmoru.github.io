@@ -52,9 +52,7 @@ export const ko = {
     ],
 
     forkNow: '지금 사고가 났어요',
-    forkNowSub: '바로 켜는 법으로 갑니다',
     forkLook: '먼저 알아보고 싶어요',
-    forkLookSub: '무엇을 어떻게 보는 도구인지',
 
     whenTitle: '이럴 때 씁니다',
     whenLede: '전부 실제로 겪은 상황이에요.',
@@ -279,9 +277,7 @@ export const en: Dict = {
     ],
 
     forkNow: 'It just happened',
-    forkNowSub: 'Straight to getting it running',
     forkLook: 'Just looking',
-    forkLookSub: 'What it looks at, and how',
 
     whenTitle: 'When you would reach for it',
     whenLede: 'All of these are situations we have actually been in.',
@@ -503,9 +499,7 @@ export const ja: Dict = {
     ],
 
     forkNow: '今、事故が起きています',
-    forkNowSub: 'すぐ動かす手順へ',
     forkLook: 'まず知りたい',
-    forkLookSub: '何を、どう見る道具なのか',
 
     whenTitle: 'こんなときに使います',
     whenLede: 'どれも実際にあった状況です。',
