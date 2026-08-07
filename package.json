@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "cookie": "2.0.1",
     "playwright-core": "^1.62.1",
     "typescript": "^6.0.3"
   }

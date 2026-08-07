@@ -24,6 +24,9 @@ importers:
       '@astrojs/check':
         specifier: ^0.9.10
         version: 0.9.10(prettier@3.9.6)(typescript@6.0.3)
+      cookie:
+        specifier: 2.0.1
+        version: 2.0.1
       playwright-core:
         specifier: ^1.62.1
         version: 1.62.1

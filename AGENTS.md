@@ -26,6 +26,10 @@ pnpm check
 `astro build` 는 **타입을 안 봅니다.** 문구를 엉뚱한 블록에 넣어도 빌드는 통과하고
 화면만 빈칸이 됩니다. 실제로 그렇게 두 군데가 비어 있었어요. `pnpm check` 가 그걸 잡습니다.
 
+`cookie` 가 devDependencies 에 있는 건 우리가 쓰는 게 아니에요. astro 가 구워낸
+prerender 진입점이 `cookie` 를 그대로 남겨두는데, pnpm 은 그걸 `node_modules` 맨 위에
+안 올려놔서 빌드 막바지에 못 찾습니다. 직접 적어두면 그 자리에 놓입니다. 지우면 빌드가 깨져요.
+
 ## 문구
 
 **한국어가 원본입니다.** [src/i18n/ui.ts](src/i18n/ui.ts) 의 `ko` 가 타입의 출처이고,
