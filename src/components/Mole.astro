@@ -11,8 +11,9 @@ import * as S from '../lib/sprites'
  * **흙 위에 그냥 얹으면 안 보인다.** 몸통이 `#6f5442`, 표토가 `#6d5138` 이라
  * 명도 대비가 1.05 다. 거의 같은 색이다. 앱에서는 모루가 굴 안에 있어서 이 문제가 없었다.
  *
- * 그래서 흙 위에서는 굴을 파고 그 안에 넣는다. 색을 바꿔서 맞추는 것보다 낫다.
- * 두더지가 흙 속에 있으면 원래 굴 안에 있고, 그러면 대비가 저절로 생긴다.
+ * 상자를 깔아서 가리는 방법을 먼저 해봤는데, 캐릭터가 액자에 갇힌 것처럼 어색했다.
+ * 지금은 실루엣에 테두리를 두른다 (`mole.ts`). 도트 게임이 원래 쓰는 방법이고,
+ * 배경 위에 그냥 올려둬도 형체가 남는다.
  */
 
 const SEQ = {
@@ -22,6 +23,9 @@ const SEQ = {
   wave: S.SEQ_WAVE,
   look: S.SEQ_LOOK,
   found: S.SEQ_FOUND,
+  shake: S.SEQ_SHAKE,
+  carry: S.SEQ_CARRY,
+  nod: S.SEQ_NOD,
 } as const
 
 interface Props {
@@ -29,35 +33,15 @@ interface Props {
   scale?: number
   ms?: number
   label?: string
-  /** 흙 위에 놓을 때 켠다. 굴을 파고 그 안에 넣는다 */
-  burrow?: boolean
   class?: string
 }
 
-const {
-  motion = 'idle',
-  scale = 6,
-  ms = 380,
-  label = '모루',
-  burrow = false,
-  class: cls,
-} = Astro.props
+const { motion = 'idle', scale = 6, ms = 380, label = '모루', class: cls } = Astro.props
 
 const html = framesToHtml(SEQ[motion] as string[][], { scale, ms, label })
 ---
 
-{
-  burrow ? (
-    <span
-      class:list={['inline-flex items-end justify-center', cls]}
-      style={`background: var(--color-ink); padding: ${scale * 2}px ${scale * 3}px 0; box-shadow: 0 calc(var(--px) * -1) 0 var(--color-soil-line)`}
-    >
-      <span set:html={html} />
-    </span>
-  ) : (
-    <span class={cls} set:html={html} />
-  )
-}
+<span class={cls} set:html={html} />
 
 <script>
   /*

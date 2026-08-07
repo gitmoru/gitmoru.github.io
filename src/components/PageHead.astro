@@ -12,7 +12,7 @@ interface Props {
   eyebrow?: string
   title: string
   lede?: string
-  motion?: 'idle' | 'dig' | 'peek' | 'wave' | 'look' | 'found'
+  motion?: 'idle' | 'dig' | 'peek' | 'wave' | 'look' | 'found' | 'shake' | 'carry' | 'nod'
 }
 
 const { eyebrow, title, lede, motion = 'idle' } = Astro.props
@@ -37,5 +37,5 @@ const { eyebrow, title, lede, motion = 'idle' } = Astro.props
     }
   </div>
 
-  <Mole motion={motion} burrow scale={6} class="hidden shrink-0 lg:block" />
+  <Mole motion={motion} scale={6} class="hidden shrink-0 lg:block" />
 </div>
