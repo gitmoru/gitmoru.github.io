@@ -26,7 +26,7 @@ export const LANG_NAME: Record<Lang, string> = {
 }
 
 /** 이 사이트에 있는 페이지. 여기 적힌 것만 사이트맵과 언어 링크에 나온다. */
-export const PAGES = ['', 'why', 'how', 'start', 'mcp', 'say', 'safety', 'story'] as const
+export const PAGES = ['', 'why', 'how', 'start', 'mcp', 'feedback', 'safety', 'story'] as const
 export type PagePath = (typeof PAGES)[number]
 
 /** `('en', 'why')` -> `/en/why` */

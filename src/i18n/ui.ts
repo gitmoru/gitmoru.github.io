@@ -24,7 +24,7 @@ export const ko = {
     how: '어떻게 도나',
     start: '시작하기',
     mcp: 'AI 붙이기',
-    say: '의견',
+    feedback: '의견',
     story: '만든 이유',
     github: 'GitHub',
     menu: '메뉴',
@@ -237,7 +237,7 @@ https://gitmoru.dev`,
     next: 'AI 에 붙이기',
   },
 
-  say: {
+  feedback: {
     seoTitle: 'gitmoru 에 의견이나 아이디어 남기기',
     seoDesc: '어디서 막혔는지, 화면이 헷갈리게 말한 곳, 이런 것도 잡아줬으면 하는 것. GitHub Discussions 로 보내주세요. 버그와 놓친 신호는 이슈 양식이 따로 있습니다.',
     title: '의견',
@@ -374,7 +374,7 @@ export const en: Dict = {
     how: 'How it works',
     start: 'Get started',
     mcp: 'Hook up an agent',
-    say: 'Tell us',
+    feedback: 'Tell us',
     story: 'Why we built it',
     github: 'GitHub',
     menu: 'Menu',
@@ -582,7 +582,7 @@ https://gitmoru.dev`,
     next: 'Hook up an agent',
   },
 
-  say: {
+  feedback: {
     seoTitle: 'Send gitmoru an opinion or an idea',
     seoDesc: 'Where you got stuck, where the screen said something confusing, what it should have caught. Head to GitHub Discussions. Bugs and missed signals have their own issue forms.',
     title: 'Tell us',
@@ -716,7 +716,7 @@ export const ja: Dict = {
     how: 'しくみ',
     start: 'はじめかた',
     mcp: 'AI につなぐ',
-    say: '意見',
+    feedback: '意見',
     story: 'つくった理由',
     github: 'GitHub',
     menu: 'メニュー',
@@ -924,7 +924,7 @@ https://gitmoru.dev`,
     next: 'AI につなぐ',
   },
 
-  say: {
+  feedback: {
     seoTitle: 'gitmoru に意見やアイデアを送る',
     seoDesc: 'どこで詰まったか、画面の言い方が紛らわしかったところ、拾ってほしかったもの。GitHub Discussions へどうぞ。不具合と見逃しには別の Issue 様式があります。',
     title: '意見',

@@ -8,7 +8,7 @@ import { t } from '../i18n/ui'
 interface Props { lang: Lang }
 const { lang } = Astro.props
 const ui = t(lang)
-const s = ui.say
+const s = ui.feedback
 
 const REPO = 'https://github.com/gitmoru/gitmoru'
 
@@ -24,7 +24,7 @@ const REPO = 'https://github.com/gitmoru/gitmoru'
 */
 ---
 
-<Layout lang={lang} page="say" title={s.seoTitle} description={s.seoDesc} tone="var(--color-soil-1)">
+<Layout lang={lang} page="feedback" title={s.seoTitle} description={s.seoDesc} tone="var(--color-soil-1)">
   <Band tone={1} grit>
     <PageHead title={s.h1} lede={s.lede} motion="nod" />
   </Band>
