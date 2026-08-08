@@ -213,7 +213,7 @@ https://gitmoru.dev`,
     fullNeed: '여기엔 하나 더 필요해요',
     afterTitle: '창이 뜨면',
     after1: '조직 이름을 넣고 파보기를 누르세요. 시간대는 기본값 그대로 두면 됩니다.',
-    after2: '기본값은 오늘 새벽 0시부터 7시까지예요. 사고는 대개 이 시간대에 납니다.',
+    after2: '기본값은 오늘 새벽 0시부터 7시까지예요. 밤사이 일어난 일을 아침에 알아보는 자리를 생각하고 고른 값입니다. 언제인지 알면 그 시간대로 바꿔주세요.',
 
     stuckTitle: '자주 막히는 곳',
     stuck: [
@@ -532,7 +532,7 @@ https://gitmoru.dev`,
     fullNeed: 'One more thing for this one',
     afterTitle: 'Once the window opens',
     after1: 'Type an org name and hit Dig. Leave the time window on its default.',
-    after2: 'It defaults to midnight through 7am today. That\'s usually when this happens.',
+    after2: 'It defaults to midnight through 7am today, because the tool was built for finding out in the morning what happened overnight. If you know when, set that instead.',
 
     stuckTitle: 'Where people get stuck',
     stuck: [
@@ -848,7 +848,7 @@ https://gitmoru.dev`,
     fullNeed: 'これにはもう 1 つ要ります',
     afterTitle: 'ウィンドウが開いたら',
     after1: '組織名を入力して「掘る」を押してください。期間は既定のままで構いません。',
-    after2: '既定は今日の 0 時から 7 時までです。だいたいこの時間帯に起きます。',
+    after2: '既定は今日の 0 時から 7 時までです。夜のあいだに起きたことを朝に確かめる場面を想定して選んだ値です。時刻が分かっているなら、その期間に変えてください。',
 
     stuckTitle: 'よく詰まるところ',
     stuck: [
