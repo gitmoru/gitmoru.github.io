@@ -243,23 +243,23 @@ https://gitmoru.dev`,
     title: '의견',
     desc: '쓰다가 걸린 게 있으면 알려주세요. 사소해 보이는 게 제일 도움이 됩니다.',
     h1: '쓰다가 걸린 걸 알려주세요',
-    lede: '이 도구는 실제 사고를 수습하면서 만들었어요. 그래서 만든 사람이 이미 아는 것만 잘 돌아갑니다. 남이 어디서 걸리는지는 말해주기 전에는 알 방법이 없어요.',
+    lede: '이 도구는 실제 사고를 수습하면서 만들었어요. 그래서 다른 사람이 어디서 걸리는지는 말해주셔야 알 수 있습니다.',
 
     wantTitle: '이런 게 제일 도움이 돼요',
     wants: [
-      ['어디서 막혔는지', '켜다가 멈춘 자리, 뭘 눌러야 할지 몰랐던 자리요. 사소해 보여도 알려주세요. 만든 사람은 그 자리를 못 봅니다.'],
+      ['어디서 막혔는지', '켜다가 멈춘 자리, 뭘 눌러야 할지 몰랐던 자리요. 사소해 보여도 괜찮습니다.'],
       ['화면이 헷갈리게 말한 곳', '읽고 나서 뜻을 잘못 알았다면 그건 저희 문구가 틀린 거예요. 특히 결과가 0건일 때 어떻게 읽혔는지 궁금합니다.'],
       ['이런 것도 잡아줬으면', '실제로 겪은 일에서 나온 이야기면 더 좋아요. 여기 있는 규칙은 전부 그렇게 생겼습니다.'],
     ],
 
     go: 'GitHub 에서 이야기하기',
-    goNote: '댓글창을 여기 심지 않았어요. 이 도구는 아무것도 안 내려받고 아무 데도 안 보낸다고 말하는데, 그 사이트가 의견 하나 받자고 남의 스크립트를 부르는 건 앞뒤가 안 맞아서요.',
+    goNote: 'GitHub 계정만 있으면 돼요.',
 
     elseTitle: '여기 말고 갈 곳도 있어요',
     elseIssue: '뭔가 깨졌거나, 있었는데 못 잡았을 때',
-    elseIssueWhy: '양식이 네 개 있습니다. 맨 위에 실제 저장소 이름과 로그 속 토큰을 빼달라고 적어뒀어요. 그게 여기 대화보다 중요합니다.',
+    elseIssueWhy: '로그에는 토큰이 들어 있어요. 빼고 올려주세요.',
     elseSecurity: 'gitmoru 자체에 구멍을 찾았을 때',
-    elseSecurityWhy: '공개된 자리에 적지 말아주세요. 비공개로 받습니다. 고친 다음에 이야기가 나가는 게 맞아요.',
+    elseSecurityWhy: '공개된 자리에 적지 말아주세요.',
   },
 
   mcp: {
@@ -588,23 +588,23 @@ https://gitmoru.dev`,
     title: 'Tell us',
     desc: 'If something caught you out, say so. The small things help most.',
     h1: 'Tell us where it caught you out',
-    lede: 'This was built while cleaning up a real incident, so it works best on what the person who built it already knew. Where anyone else gets stuck is not knowable until somebody says.',
+    lede: 'This was built while cleaning up a real incident. Where anyone else gets stuck is something you have to tell us.',
 
     wantTitle: 'What helps most',
     wants: [
-      ['Where you got stuck', 'The place you stopped, the moment you did not know what to press. Small is fine. Whoever built it cannot see that spot.'],
+      ['Where you got stuck', 'The place you stopped, the moment you did not know what to press. Small is fine.'],
       ['Where the screen misled you', 'If you read something and took the wrong meaning from it, our wording is wrong. Especially curious how a result of zero read to you.'],
       ['Something it should have caught', 'An idea with a real incident under it is worth much more. Every rule in here came from one.'],
     ],
 
     go: 'Say it on GitHub',
-    goNote: 'No comment box embedded here. This tool tells you it downloads nothing and sends nothing anywhere, and a site that pulls in someone else\'s script to collect an opinion would be saying two different things.',
+    goNote: 'A GitHub account is all you need.',
 
     elseTitle: 'Some things belong elsewhere',
     elseIssue: 'Something broke, or was there and went unnoticed',
-    elseIssueWhy: 'Four forms, each one asking you at the top to leave out real repository names and the token in your logs. That matters more than the conversation here.',
+    elseIssueWhy: 'Your logs carry your token. Take it out first.',
     elseSecurity: 'You found a hole in gitmoru itself',
-    elseSecurityWhy: 'Not in the open, please. It comes to us privately, and the fix should ship before the write-up does.',
+    elseSecurityWhy: 'Please do not post it in the open.',
   },
 
   mcp: {
@@ -930,23 +930,23 @@ https://gitmoru.dev`,
     title: '意見',
     desc: '使っていて引っかかったことを教えてください。小さいことほど助かります。',
     h1: '引っかかったところを教えてください',
-    lede: 'この道具は実際の事故を片付けながら作りました。だから作った人がすでに知っていることには強く、他の人がどこで詰まるかは、言ってもらうまで分かりません。',
+    lede: 'この道具は実際の事故を片付けながら作りました。他の人がどこで詰まるかは、教えてもらわないと分かりません。',
 
     wantTitle: 'こういうものが一番助かります',
     wants: [
-      ['どこで詰まったか', '手が止まった場所、何を押せばいいか分からなかった場面です。小さくて構いません。作った人にはその場所が見えません。'],
+      ['どこで詰まったか', '手が止まった場所、何を押せばいいか分からなかった場面です。小さくて構いません。'],
       ['画面の言い方が紛らわしかったところ', '読んで意味を取り違えたなら、それは私たちの文が悪いということです。とくに結果が 0 件のとき、どう読めたのかを知りたいです。'],
       ['拾ってほしかったもの', '実際に起きたことが下にある話のほうがずっと役に立ちます。ここにある規則はすべてそうやってできました。'],
     ],
 
     go: 'GitHub で話す',
-    goNote: 'コメント欄はここに埋め込んでいません。この道具は「何も落とさないし、どこにも送らない」と言っています。その サイトが意見をもらうために他人のスクリプトを読み込むのは、話が食い違います。',
+    goNote: 'GitHub アカウントがあれば書けます。',
 
     elseTitle: 'ここではない場所もあります',
     elseIssue: '壊れた、または あったのに気づけなかった',
-    elseIssueWhy: '様式が 4 つあります。どれも先頭に、実在のリポジトリ名とログの中のトークンを外してくださいと書いてあります。ここでの会話よりそちらが大事です。',
+    elseIssueWhy: 'ログにはトークンが入っています。外してから送ってください。',
     elseSecurity: 'gitmoru 自体の穴を見つけた',
-    elseSecurityWhy: '公開の場には書かないでください。非公開で受け取ります。直ってから話が出るほうが正しいです。',
+    elseSecurityWhy: '公開の場には書かないでください。',
   },
 
   mcp: {
