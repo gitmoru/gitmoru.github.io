@@ -1,0 +1,81 @@
+---
+import Layout from '../components/Layout.astro'
+import Band from '../components/Band.astro'
+import PageHead from '../components/PageHead.astro'
+import { href, type Lang } from '../i18n/config'
+import { t } from '../i18n/ui'
+
+interface Props { lang: Lang }
+const { lang } = Astro.props
+const ui = t(lang)
+const s = ui.say
+
+const REPO = 'https://github.com/gitmoru/gitmoru'
+
+/*
+  댓글창을 사이트 안에 심지 않는다.
+
+  이 도구가 파는 게 "아무것도 안 내려받고 아무 데도 안 보낸다" 다. 그 사이트에 들어가는
+  첫 외부 스크립트가 댓글창이면 앞뒤가 안 맞고, 여기 오는 사람은 정확히 그런 걸 확인한다.
+  의견 한 줄 쓰자고 낯선 앱에 GitHub 권한을 주라고 하는 것도 요구가 과하다.
+
+  그리고 이 규모에서 댓글은 몇 개 안 달린다. **비어 있는 댓글창은 페이지를 죽어 보이게
+  만든다.** 링크는 비어 있어도 그렇지 않다. 사람이 몰리면 그때 얹는 건 한 줄이다.
+*/
+---
+
+<Layout lang={lang} page="say" title={s.seoTitle} description={s.seoDesc} tone="var(--color-soil-1)">
+  <Band tone={1} grit>
+    <PageHead title={s.h1} lede={s.lede} motion="nod" />
+  </Band>
+
+  <Band tone="rock" grit edge>
+    <h2 class="text-[22px] font-bold md:text-[28px]">{s.wantTitle}</h2>
+    <ul class="mt-8 space-y-3">
+      {s.wants.map(([what, why]) => (
+        <li class="px bg-[var(--color-ink)] p-5" style="--px-c: var(--color-edge-soft)">
+          <p class="text-[16px] font-semibold">{what}</p>
+          <p class="mt-1.5 text-[14.5px] leading-relaxed text-[var(--color-muted)]">{why}</p>
+        </li>
+      ))}
+    </ul>
+
+    <a
+      href={`${REPO}/discussions`}
+      class="px-btn mt-12 inline-block bg-[var(--color-moss)] px-6 py-3 text-[15px] font-semibold text-[#16241c] hover:brightness-105"
+    >
+      {s.go} →
+    </a>
+    <p class="mt-3 text-[13.5px] text-[var(--color-muted)]">{s.goNote}</p>
+  </Band>
+
+  <Band tone="ink" edge>
+    {/*
+      여기가 아닌 곳도 적어준다.
+
+      의견 창구를 하나 열면 전부 그리로 온다. 버그와 놓친 신호는 양식이 따로 있고,
+      그 양식 맨 위에는 실제 저장소 이름과 토큰을 빼라는 말이 적혀 있다.
+      급한 사람이 그걸 안 읽고 여기 붙여넣는 게 제일 나쁜 결과다.
+    */}
+    <h2 class="text-[22px] font-bold md:text-[28px]">{s.elseTitle}</h2>
+    <ul class="mt-8 space-y-px overflow-hidden" style="background: var(--color-edge-soft)">
+      {(
+        [
+          [s.elseIssue, s.elseIssueWhy, `${REPO}/issues/new/choose`],
+          [s.elseSecurity, s.elseSecurityWhy, `${REPO}/security/advisories/new`],
+        ] as const
+      ).map(([name, why, to]) => (
+        <li class="bg-[var(--color-ink)] p-5">
+          <a href={to} class="text-[15.5px] font-semibold hover:text-[var(--color-moss)]">
+            {name} →
+          </a>
+          <p class="mt-1.5 text-[14px] leading-relaxed text-[var(--color-muted)]">{why}</p>
+        </li>
+      ))}
+    </ul>
+
+    <a href={href(lang, 'start')} class="mt-12 inline-block text-[15px] text-[var(--color-moss)] hover:underline">
+      {ui.nav.start} →
+    </a>
+  </Band>
+</Layout>
