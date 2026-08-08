@@ -294,16 +294,21 @@ const DIRT = SEQ_MOUND.map((f) => frameToSvg(f, { scale: 2, outline: false }))
     const dirt = [...mole.querySelectorAll<HTMLElement>('[data-mole-dirt]')]
     const home = items.find((a) => a.getAttribute('aria-current') === 'page')
 
-    // 지금 페이지가 내비게이션에 없으면(홈, 404) 나올 자리도 없다
-    if (home) {
+    /*
+      홈과 404 에는 활성 항목이 없다.
+
+      예전에는 여기서 통째로 멈췄다. 그래서 첫 화면에서 항목에 손을 올리면 밑줄만 그어졌다.
+      **처음 오는 사람이 제일 오래 머무는 화면이 제일 밋밋했다.**
+
+      돌아갈 자리가 없을 뿐이지 나올 자리는 있다. 손을 올리면 그 자리에서 흙을 밀고 올라오고,
+      내비게이션을 벗어나면 도로 들어간다.
+    */
+    {
       const still = matchMedia('(prefers-reduced-motion: reduce)').matches
 
       /** 한 칸 오르내리는 데 걸리는 시간. 세 칸이라 들어가고 나오는 데 각각 세 배 */
       const STEP = 60
       const TRAVEL = 240
-
-      mole.classList.remove('hidden')
-      mole.classList.add('grid')
 
       const settle = (el: HTMLElement) => {
         mole.style.left = `${el.offsetLeft + el.offsetWidth / 2 - mole.offsetWidth / 2}px`
@@ -316,14 +321,19 @@ const DIRT = SEQ_MOUND.map((f) => frameToSvg(f, { scale: 2, outline: false }))
       }
 
       // 자리를 먼저 잡고 나서 움직임을 켠다. 안 그러면 처음 뜰 때 왼쪽 끝에서 미끄러져 온다.
-      settle(home)
+      if (home) {
+        mole.classList.remove('hidden')
+        mole.classList.add('grid')
+        settle(home)
+      }
       requestAnimationFrame(() => {
         if (!still) mole.style.transition = `left ${TRAVEL}ms steps(6, end)`
       })
 
       let timers: Array<ReturnType<typeof setTimeout>> = []
       let cycling: ReturnType<typeof setInterval> | null = null
-      let at: HTMLElement = home
+      /** 지금 두더지가 나와 있는 자리. 땅속에 있으면 비어 있다. */
+      let at: HTMLElement | null = home ?? null
 
       const clearAll = () => {
         timers.forEach(clearTimeout)
@@ -379,13 +389,64 @@ const DIRT = SEQ_MOUND.map((f) => frameToSvg(f, { scale: 2, outline: false }))
         later(STEP * 4 + TRAVEL, () => show('head', 2))
       }
 
-      for (const item of items) {
-        item.addEventListener('mouseenter', () => goTo(item))
-        item.addEventListener('focus', () => goTo(item))
+      /**
+       * 땅속에서 그 자리로 바로 올라온다.
+       *
+       * 굴을 파고 가는 게 아니라 없던 데서 나오는 거라, 자리는 순간이동해야 한다.
+       * 움직임을 잠깐 껐다가 켜지 않으면 화면 왼쪽 끝에서 미끄러져 온다.
+       */
+      const surface = (target: HTMLElement) => {
+        clearAll()
+        at = target
+
+        mole.style.transition = 'none'
+        mole.classList.remove('hidden')
+        mole.classList.add('grid')
+        settle(target)
+
+        if (still) {
+          show('head', 2)
+          requestAnimationFrame(() => (mole.style.transition = ''))
+          return
+        }
+
+        show('dirt', 0)
+        requestAnimationFrame(() => (mole.style.transition = `left ${TRAVEL}ms steps(6, end)`))
+
+        later(STEP, () => show('dirt', 1))
+        later(STEP * 2, () => show('head', 0))
+        later(STEP * 3, () => show('head', 1))
+        later(STEP * 4, () => show('head', 2))
       }
 
-      nav.addEventListener('mouseleave', () => goTo(home))
-      addEventListener('resize', () => settle(at), { passive: true })
+      /** 도로 들어간다. 흙만 남았다가 그것도 사라진다. */
+      const submerge = () => {
+        clearAll()
+        at = null
+
+        const gone = () => {
+          mole.classList.add('hidden')
+          mole.classList.remove('grid')
+        }
+
+        if (still) return gone()
+
+        show('head', 1)
+        later(STEP, () => show('head', 0))
+        later(STEP * 2, () => show('dirt', 0))
+        later(STEP * 3, gone)
+      }
+
+      const onto = (item: HTMLElement) => (at ? goTo(item) : surface(item))
+
+      for (const item of items) {
+        item.addEventListener('mouseenter', () => onto(item))
+        item.addEventListener('focus', () => onto(item))
+      }
+
+      // 돌아갈 자리가 있으면 거기로, 없으면 땅속으로.
+      nav.addEventListener('mouseleave', () => (home ? goTo(home) : submerge()))
+      addEventListener('resize', () => at && settle(at), { passive: true })
     }
   }
 </script>
