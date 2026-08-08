@@ -247,7 +247,7 @@ https://gitmoru.dev`,
 
     wantTitle: '이런 게 제일 도움이 돼요',
     wants: [
-      ['어디서 막혔는지', '켜다가 멈춘 자리, 뭘 눌러야 할지 몰랐던 자리요. 사소해 보여도 괜찮습니다.'],
+      ['어디서 막혔는지', '켜다가 멈춘 자리, 다음에 뭘 해야 할지 몰랐던 자리요. 사소해 보여도 괜찮습니다.'],
       ['화면이 헷갈리게 말한 곳', '읽고 나서 뜻을 잘못 알았다면 그건 저희 문구가 틀린 거예요. 특히 결과가 0건일 때 어떻게 읽혔는지 궁금합니다.'],
       ['이런 것도 잡아줬으면', '실제로 겪은 일에서 나온 이야기면 더 좋아요. 여기 있는 규칙은 전부 그렇게 생겼습니다.'],
     ],
@@ -517,7 +517,7 @@ Note: 1 branch could not be checked.
       ['Forged author', 'Author name and date can be set to anything. The committer date is when the commit was really made, so the gap shows.'],
       ['Tooling left behind', 'Automation leaves scratch files behind and adds them to .gitignore so they don\'t get committed. That line is a fingerprint.'],
       ['Signing stopped', 'A branch that signs and suddenly does not. Silent where signing was never the habit, because only the change means anything.'],
-      ['Action pin loosened', 'A uses that went from a commit hash to a tag, which the action owner can move. That is how a widely used action was compromised in 2025.'],
+      ['Action pin loosened', 'Looks for a uses: reference that changed from a commit hash to a movable tag. That is how a widely used action was compromised in 2025.'],
       ['A workflow opened a door', "Someone else's pull request code now running with the secrets, or a pull request title that can carry a command. Only what this push introduced."],
     ],
     next: 'Try it',
@@ -592,9 +592,9 @@ https://gitmoru.dev`,
 
     wantTitle: 'What helps most',
     wants: [
-      ['Where you got stuck', 'The place you stopped, the moment you did not know what to press. Small is fine.'],
-      ['Where the screen misled you', 'If you read something and took the wrong meaning from it, our wording is wrong. Especially curious how a result of zero read to you.'],
-      ['Something it should have caught', 'An idea with a real incident under it is worth much more. Every rule in here came from one.'],
+      ['Where you got stuck', 'Where you stopped, or were not sure what to do next. Small things count too.'],
+      ['Where the screen misled you', 'If you read something and took the wrong meaning from it, our wording is wrong. We are especially curious about what you thought when the result was zero.'],
+      ['Something it should have caught', 'Even better if it comes from a real incident. Every rule here started that way.'],
     ],
 
     go: 'Say it on GitHub',
@@ -670,7 +670,7 @@ Total: 6 commits gone
     ],
 
     nowTitle: 'Where it stands now',
-    now: 'The restore is done. The tool stayed for next time. If it happens again, this is what you open.',
+    now: 'The restore is done, but we kept the tool for next time. If something like this happens again, this is what you open.',
     thanks: 'Thanks for reading.',
   },
 
@@ -678,9 +678,9 @@ Total: 6 commits gone
     seoTitle: 'Inspecting a possibly compromised repo without cloning or running it',
     seoDesc: 'No clone, no install, no build. Everything is read through the GitHub API, the token never reaches the interface, and payloads are defanged and shown as plain text.',
     title: 'What this tool will not do',
-    desc: 'It looks into repositories that may contain malicious code. That is why the convenient way is usually closed off.',
+    desc: 'It looks into repositories that may contain malicious code. That is why some of the convenient options are deliberately disabled.',
     h1: 'What this tool will not do',
-    lede: 'It looks into repositories that may contain malicious code, and it is built on the assumption that what it reads is hostile. That is why the convenient way is usually closed off.',
+    lede: 'It looks into repositories that may contain malicious code, and it is built on the assumption that what it reads is hostile. That is why some of the convenient options are deliberately disabled.',
     rulesTitle: 'What we keep to',
     rules: [
       ['It never downloads anything', 'No clone, no fetch, no checkout. Some payloads run the moment a folder is opened in an editor. Downloading is already losing.'],
@@ -844,12 +844,12 @@ export const ja: Dict = {
       ['直前のツリーと今のツリーを diff します', 'どのファイルが追加、変更、削除されたかが出ます。'],
       ['変わったファイルを全部残します', 'ここが成果物です。ルールと関係なく残ります。'],
       ['先に読むものを並べ替えます', '判定ではなく順番です。'],
-      ['あとは人か AI が引き取ります', 'この道具はこの手前で止まります。'],
+      ['あとは人か AI が引き取ります', 'このツールはこの手前で止まります。'],
     ],
 
     limitTitle: '同じ事実が限界にもなります',
     limit1: 'GitHub Events APIは 90 日、300 件ほどしか残りません。それを過ぎると住所が見つかりません。',
-    limit2: 'だから早く見る必要があり、道具も画面でそう伝えます。掘った記録をファイルに残すのも同じ理由です。',
+    limit2: 'だから早く見る必要があり、ツールも画面でそう伝えます。掘った記録をファイルに残すのも同じ理由です。',
 
     watchTitle: '先に読むものの決め方',
     watchLede: 'どれも実際の事故から出てきたものです。どれにも当たらないから安全、という意味ではありません。',
@@ -868,7 +868,7 @@ export const ja: Dict = {
   start: {
     seoTitle: 'gitmoru を入れてリポジトリの侵害を確認する',
     seoDesc: 'gh auth login のあと npx -y gitmoru の 1 行でブラウザに画面が出ます。復元まで使うならクローンしてアプリで開きます。gh auth login でつまずくとき、点検が空で返るときの読み方も。',
-    teamMessage: `リポジトリがやられたとき、何が変わったのかを確認する道具です。
+    teamMessage: `リポジトリがやられたとき、何が変わったのかを確認するツールです。
 各自のアカウントで 1 回ずつ動かしてください。
 
   gh auth login
@@ -911,7 +911,7 @@ https://gitmoru.dev`,
     ],
 
     noInstallerTitle: 'インストーラは作っていません',
-    noInstaller1: 'この道具はリポジトリへのアクセス権を使います。署名のない実行ファイルがそれを求める姿は、この道具が探している攻撃と見分けがつきません。',
+    noInstaller1: 'このツールはリポジトリへのアクセス権を使います。署名のない実行ファイルがそれを求める姿は、このツールが探している攻撃と見分けがつきません。',
     noInstaller2: 'npx もコードを実行します。違うのは、そのコードが npm にそのまま置いてあって誰でも読めることです。受け取るのはついさっきやられた人で、その日に渡すものは読めるコードであるべきだと考えました。',
 
     factTitle: '先に知っておくこと',
@@ -934,9 +934,9 @@ https://gitmoru.dev`,
 
     wantTitle: 'こういうものが一番助かります',
     wants: [
-      ['どこで詰まったか', '手が止まった場所、何を押せばいいか分からなかった場面です。小さくて構いません。'],
-      ['画面の言い方が紛らわしかったところ', '読んで意味を取り違えたなら、それは私たちの文が悪いということです。とくに結果が 0 件のとき、どう読めたのかを知りたいです。'],
-      ['拾ってほしかったもの', '実際に起きたことが下にある話のほうがずっと役に立ちます。ここにある規則はすべてそうやってできました。'],
+      ['どこで詰まったか', '手が止まった場所や、次に何をすればいいか分からなかった場面です。些細なことでも構いません。'],
+      ['画面の言い方が紛らわしかったところ', '読んで意味を取り違えたなら、それは私たちの文が悪いということです。とくに結果が 0 件だったとき、どう受け取ったかを知りたいです。'],
+      ['拾ってほしかったもの', '実際のインシデントから出てきた話なら、なお助かります。ここにあるルールも、すべてそこから生まれました。'],
     ],
 
     go: 'GitHub で話す',
@@ -966,7 +966,7 @@ https://gitmoru.dev`,
     title: 'AI につなぐ',
     desc: 'MCP サーバーが同梱されています。Claude Code などにつなぐと、AI が結果を直接読みます。',
     h1: 'コードを読むのは AI の仕事です',
-    lede: 'この道具は「何が変わったか」までを引き受けます。それがどんなコードなのかは別の仕事なので、同梱の MCP サーバーにつなげば AI が結果を直接読みます。',
+    lede: 'このツールは「何が変わったか」までを引き受けます。それがどんなコードなのかは別の仕事なので、同梱の MCP サーバーにつなげば AI が結果を直接読みます。',
     addTitle: '1 行です',
     addNote: 'アプリで「AI につなぐ」を押すと、このパソコンの実際の設定ファイルの場所まで教えてくれます。',
     clientsTitle: 'つながる先',
@@ -1020,9 +1020,9 @@ https://gitmoru.dev`,
     seoTitle: '侵害された可能性のあるリポジトリを、clone せずに調べる',
     seoDesc: 'clone もインストールもビルドもしません。すべて GitHub API 経由で読み、トークンは画面に渡さず、ペイロードは無力化して文字としてだけ表示します。',
     title: 'この道具がしないこと',
-    desc: '悪意あるコードが入っているかもしれないリポジトリを覗く道具です。だから楽に見える方法はたいてい塞いであります。',
+    desc: '悪意あるコードが入っているかもしれないリポジトリを覗く道具です。そのため、便利そうな機能ほど意図的に制限しています。',
     h1: 'この道具がしないこと',
-    lede: '悪意あるコードが入っているかもしれないリポジトリを覗く道具です。読む対象が敵だという前提で作っています。だから楽に見える方法はたいてい塞いであります。',
+    lede: '悪意あるコードが入っているかもしれないリポジトリを覗く道具です。読む対象が敵だという前提で作っています。そのため、便利そうな機能ほど意図的に制限しています。',
     rulesTitle: '守っていること',
     rules: [
       ['ダウンロードしません', 'clone も fetch も checkout もしません。エディタでフォルダを開いた瞬間に走るペイロードがあります。落とした時点で負けです。'],
