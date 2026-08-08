@@ -259,7 +259,7 @@ https://gitmoru.dev`,
     elseIssue: '뭔가 깨졌거나, 있었는데 못 잡았을 때',
     elseIssueWhy: '로그에는 토큰이 들어 있어요. 빼고 올려주세요.',
     elseSecurity: 'gitmoru 자체에 구멍을 찾았을 때',
-    elseSecurityWhy: '공개된 자리에 적지 말아주세요.',
+    elseSecurityWhy: '여기로 보내면 비공개로 접수돼요.',
   },
 
   mcp: {
@@ -604,7 +604,7 @@ https://gitmoru.dev`,
     elseIssue: 'Something broke, or was there and went unnoticed',
     elseIssueWhy: 'Your logs carry your token. Take it out first.',
     elseSecurity: 'You found a hole in gitmoru itself',
-    elseSecurityWhy: 'Please do not post it in the open.',
+    elseSecurityWhy: 'This one comes in privately.',
   },
 
   mcp: {
@@ -946,7 +946,7 @@ https://gitmoru.dev`,
     elseIssue: '壊れた、または あったのに気づけなかった',
     elseIssueWhy: 'ログにはトークンが入っています。外してから送ってください。',
     elseSecurity: 'gitmoru 自体の穴を見つけた',
-    elseSecurityWhy: '公開の場には書かないでください。',
+    elseSecurityWhy: '非公開で受け取ります。',
   },
 
   mcp: {
