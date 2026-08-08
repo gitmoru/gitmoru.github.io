@@ -419,7 +419,14 @@ const DIRT = SEQ_MOUND.map((f) => frameToSvg(f, { scale: 2, outline: false }))
         later(STEP * 4, () => show('head', 2))
       }
 
-      /** 도로 들어간다. 흙만 남았다가 그것도 사라진다. */
+      /**
+       * 도로 들어간다.
+       *
+       * 흙 프레임을 하나만 스치고 지우면 중간 크기 두덩에서 그냥 잘려서 훅 사라져 보인다.
+       * 흙은 솟았다(1) 내려앉았다(0) 평평해지는(2) 세 장이라, 그 순서대로 다 보여주고
+       * **제일 납작해진 다음에** 치운다. 마지막에 지우는 건 어차피 한 칸 끊기는 일이라,
+       * 그 한 칸이 작을수록 덜 티가 난다.
+       */
       const submerge = () => {
         clearAll()
         at = null
@@ -433,8 +440,10 @@ const DIRT = SEQ_MOUND.map((f) => frameToSvg(f, { scale: 2, outline: false }))
 
         show('head', 1)
         later(STEP, () => show('head', 0))
-        later(STEP * 2, () => show('dirt', 0))
-        later(STEP * 3, gone)
+        later(STEP * 2, () => show('dirt', 1))
+        later(STEP * 3, () => show('dirt', 0))
+        later(STEP * 4, () => show('dirt', 2))
+        later(STEP * 5, gone)
       }
 
       const onto = (item: HTMLElement) => (at ? goTo(item) : surface(item))
