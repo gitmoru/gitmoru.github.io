@@ -179,8 +179,8 @@ export const ko = {
   },
 
   start: {
-    seoTitle: 'gitmoru 설치하고 저장소 침해 확인하기',
-    seoDesc: 'gh auth login 하고 npx -y gitmoru 한 줄이면 브라우저에 화면이 뜹니다. 되돌리기까지 쓰려면 클론해서 앱으로 켜세요. gh auth login 에서 막힐 때, 문단속이 비어 나올 때 읽는 법까지.',
+    seoTitle: '털린 GitHub 저장소, 명령 한 줄로 확인 시작하기',
+    seoDesc: '계정이 털렸거나 브랜치가 덮어써졌을 때 무엇부터 볼지. gh auth login 하고 npx -y gitmoru 한 줄이면 브라우저에 화면이 뜹니다. gh auth login 에서 막힐 때, 문단속이 비어 나올 때 읽는 법까지.',
     teamMessage: `저장소가 털렸을 때 뭐가 바뀌었는지 확인하는 도구예요.
 각자 계정으로 한 번씩만 돌려주세요.
 
@@ -238,7 +238,7 @@ https://gitmoru.dev`,
   },
 
   feedback: {
-    seoTitle: 'gitmoru 에 의견이나 아이디어 남기기',
+    seoTitle: '쓰다가 막힌 곳 알려주기',
     seoDesc: '어디서 막혔는지, 화면이 헷갈리게 말한 곳, 이런 것도 잡아줬으면 하는 것. GitHub Discussions 로 보내주세요. 버그와 놓친 신호는 이슈 양식이 따로 있습니다.',
     title: '의견',
     desc: '쓰다가 걸린 게 있으면 알려주세요. 사소해 보이는 게 제일 도움이 됩니다.',
@@ -396,7 +396,7 @@ export const en: Dict = {
   },
 
   home: {
-    seoTitle: 'Undo a force push and find the commits that went missing',
+    seoTitle: 'Recover a force-pushed GitHub branch and see what changed',
     seoDesc: 'Find every file that changed in a GitHub org during a time window, branch by branch. Recover commits lost to a force push, and see exactly what could not be verified. Nothing is cloned.',
     title: 'Find out what changed when your repos got hit',
     desc: 'Finds the files that changed in a repository during a time window, branch by branch. Nothing is downloaded, nothing leaves your machine.',
@@ -524,8 +524,8 @@ Note: 1 branch could not be checked.
   },
 
   start: {
-    seoTitle: 'Install gitmoru and check a repo after a breach',
-    seoDesc: 'Run gh auth login, then npx -y gitmoru, and the screen opens in your browser. Clone it if you want the restore button. Includes where people get stuck on gh auth login and how to read an access check that comes back empty.',
+    seoTitle: 'Check a compromised GitHub repo, starting with one command',
+    seoDesc: 'What to look at first after an account is taken over or a branch is overwritten. Run gh auth login, then npx -y gitmoru, and the screen opens in your browser. Includes where people get stuck on gh auth login and how to read an access check that comes back empty.',
     teamMessage: `A tool for finding out what changed after repos get hit.
 Please run it once from your own account.
 
@@ -583,7 +583,7 @@ https://gitmoru.dev`,
   },
 
   feedback: {
-    seoTitle: 'Send gitmoru an opinion or an idea',
+    seoTitle: 'Tell us where it caught you out',
     seoDesc: 'Where you got stuck, where the screen said something confusing, what it should have caught. Head to GitHub Discussions. Bugs and missed signals have their own issue forms.',
     title: 'Tell us',
     desc: 'If something caught you out, say so. The small things help most.',
@@ -738,7 +738,7 @@ export const ja: Dict = {
   },
 
   home: {
-    seoTitle: 'force push で消えたコミットを探して復元する',
+    seoTitle: 'GitHub の force push で消えたコミットを探して復元する',
     seoDesc: 'GitHub の組織で、指定した期間に変わったファイルをブランチごとに洗い出します。force push で消えたコミットを戻し、確認できなかった箇所も明示します。clone はしません。',
     title: 'リポジトリがやられたとき、何が変わったのかを掘ります',
     desc: '指定した期間にリポジトリで変わったファイルを、ブランチごとに探して見せます。何もダウンロードせず、このパソコンの外へは何も送りません。',
@@ -823,7 +823,7 @@ export const ja: Dict = {
   },
 
   how: {
-    seoTitle: 'force push 後にブランチを復元するしくみ',
+    seoTitle: 'GitHub で force push 後にブランチを復元する方法',
     seoDesc: 'force push はコミットを消しません。GitHub はプッシュ直前にブランチが指していたコミットを記録していて、90 日ほどの間なら戻って今と比較できます。',
     shotDiffAlt: '攻撃直前のファイルと今のファイルを左右に並べた画面',
     title: 'しくみ',
@@ -866,8 +866,8 @@ export const ja: Dict = {
   },
 
   start: {
-    seoTitle: 'gitmoru を入れてリポジトリの侵害を確認する',
-    seoDesc: 'gh auth login のあと npx -y gitmoru の 1 行でブラウザに画面が出ます。復元まで使うならクローンしてアプリで開きます。gh auth login でつまずくとき、点検が空で返るときの読み方も。',
+    seoTitle: '侵害された GitHub リポジトリを 1 行で調べはじめる',
+    seoDesc: 'アカウントが乗っ取られたとき、ブランチが上書きされたとき、まず何を見るか。gh auth login のあと npx -y gitmoru の 1 行でブラウザに画面が出ます。gh auth login でつまずくとき、点検が空で返るときの読み方も。',
     teamMessage: `リポジトリがやられたとき、何が変わったのかを確認するツールです。
 各自のアカウントで 1 回ずつ動かしてください。
 
@@ -925,7 +925,7 @@ https://gitmoru.dev`,
   },
 
   feedback: {
-    seoTitle: 'gitmoru に意見やアイデアを送る',
+    seoTitle: '引っかかったところを教えてください',
     seoDesc: 'どこで詰まったか、画面の言い方が紛らわしかったところ、拾ってほしかったもの。GitHub Discussions へどうぞ。不具合と見逃しには別の Issue 様式があります。',
     title: '意見',
     desc: '使っていて引っかかったことを教えてください。小さいことほど助かります。',
