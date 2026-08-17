@@ -14,6 +14,9 @@ import tailwind from '@tailwindcss/vite'
  */
 export default defineConfig({
   site: 'https://gitmoru.dev',
+  // 서버가 내주는 주소와 우리가 적는 주소를 같게 맞춘다.
+  // 이게 어긋나면 canonical 이 리디렉션되는 곳을 가리키게 된다.
+  trailingSlash: 'always',
 
   i18n: {
     defaultLocale: 'ko',

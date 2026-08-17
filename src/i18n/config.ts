@@ -29,10 +29,25 @@ export const LANG_NAME: Record<Lang, string> = {
 export const PAGES = ['', 'why', 'how', 'start', 'mcp', 'feedback', 'safety', 'story'] as const
 export type PagePath = (typeof PAGES)[number]
 
-/** `('en', 'why')` -> `/en/why` */
+/**
+ * `('en', 'why')` -> `/en/why/`
+ *
+ * **끝에 슬래시를 붙인다.** 이게 실제로 서버가 내주는 주소다.
+ * `/why` 로 들어오면 `/why/` 로 301 을 준다.
+ *
+ * 예전에는 슬래시를 떼고 있었다. 그래서 한 페이지가 세 가지 신호를 서로 다르게 줬다.
+ *
+ *   사이트맵   /why/     (@astrojs/sitemap 이 만든다)
+ *   canonical  /why      (여기서 만든다)
+ *   내부 링크   /why      (여기서 만든다)
+ *
+ * canonical 이 리디렉션되는 주소를 가리키니 구글이 "대체 페이지" 로 접었고,
+ * 내부 링크마다 301 을 한 번씩 타서 "리디렉션이 포함된 페이지" 로 잡혔다.
+ * canonical, hreflang, og:url, 내비게이션이 전부 이 함수에서 나오므로 여기만 고치면 된다.
+ */
 export function href(lang: Lang, page: PagePath = ''): string {
   const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
-  return `${prefix}/${page}` .replace(/\/$/, '') || '/'
+  return page ? `${prefix}/${page}/` : `${prefix}/`
 }
 
 /** 주소에서 언어를 읽는다. 못 읽으면 기본 언어다. */
